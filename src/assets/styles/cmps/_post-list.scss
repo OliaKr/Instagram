@@ -1,0 +1,70 @@
+.story-container {
+  display: flex;
+  flex-direction: column;
+  margin-top: 200px;
+
+  background-color: whitesmoke;
+
+  border-radius: 20px;
+  width: 470px;
+  height: 700px;
+}
+.story-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  width: 100%;
+  height: 8%;
+  margin: 0px 0px 0px 0px;
+}
+.img-container {
+  height: fit-content;
+  width: 100%;
+  img {
+    width: 100%;
+  }
+}
+
+.input-container {
+  display: flex;
+  flex-direction: row;
+  height: 60px;
+  width: 466px;
+}
+
+.heart-sign-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  width: 100%;
+  height: 30px;
+
+  button {
+    border: none;
+    background-color: inherit;
+  }
+}
+.comments {
+  display: flex;
+  flex-direction: column;
+
+  height: 200px;
+  width: 100%;
+}
+.input-area {
+  display: flex;
+
+  width: 100%;
+  height: fit-content;
+
+  button {
+    border: none;
+    background-color: inherit;
+  }
+}
+.emoji {
+  width: 30px;
+  height: 30px;
+  background-image: url('../../icons/emoji.svg');
+  background-size: cover;
+}

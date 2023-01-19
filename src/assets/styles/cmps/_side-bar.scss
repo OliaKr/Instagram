@@ -1,0 +1,69 @@
+.side-bar {
+  padding: 40px 20px;
+
+ 
+  font-size: 16px;
+  grid-template-rows: 80px 1fr 10px;
+  background-color: rgb(255, 255, 255);
+  height: 100vh;
+  width: 250px;
+  border-right: 1px solid rgb(219, 219, 219);
+
+  nav {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+  }
+
+  .nav-btn {
+      color: #262626;
+      padding: 15px 15px;
+      border-radius: 25px;
+      font-family: 'Segoe UI', sans-serif;
+      text-decoration: none;
+      display: flex;
+      gap: 10px;
+      align-items: center;
+
+      .nav-icon {
+          font-size: 22px;
+          width: 30px;
+      }
+
+      span {
+          font-size: 16px;
+      }
+
+      &.active {
+          color: black;
+          font-weight: 700;
+      }
+
+      &:hover {
+          background-color: #fafafa;
+      }
+
+  }
+
+  .side-bar-more {
+      padding: 0 15px;
+      display: flex;
+      margin-top: 600px;
+      gap: 20px;
+      align-items: center;
+      border-radius: 25px;
+      font-family: 'Segoe UI', sans-serif;
+      cursor: pointer;
+
+      i {
+          font-size: 22px;
+          width: 30px;
+      }
+
+      span {
+          font-size: 16px;
+      }
+
+  }
+
+}
