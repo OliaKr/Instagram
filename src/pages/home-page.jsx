@@ -8,7 +8,7 @@ export function HomePage() {
     <div className='flex-container'>
       <Sidebar />
       <Postlist />
-      <Suggestions/>
+      <Suggestions   />
    
     </div>
   );
