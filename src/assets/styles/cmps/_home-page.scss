@@ -1,13 +1,18 @@
 *{
     margin: 0;
     padding: 0;
-    
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
-
-
 
 .flex-container{
     display: flex;
-    flex-direction: row;
     justify-content: space-between;
+    
+}
+.post-container{
+    display: flex;
+    border: 2px solid red;
+    justify-content: center;
+
+    width: 100%;
 }

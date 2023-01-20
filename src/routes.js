@@ -1,4 +1,5 @@
 import { HomePage } from './pages/home-page';
+import { Profile } from './cmps/profie';
 
 const routes = [
     {
@@ -15,7 +16,7 @@ const routes = [
     },
     {
         path: 'profile',
-        component: <HomePage/>,
+        component: <Profile/>,
         label: 'Profile',
         icon: <i className="fa-solid fa-user"></i>
     },

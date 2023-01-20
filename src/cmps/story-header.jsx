@@ -2,8 +2,8 @@ import Avatar from '@mui/material/Avatar';
 import Stack from '@mui/material/Stack';
 
 import { useState } from 'react';
-export function Storyheader() {
-  const [name, setName] = useState('michael cat');
+export function Storyheader({story}) {
+  const [name, setName] = useState(story.by.fullname);
   return (
     <div className='story-header'>
       <Stack
@@ -11,11 +11,10 @@ export function Storyheader() {
         spacing={2}
       >
         <Avatar
-          src='...\assets\img\June.jpg'
-          srcSet='...\assets\img\June.jpg'
+          src={story.by.userImg}
         />
       </Stack>
-      {name}
+      <span className='userName'>{name}</span>
     </div>
   );
 }
