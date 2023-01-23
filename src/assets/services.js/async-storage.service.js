@@ -20,6 +20,7 @@ function get(entityType, entityId) {
 }
 
 function post(entityType, newEntity) {
+    console.log('im post');
     newEntity = JSON.parse(JSON.stringify(newEntity))    
     newEntity._id = _makeId()
     return query(entityType).then(entities => {
@@ -30,6 +31,7 @@ function post(entityType, newEntity) {
 }
 
 function put(entityType, updatedEntity) {
+    console.log('im put');
     updatedEntity = JSON.parse(JSON.stringify(updatedEntity))    
     return query(entityType).then(entities => {
         const idx = entities.findIndex(entity => entity._id === updatedEntity._id)
@@ -42,10 +44,9 @@ function put(entityType, updatedEntity) {
 
 function remove(entityType, entityId) {
     return query(entityType).then(entities => {
-        const idx = entities.findIndex(entity => entity._id === entityId)
-        if (idx < 0) throw new Error(`Remove failed, cannot find entity with id: ${entityId} in: ${entityType}`)
-        entities.splice(idx, 1)
-        _save(entityType, entities)
+        console.log('test',entities[0]._id, entityId )     
+        let updatedEntities = entities.filter(story => story._id !== entityId)
+        _save(entityType, updatedEntities)
     })
 }
 

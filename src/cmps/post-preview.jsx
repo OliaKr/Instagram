@@ -1,11 +1,10 @@
 import { Storyheader } from './story-header';
 import { HeartSignContainer } from './heart-sign-container';
-import { Suggestions } from './suggestions';
-import { Fragment } from 'react';
+
 
 export function PostPreview({ story }) {
   return (
-    <Fragment>
+    <div>
       <div className='story-container'>
         <Storyheader story={story} />
         <div className='img-container'>
@@ -28,8 +27,6 @@ export function PostPreview({ story }) {
           </button>
         </div>
       </div>
-
-      
-    </Fragment>
+    </div>
   );
 }

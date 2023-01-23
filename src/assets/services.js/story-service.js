@@ -7,8 +7,62 @@ export const storyService = {
   query,
   getById,
   remove,
-  save,
+  create,
+  update,
 };
+
+export const newStory = {
+  _id:  null,
+  txt: 'Best trip ever',
+  postImg: '', //Can be an array if decide to support multiple imgs
+  by: {
+    _id:  utilService.makeId(),
+    fullname: 'Ulash Ulashi',
+    userImg: 'https://img.mako.co.il/2014/02/24/467424241_g.jpg',
+  },
+
+  comments: [
+    {
+      id:  utilService.makeId(),
+      by: {
+        _id:  utilService.makeId(),
+        fullname: 'Bob',
+        imgUrl: 'http://some-img',
+      },
+      txt: 'good one!',
+      likedBy: [
+        // Optional
+        {
+          _id:  utilService.makeId(),
+          fullname: 'Bob',
+          imgUrl: 'http://some-img',
+        },
+      ],
+    },
+    {
+      id:  utilService.makeId(),
+      by: {
+        _id:  utilService.makeId(),
+        fullname: 'Dob',
+        imgUrl: 'http://some-img',
+      },
+      txt: 'not good!',
+    },
+  ],
+  likedBy: [
+    {
+      _id:  utilService.makeId(),
+      fullname: 'Bob',
+      imgUrl: 'http://some-img',
+    },
+    {
+      _id:  utilService.makeId(),
+      fullname: 'Dob',
+      imgUrl: 'http://some-img',
+    },
+  ],
+  tags: ['fun', 'kids'],
+}
 
 const gStories = [
   {
@@ -210,12 +264,36 @@ async function remove(storyId) {
   await storageService.remove(STORAGE_KEY, storyId);
 }
 
-async function save(story) {
-  var savedStory;
-  if (story._id) {
-    savedStory = await storageService.put(STORAGE_KEY, story);
-  } else {
-    savedStory = await storageService.post(STORAGE_KEY, story);
-  }
+// async function save(story) {
+//   var savedStory;
+//   console.log('story._id', story._id);
+//   if (story._id) {
+
+  
+//     savedStory = await storageService.put(STORAGE_KEY, story);
+//   } else {
+  
+//     savedStory = await storageService.post(STORAGE_KEY, story);
+//   }
+//   return savedStory;
+// }
+
+async function create(story){
+
+  let savedStory = await storageService.post(STORAGE_KEY, story);
+
   return savedStory;
+
+
+
+}
+
+async function update(story){
+
+  let savedStory = await storageService.put(STORAGE_KEY, story);
+
+  return savedStory;
+
+
+
 }

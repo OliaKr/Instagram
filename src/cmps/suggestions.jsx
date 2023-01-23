@@ -20,7 +20,7 @@ export function Suggestions() {
         <ul>
           {SuggestedUsers.map((user) => {
             return (
-              <li>
+              <li className='user-suggestion' key= {user._id}>
                 <Stack>
                   <Avatar
                     alt={user.username}
