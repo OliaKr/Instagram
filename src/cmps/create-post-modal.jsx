@@ -1,14 +1,12 @@
 import React, { useState} from 'react';
 import { useSelector } from 'react-redux';
 import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import Divider from '@mui/material/Divider';
 import createpic from '../assets/img/createpic.png';
 import { ImgUploader } from './img-uploader.jsx';
-import {closeCreateModal} from '../store/story.actions.js'
-
+import {closeCreateModal, addStory, updateImgUrl} from '../store/story.actions.js';
+import {newStory} from '../assets/services.js/story-service.js';
 
 const style = {
   display: 'flex',
@@ -27,8 +25,18 @@ const style = {
 };
 
 export function CreatePostModal() {
-
     const isCreateModalOpen = useSelector(storeState => storeState.storyModule.isCreateModalOpen);
+    const updatedImgUrl = useSelector(
+      (storeState) => storeState.storyModule.updatedImgUrl
+    );
+     
+    function onCreateNewPost() {
+      if(updatedImgUrl){
+        let story = {...newStory, postImg: updatedImgUrl}
+        addStory(story);
+        updateImgUrl(null);
+      }
+    }
 
   return (
     <Modal
@@ -41,6 +49,9 @@ export function CreatePostModal() {
         <div className='modal-header'>
           <span>Create new post </span>
         </div>
+        <div onClick={onCreateNewPost} className='modal-header'>
+          <span>Create</span>
+        </div>
 
         <Divider/>
         <div onClick={closeCreateModal} className='modal-header'>
@@ -48,7 +59,6 @@ export function CreatePostModal() {
         </div>
         <Divider/>
         <Divider/>
-        {/* <div style={{height: '1px', width: '20px', backgroundColor:" black"}}/> */}
         <div className='img-create-container'>
          <img
           src={createpic}
@@ -56,7 +66,7 @@ export function CreatePostModal() {
           alt='newPostImg'
         /> 
           
-          <ImgUploader/>
+          <ImgUploader />
         </div>
         
         

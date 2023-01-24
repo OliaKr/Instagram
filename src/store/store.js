@@ -1,10 +1,11 @@
-import { storyReducer } from "../store/story.reducer.js";
+import { userReducer } from "../store/user.reducer.js";
+import {storyReducer} from "../store/story.reducer.js";
 import { createStore, combineReducers} from "redux";
 
 
 const rootReducer = combineReducers({
     storyModule: storyReducer,
-    // userModule: userReducer,
+    userModule: userReducer,
    
 })
 

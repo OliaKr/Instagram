@@ -13,7 +13,7 @@ export function PostPreview({ story }) {
 
         <HeartSignContainer />
         <div className='comments'>
-          <h4>{story.likedBy.length}</h4>
+          <h4>{story.likedBy.length} likes</h4>
           <h4>{story.txt}</h4>
           <h6>view comments...</h6>
         </div>

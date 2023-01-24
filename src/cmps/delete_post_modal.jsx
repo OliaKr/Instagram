@@ -3,7 +3,7 @@ import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import Divider from '@mui/material/Divider';
 import TextField from '@mui/material/TextField';
-import { closeRemoveModal, updateStory } from '../store/story.actions.js';
+import { closeRemoveModal, updateStory, updateImgUrl } from '../store/story.actions.js';
 import { onRemoveStory } from '../cmps/post-index.jsx';
 import { useSelector } from 'react-redux';
 import { ImgUploader } from '../cmps/img-uploader.jsx';
@@ -42,7 +42,10 @@ export function DeletePostModal() {
 
   function onUpdateStory() {
     let updatedStory = { ...currentStory, txt: text, postImg: updatedImgUrl };
-    if (updatedStory._id) updateStory(updatedStory);
+    updateStory(updatedStory);
+    closeRemoveModal()
+    updateImgUrl(null);
+
   }
 
   return (
@@ -60,12 +63,13 @@ export function DeletePostModal() {
           <span>Delete </span>
         </div>
         <Divider />
-        <div
-          onClick={onUpdateStory}
+        <button
+          onClick={onUpdateStory} 
           className='modal-header'
+          disabled={!updatedImgUrl}
         >
           <span>Edit </span>
-        </div>
+        </button>
         <Divider />
         <div
           onClick={closeRemoveModal}

@@ -53,6 +53,7 @@ const story = {
     ],
     "tags":["fun", "kids"]
   }
+
   
   const user = {
     "_id": "u101",
