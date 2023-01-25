@@ -1,0 +1,50 @@
+.profile-container {
+    // border: 1px solid red;
+    width: 100vh;
+    display: flex;
+    
+
+}
+
+.top-section {
+    display: flex;
+    flex-basis: 930px;
+
+
+}
+
+.three-columns-details {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+
+
+}
+
+.first {
+    display: flex;
+
+}
+
+
+.second {
+
+    
+}
+
+.third {
+
+}
+
+.grid-images{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  flex-basis: 930px;
+}
+
+.singleImg{
+   flex: 0 0 250px; /* play with this number */
+//    background: red;
+   margin: 10px;
+}
