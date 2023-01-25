@@ -18,7 +18,7 @@ const routes = [
         icon: <i className="fa-regular fa-square-plus"></i>
     },
     {
-        path: 'user/:username',  
+        path: '/profile',  
         component: <Profile/>,
         label: 'Profile',
         icon: <Avatar alt="Remy Sharp" sx={{ width: 24, height: 24}} src={defaultImg } />

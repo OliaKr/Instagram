@@ -23,7 +23,7 @@ export function PostIndex(){
     },[])
    
   return (
-    <div>
+    <div className="post-index-container">
         <DeletePostModal />
         <PostList stories={stories} />
         </div>
