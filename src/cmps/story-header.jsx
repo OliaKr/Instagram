@@ -1,6 +1,6 @@
-import Avatar from '@mui/material/Avatar';
-import Stack from '@mui/material/Stack';
-import { useState } from 'react';
+import Avatar from '@mui/material/Avatar'
+import Stack from '@mui/material/Stack'
+import { useState } from 'react'
 import {openRemoveModal, updateCurrentStory} from '../store/story.actions.js'
 
 export function Storyheader({ story }) {
@@ -9,11 +9,7 @@ export function Storyheader({ story }) {
   function editPost(){
     updateCurrentStory(story)
    
-      openRemoveModal()
-
-    
-    
-    
+      openRemoveModal()  
   }
 
   return (
@@ -27,7 +23,7 @@ export function Storyheader({ story }) {
       </Stack>
       <span className='userName'>{name.toLowerCase()}</span>
       </div>
-      <span className="threeDots"><i onClick={editPost} className="fa fa-ellipsis-h" aria-hidden="true"></i></span>
+      <span className='threeDots'><i onClick={editPost} className='fa fa-ellipsis-h' aria-hidden='true'></i></span>
     </div>
-  );
+  )
 }

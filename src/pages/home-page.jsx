@@ -10,5 +10,5 @@ export function HomePage() {
       <Suggestions />
       </div>
     </Fragment>
-  );
+  )
 }

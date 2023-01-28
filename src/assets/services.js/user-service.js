@@ -38,11 +38,8 @@ async function query() {
   }
   
   //  כאשר יוזר רוצה להתחבר, הוא ממלא את השם משתמש והססמא, אותה נשלח לפונקציה שתביא לנו את כל היוזרים מתוך הלוקאל סטוראג'. אם המערך יוזרים ריק, נשמור במקום מערך יוזרים בצורת הארד קודד. לאחר מכן נחפש יוזר ששם המשתמש שלו וגם הססמא זהים ליוזר מתוך המערך של כל היוזרים. אם מצאנו אחד כזה, לשמור אותו בסשן סטוראג' ונחזיר חזרה לפרונט את היוזר המחובר. אם לא מצאנו אחד כזה, נשלח שגיאה לפרונט ונטפל בה
-  
 
-
-
-export const gUsers = [
+ export const gUsers = [
   {
     "_id": "Z550",
     "username": "Liori",
@@ -51,15 +48,11 @@ export const gUsers = [
     "imgUrl": 'https://res.cloudinary.com/dsinv9pik/image/upload/v1674477174/%D7%AA%D7%9E%D7%95%D7%A0%D7%94_vsrinc.jpg',
     "following": [
       {
-        "_id": "B700",
-        "fullname": "Dob",
-        "imgUrl": "https://media.allure.com/photos/5c734d9adbe270553d92abf1/1:1/w_1503,h_1503,c_limit/Rami-Malek-Oscars-2019-Look-Dyp.jpg"
+        "_id": "Z580",
+        "fullname": "ulashi ulashi",
+        "imgUrl": "https://img.mako.co.il/2014/02/24/467424241_g.jpg"
       },
-      {
-        "_id": "C600",
-        "fullname": "Marko",
-        "imgUrl": "https://randomuser.me/api/portraits/men/75.jpg"
-      }
+      
     ],
     "followers": [
       {
@@ -91,6 +84,92 @@ export const gUsers = [
           "_id": "C600",
           "fullname": "Marko",
           "imgUrl": "https://randomuser.me/api/portraits/men/75.jpg"
+        },
+        {
+          "_id": "u103",
+          "fullname": "Eli Mor",
+          "imgUrl": "https://shorturl.at/adGH1",
+        },
+      ],
+      "followers": [
+        {
+          "_id": "B700",
+          "fullname": "Dob",
+          "imgUrl": "https://media.allure.com/photos/5c734d9adbe270553d92abf1/1:1/w_1503,h_1503,c_limit/Rami-Malek-Oscars-2019-Look-Dyp.jpg"
+        },
+        {
+          "_id": "C600",
+          "fullname": "maria pali",
+          "imgUrl": "https://randomuser.me/api/portraits/women/31.jpg"
+        }
+      ],
+      "savedStoryIds": ["s104", "s111", "s123"]
+    },
+    {
+      "_id": "B700",
+      "username": "Dob",
+      "password": "123456",
+      "fullname": "Dob moran",
+      "imgUrl": "https://media.allure.com/photos/5c734d9adbe270553d92abf1/1:1/w_1503,h_1503,c_limit/Rami-Malek-Oscars-2019-Look-Dyp.jpg",
+      "following": [
+        {
+          "_id": "C600",
+          "fullname": "Dob",
+          "imgUrl": "https://randomuser.me/api/portraits/men/75.jpg"
+        },
+        {
+          "_id": "u102",
+          "fullname": "Leo Dicaprio",
+          "imgUrl": "https://tinyurl.com/bddwcp58",
+        }
+      ],
+      "followers": [
+        {
+          "_id": "C600",
+          "fullname": "Dob",
+          "imgUrl": "https://randomuser.me/api/portraits/men/75.jpg"
+        }
+      ],
+      "savedStoryIds": ["m104", "m111", "m123"]
+    },
+    {
+      "_id": "C600",
+      "username": "Maria",
+      "password": "123456",
+      "fullname": "Maria Pali",
+      "imgUrl": "https://randomuser.me/api/portraits/women/31.jpg",
+      "following": [
+        {
+          "_id": "B700",
+          "fullname": "Dob",
+          "imgUrl": "https://media.allure.com/photos/5c734d9adbe270553d92abf1/1:1/w_1503,h_1503,c_limit/Rami-Malek-Oscars-2019-Look-Dyp.jpg"
+        },
+      ],
+      "followers": [
+        {
+          "_id": "B700",
+          "fullname": "Dob",
+          "imgUrl": "https://media.allure.com/photos/5c734d9adbe270553d92abf1/1:1/w_1503,h_1503,c_limit/Rami-Malek-Oscars-2019-Look-Dyp.jpg"
+        },
+      ],
+      "savedStoryIds": ["s1594", "s166", "s199"]
+    },
+    {
+      "_id": "Z580",
+      "username": "ulashi",
+      "password": "123456",
+      "fullname": "ulashi ulashi",
+      "imgUrl": 'https://img.mako.co.il/2014/02/24/467424241_g.jpg',
+      "following": [
+        {
+          "_id": "B700",
+          "fullname": "Dob",
+          "imgUrl": "https://media.allure.com/photos/5c734d9adbe270553d92abf1/1:1/w_1503,h_1503,c_limit/Rami-Malek-Oscars-2019-Look-Dyp.jpg"
+        },
+        {
+          "_id": "C600",
+          "fullname": "Marko",
+          "imgUrl": "https://randomuser.me/api/portraits/men/75.jpg"
         }
       ],
       "followers": [
@@ -108,39 +187,54 @@ export const gUsers = [
       "savedStoryIds": ["s104", "s111", "s123"]
     },
     {
-      "_id": "B700",
-      "username": "Dob",
+      "_id": "u102",
+      "username": "lea1",
       "password": "123456",
-      "fullname": "Dob moran",
-      "imgUrl": "https://media.allure.com/photos/5c734d9adbe270553d92abf1/1:1/w_1503,h_1503,c_limit/Rami-Malek-Oscars-2019-Look-Dyp.jpg",
+      "fullname":"lea di",
+      "imgUrl": 'https://tinyurl.com/bddwcp58',
       "following": [
         {
-          "_id": "C600",
+          "_id": "B700",
           "fullname": "Dob",
+          "imgUrl": "https://media.allure.com/photos/5c734d9adbe270553d92abf1/1:1/w_1503,h_1503,c_limit/Rami-Malek-Oscars-2019-Look-Dyp.jpg"
+        },
+        {
+          "_id": "C600",
+          "fullname": "Marko",
           "imgUrl": "https://randomuser.me/api/portraits/men/75.jpg"
         }
       ],
       "followers": [
         {
-          "_id": "C600",
+          "_id": "B700",
           "fullname": "Dob",
+          "imgUrl": "https://media.allure.com/photos/5c734d9adbe270553d92abf1/1:1/w_1503,h_1503,c_limit/Rami-Malek-Oscars-2019-Look-Dyp.jpg"
+        },
+        {
+          "_id": "C600",
+          "fullname": "Marko",
           "imgUrl": "https://randomuser.me/api/portraits/men/75.jpg"
         }
       ],
-      "savedStoryIds": ["m104", "m111", "m123"]
+      "savedStoryIds": ["s104", "s111", "s123"]
     },
     {
-      "_id": "C600",
-      "username": "Marko",
+      "_id": "u103",
+      "username": "eli1",
       "password": "123456",
-      "fullname": "Marko Pollo",
-      "imgUrl": "http://some-img",
+      "fullname": "eli mor",
+      "imgUrl": 'https://randomuser.me/api/portraits/men/71.jpg',
       "following": [
         {
           "_id": "B700",
           "fullname": "Dob",
           "imgUrl": "https://media.allure.com/photos/5c734d9adbe270553d92abf1/1:1/w_1503,h_1503,c_limit/Rami-Malek-Oscars-2019-Look-Dyp.jpg"
         },
+        {
+          "_id": "C600",
+          "fullname": "Marko",
+          "imgUrl": "https://randomuser.me/api/portraits/men/75.jpg"
+        }
       ],
       "followers": [
         {
@@ -148,13 +242,20 @@ export const gUsers = [
           "fullname": "Dob",
           "imgUrl": "https://media.allure.com/photos/5c734d9adbe270553d92abf1/1:1/w_1503,h_1503,c_limit/Rami-Malek-Oscars-2019-Look-Dyp.jpg"
         },
+        {
+          "_id": "C600",
+          "fullname": "Marko",
+          "imgUrl": "https://randomuser.me/api/portraits/men/75.jpg"
+        }
       ],
-      "savedStoryIds": ["s1594", "s166", "s199"]
+      "savedStoryIds": ["s104", "s111", "s123"]
     },
 
 
 
   ]
+
+  
 
 
 

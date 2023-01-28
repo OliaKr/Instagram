@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
-import Box from '@mui/material/Box';
-import Modal from '@mui/material/Modal';
-import Divider from '@mui/material/Divider';
-import TextField from '@mui/material/TextField';
-import { closeRemoveModal, updateStory, updateImgUrl } from '../store/story.actions.js';
-import { onRemoveStory } from '../cmps/post-index.jsx';
-import { useSelector } from 'react-redux';
-import { ImgUploader } from '../cmps/img-uploader.jsx';
+import React, { useState } from 'react'
+import Box from '@mui/material/Box'
+import Modal from '@mui/material/Modal'
+import Divider from '@mui/material/Divider'
+import TextField from '@mui/material/TextField'
+import { closeRemoveModal, updateStory, updateImgUrl } from '../store/story.actions.js'
+import { onRemoveStory } from './post-index.jsx'
+import { useSelector } from 'react-redux'
+import { ImgUploader } from '../cmps/img-uploader.jsx'
 
 const style = {
   display: 'flex',
@@ -26,25 +26,25 @@ const style = {
 export function DeletePostModal() {
   const isRemoveModalOpen = useSelector(
     (storeState) => storeState.storyModule.isRemoveModalOpen
-  );
+  )
   const currentStory = useSelector(
     (storeState) => storeState.storyModule.currentStory
-  );
+  )
   const updatedImgUrl = useSelector(
     (storeState) => storeState.storyModule.updatedImgUrl
-  );
-  const [text, setText] = useState(currentStory.txt);
+  )
+  const [text, setText] = useState(currentStory.txt)
 
   function handleChange(e) {
-    setText(e.target.value);
-    console.log(text);
+    setText(e.target.value)
+    console.log(text)
   }
 
   function onUpdateStory() {
-    let updatedStory = { ...currentStory, txt: text, postImg: updatedImgUrl };
-    updateStory(updatedStory);
+    let updatedStory = { ...currentStory, txt: text, postImg: updatedImgUrl }
+    updateStory(updatedStory)
     closeRemoveModal()
-    updateImgUrl(null);
+    updateImgUrl(null)
 
   }
 
@@ -95,5 +95,5 @@ export function DeletePostModal() {
         />
       </Box>
     </Modal>
-  );
+  )
 }

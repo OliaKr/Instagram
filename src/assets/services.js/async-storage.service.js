@@ -20,7 +20,6 @@ function get(entityType, entityId) {
 }
 
 function post(entityType, newEntity) {
-    console.log('im post');
     newEntity = JSON.parse(JSON.stringify(newEntity))    
     newEntity._id = _makeId()
     return query(entityType).then(entities => {
@@ -31,7 +30,6 @@ function post(entityType, newEntity) {
 }
 
 function put(entityType, updatedEntity) {
-    console.log('im put');
     updatedEntity = JSON.parse(JSON.stringify(updatedEntity))    
     return query(entityType).then(entities => {
         const idx = entities.findIndex(entity => entity._id === updatedEntity._id)

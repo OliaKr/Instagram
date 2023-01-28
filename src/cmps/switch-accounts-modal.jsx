@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
-import Box from '@mui/material/Box';
-import Modal from '@mui/material/Modal';
-import Divider from '@mui/material/Divider';
-import vi from '../assets/img/vi.png';
-import Avatar from '@mui/material/Avatar';
-import { gUsers } from '../assets/services.js/user-service.js';
+import React from 'react'
+import { useSelector } from 'react-redux'
+import Box from '@mui/material/Box'
+import Modal from '@mui/material/Modal'
+import Divider from '@mui/material/Divider'
+import vi from '../assets/img/vi.png'
+import Avatar from '@mui/material/Avatar'
+import { gUsers } from '../assets/services.js/user-service.js'
 import {switchUser , closeSwitchUsersModal} from '../store/user.action.js'
 import close from '../assets/img/close.png'
 
@@ -28,11 +28,14 @@ const style = {
 export function SwitchAcoountsModal() {
   const isSwitchModalOpen = useSelector(
     (storeState) => storeState.userModule.isSwitchModalOpen
-  );
+    );
+    const user = useSelector(
+      (storeState) => storeState.userModule.user
+    );
 
-  function onLogin(user) {
-    console.log(`The user ${user.fullname} is logged in`);
-    switchUser(user)
+  function onLogin(userLine) {
+    console.log(`The user ${userLine.fullname} is logged in`)
+    switchUser(userLine)
 
     
   }
@@ -50,22 +53,23 @@ export function SwitchAcoountsModal() {
           <img src={close} alt="close" onClick={closeSwitchUsersModal}/>
         </div>
         <Divider />
-        {gUsers.map((user) => (
-          <div className='registered-user' key={user._id} onClick={() => onLogin(user)}>
+        {gUsers.map((userLine) => (
+          <div className='registered-user' key={userLine._id} onClick={() => onLogin(userLine)}>
             <div className='left-section'>
               <Avatar
-                alt={user.fullname}
+                alt={userLine.fullname}
                 sx={{ width: 24, height: 24 }}
-                src={user.imgUrl}
+                src={userLine.imgUrl}
               />
-              <span>{user.fullname}</span>
+              <span>{userLine.fullname}</span>
             </div>
-            <img
+            {user && user._id === userLine._id ? (
+               <img
               src={vi}
               width='30'
               height='30'
               alt='newPostImg'
-            ></img>
+            ></img>) : null }
           </div>
         ))}
       </Box>

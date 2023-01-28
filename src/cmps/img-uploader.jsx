@@ -1,8 +1,8 @@
 import { useState} from 'react'
-import {updateImgUrl} from '../store/story.actions.js';
-import {useSelector} from 'react-redux';
+import {updateImgUrl} from '../store/story.actions.js'
+import {useSelector} from 'react-redux'
 
-import {uploadService} from '../assets/services.js/upload.service.js';
+import {uploadService} from '../assets/services.js/upload.service.js'
 
 
 export function ImgUploader({ onUploaded = null}) {
@@ -27,10 +27,10 @@ export function ImgUploader({ onUploaded = null}) {
   }
 
   return (
-    <div className="upload-preview">
+    <div className='upload-preview'>
       {updatedImgUrl  && <img src={updatedImgUrl } style={{ maxWidth: '200px', float: 'right' }} />}
-      <label htmlFor="imgUpload">{getUploadLabel()}</label>
-      <input type="file" onChange={uploadImg} accept="img/*" id="imgUpload" />
+      <label htmlFor='imgUpload'>{getUploadLabel()}</label>
+      <input type='file' onChange={uploadImg} accept="img/*" id='imgUpload' />
     </div>
   )
 }

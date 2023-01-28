@@ -23,7 +23,7 @@ export function getActionRemovestory(storyId) {
 
 export function getActionAddstory(story) {
   return {
-    type: ADD_STORY,
+    type: ADD_STORY,  
     story,
   };
 }
@@ -154,3 +154,11 @@ export function updateImgUrl(story) {
     throw err;
   }
 }
+
+export async function addLikeOrComment(updatedStory) {
+  console.log('I should see on the LikedBy section of this story 3 objects including Lior', updatedStory)
+  await storyService.update(updatedStory);
+  loadStories()
+}
+
+

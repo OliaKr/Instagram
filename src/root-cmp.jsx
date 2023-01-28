@@ -1,13 +1,13 @@
-import { Profile } from './cmps/profie.jsx';
-import { HomePage } from './pages/home-page';
+import { Profile } from './cmps/profie.jsx'
+import { HomePage } from './pages/home-page'
 import React, { useEffect } from 'react'
 import { Routes, Route } from 'react-router'
 import routes from './routes'
-import { Sidebar } from './cmps/sidebar.jsx';
+import { Sidebar } from './cmps/sidebar.jsx'
 
 
 
-import { loadUsers } from './store/user.action';
+import { loadUsers } from './store/user.action'
 
 
 

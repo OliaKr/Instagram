@@ -16,5 +16,5 @@ root.render(
     </Router>
   </Provider>
   
-);
+)
 

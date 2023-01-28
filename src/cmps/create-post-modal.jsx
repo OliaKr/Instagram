@@ -1,12 +1,12 @@
-import React, { useState} from 'react';
-import { useSelector } from 'react-redux';
-import Box from '@mui/material/Box';
-import Modal from '@mui/material/Modal';
-import Divider from '@mui/material/Divider';
-import createpic from '../assets/img/createpic.png';
-import { ImgUploader } from './img-uploader.jsx';
-import {closeCreateModal, addStory, updateImgUrl} from '../store/story.actions.js';
-import {newStory} from '../assets/services.js/story-service.js';
+import React, { useState} from 'react'
+import { useSelector } from 'react-redux'
+import Box from '@mui/material/Box'
+import Modal from '@mui/material/Modal'
+import Divider from '@mui/material/Divider'
+import createpic from '../assets/img/createpic.png'
+import { ImgUploader } from './img-uploader.jsx'
+import {closeCreateModal, addStory, updateImgUrl} from '../store/story.actions.js'
+import {newStory} from '../assets/services.js/story-service.js'
 
 const style = {
   display: 'flex',
@@ -25,7 +25,7 @@ const style = {
 };
 
 export function CreatePostModal() {
-    const isCreateModalOpen = useSelector(storeState => storeState.storyModule.isCreateModalOpen);
+    const isCreateModalOpen = useSelector(storeState => storeState.storyModule.isCreateModalOpen)
     const updatedImgUrl = useSelector(
       (storeState) => storeState.storyModule.updatedImgUrl
     );
@@ -62,7 +62,7 @@ export function CreatePostModal() {
         <div className='img-create-container'>
          <img
           src={createpic}
-          width="100" height="100"
+          width='100' height='100'
           alt='newPostImg'
         /> 
           
