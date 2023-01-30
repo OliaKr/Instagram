@@ -7,6 +7,8 @@ import {
   CLOSE_CREATE_MODAL,
   OPEN_REMOVE_MODAL,
   CLOSE_REMOVE_MODAL,
+  OPEN_STORY_FORWARD_MODAL,
+  CLOSE_STORY_FORWARD_MODAL,
   UPDATE_CURRENT_STORY,
   UPDATE_IMG_URL,
 } from './story.reducer';
@@ -23,7 +25,7 @@ export function getActionRemovestory(storyId) {
 
 export function getActionAddstory(story) {
   return {
-    type: ADD_STORY,  
+    type: ADD_STORY,
     story,
   };
 }
@@ -73,10 +75,9 @@ export async function addStory(story) {
 export async function updateStory(story) {
   try {
     // if (story._id) {
-      let savedstory = await storyService.update(story);
-      store.dispatch(getActionUpdatestory(savedstory));
-      return savedstory;
-    
+    let savedstory = await storyService.update(story);
+    store.dispatch(getActionUpdatestory(savedstory));
+    return savedstory;
   } catch (err) {
     console.log('Cannot save story', err);
     throw err;
@@ -87,7 +88,7 @@ export function openCreateModal(story) {
   try {
     store.dispatch({
       type: OPEN_CREATE_MODAL,
-      story: true,
+      isOpen: true,
     });
   } catch (err) {
     console.log('Cannot open create modal', err);
@@ -99,7 +100,7 @@ export function closeCreateModal(story) {
   try {
     store.dispatch({
       type: CLOSE_CREATE_MODAL,
-      story: false,
+      isOpen: false,
     });
   } catch (err) {
     console.log('Cannot close create modal', err);
@@ -111,7 +112,7 @@ export function openRemoveModal() {
   try {
     store.dispatch({
       type: OPEN_REMOVE_MODAL,
-      story: true,
+      isOpen: true,
     });
   } catch (err) {
     console.log('Cannot open delete modal', err);
@@ -123,7 +124,31 @@ export function closeRemoveModal() {
   try {
     store.dispatch({
       type: CLOSE_REMOVE_MODAL,
-      story: false,
+      isOpen: false,
+    });
+  } catch (err) {
+    console.log('Cannot close delete modal', err);
+    throw err;
+  }
+}
+
+export function openStoryForwardModal() {
+  try {
+    store.dispatch({
+      type: OPEN_STORY_FORWARD_MODAL,
+      isOpen: true,
+    });
+  } catch (err) {
+    console.log('Cannot open delete modal', err);
+    throw err;
+  }
+}
+
+export function closeStoryForwardModal() {
+  try {
+    store.dispatch({
+      type: CLOSE_STORY_FORWARD_MODAL,
+      isOpen: false,
     });
   } catch (err) {
     console.log('Cannot close delete modal', err);
@@ -156,9 +181,10 @@ export function updateImgUrl(story) {
 }
 
 export async function addLikeOrComment(updatedStory) {
-  console.log('I should see on the LikedBy section of this story 3 objects including Lior', updatedStory)
+  console.log(
+    'I should see on the LikedBy section of this story 3 objects including Lior',
+    updatedStory
+  );
   await storyService.update(updatedStory);
-  loadStories()
+  loadStories();
 }
-
-

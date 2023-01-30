@@ -9,68 +9,31 @@ export const storyService = {
   remove,
   create,
   update,
- 
 };
 
 export const newStory = {
   _id: null,
-  txt: 'Best trip ever',
-  postImg: '', //Can be an array if decide to support multiple imgs
+  txt: '',
+  postImg: [], //Can be an array if decide to support multiple imgs
   by: {
-    _id: utilService.makeId(),
-    fullname: 'Ulash Ulashi',
-    userImg: 'https://img.mako.co.il/2014/02/24/467424241_g.jpg',
+    _id: '',
+    fullname: '',
+    userImg: '',
   },
-
-  comments: [
-    {
-      id: utilService.makeId(),
-      by: {
-        _id: utilService.makeId(),
-        fullname: 'Bob',
-        imgUrl: 'http://some-img',
-      },
-      txt: 'good one!',
-      likedBy: [
-        // Optional
-        {
-          _id: utilService.makeId(),
-          fullname: 'Bob',
-          imgUrl: 'http://some-img',
-        },
-      ],
-    },
-    {
-      id: utilService.makeId(),
-      by: {
-        _id: utilService.makeId(),
-        fullname: 'Dob',
-        imgUrl: 'http://some-img',
-      },
-      txt: 'not good!',
-    },
-  ],
-  likedBy: [
-    {
-      _id: utilService.makeId(),
-      fullname: 'Bob',
-      imgUrl: 'http://some-img',
-    },
-    {
-      _id: utilService.makeId(),
-      fullname: 'Dob',
-      imgUrl: 'http://some-img',
-    },
-  ],
-  tags: ['fun', 'kids'],
+  comments: [],
+  likedBy: [],
+  tags: [],
 };
 
 const gStories = [
   {
     _id: 's101',
     txt: 'Best trip ever',
-    postImg:
-      'https://i.pinimg.com/474x/fe/bb/63/febb6397ebc186d9d0910d05d8fc28af.jpg', //Can be an array if decide to support multiple imgs
+    postImg: [
+      'https://i.pinimg.com/474x/fe/bb/63/febb6397ebc186d9d0910d05d8fc28af.jpg',
+      'https://res.cloudinary.com/dsinv9pik/image/upload/v1674992159/324925483_746086793599887_2422444401539407282_n_x1var0.jpg',
+      'https://res.cloudinary.com/dsinv9pik/image/upload/v1674988394/325913754_1048696716095856_6968959291050052233_n_xjxeb9.jpg',
+    ], //Can be an array if decide to support multiple imgs
     by: {
       _id: 'Z580',
       fullname: 'Ulash Ulashi',
@@ -122,7 +85,7 @@ const gStories = [
   {
     _id: 's102',
     txt: 'Nice!',
-    postImg: 'https://i.insider.com/58936e390849ec1a008b4619?width=700', //Can be an array if decide to support multiple imgs
+    postImg: ['https://i.insider.com/58936e390849ec1a008b4619?width=700'], //Can be an array if decide to support multiple imgs
     by: {
       _id: 'u102',
       fullname: 'Lea Di',
@@ -173,7 +136,7 @@ const gStories = [
   {
     _id: 's103',
     txt: 'Great pic!',
-    postImg: 'https://shorturl.ac/79odv', //Can be an array if decide to support multiple imgs
+    postImg: ['https://shorturl.ac/79odv'], //Can be an array if decide to support multiple imgs
     by: {
       _id: 'u103',
       fullname: 'Eli Mor',
@@ -186,7 +149,7 @@ const gStories = [
         by: {
           _id: 'u105',
           fullname: 'Bob',
-          imgUrl: 'https://shorturl.ac/79odv',
+          imgUrl: ['https://shorturl.ac/79odv'],
         },
         txt: 'good one!',
         likedBy: [
@@ -265,5 +228,3 @@ async function update(story) {
   let savedStory = await storageService.put(STORAGE_KEY, story);
   return savedStory;
 }
-
-

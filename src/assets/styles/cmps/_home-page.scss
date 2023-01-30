@@ -1,20 +1,23 @@
-.post-container{
-    display: flex;
-    justify-content: center;
-    gap: 100px;
-    overflow-y: auto;
+.post-container {
+  display: flex;
+  justify-content: center;
+  gap: 100px;
+  overflow-y: auto;
 
-    width: 100%;
+  width: 100%;
 }
 
-button[disabled]{
-    border: none;
-    background-color: transparent;
-    
-  }
+button[disabled] {
+  border: none;
+  background-color: transparent;
+}
 
-  button{
-    border: none;
-    background-color: transparent;
-    cursor: pointer;
-  }
+button {
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+// input[type='file'] {
+//   display: none;
+// }

@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { PostList } from './post-list.jsx';
+import { StoryForwardModal } from './story-forward-modal.jsx';
 import {
   loadStories,
   removeStory,
@@ -32,6 +33,7 @@ export function PostIndex() {
   return (
     <div className='post-index-container'>
       <DeletePostModal />
+      <StoryForwardModal />
       <PostList stories={stories} />
     </div>
   );

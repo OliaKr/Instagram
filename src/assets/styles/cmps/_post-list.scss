@@ -1,9 +1,7 @@
 .story-container {
-  
   display: flex;
   flex-direction: column;
-  margin-top: 170px;
-  height: 700px;
+  margin-top: 50px;
 }
 .story-header {
   display: flex;
@@ -14,8 +12,6 @@
   width: 100%;
   height: 8%;
   margin-bottom: 10px;
-
-  
 }
 .img-container {
   height: fit-content;
@@ -24,7 +20,13 @@
     width: 100%;
     min-height: 587.5px;
     max-height: 587.5px;
+    object-fit: cover;
   }
+}
+
+.preview-details {
+  font-size: 14px;
+  color: #262626;
 }
 
 .input-container {
@@ -38,7 +40,7 @@
   display: flex;
   flex-direction: row;
   // justify-content: flex-start;
-  justify-content: space-between ;
+  justify-content: space-between;
   width: 100%;
   height: 30px;
 
@@ -47,12 +49,31 @@
     background-color: inherit;
   }
 }
+
+.likesContainer {
+  margin-bottom: 8px;
+}
+
+.storytitle {
+  margin-bottom: 8px;
+}
+
+.viewComments {
+  color: #8e8e8e;
+  font-size: 14px;
+  font-weight: 400;
+  margin-bottom: 8px;
+}
 .comments {
   display: flex;
   flex-direction: column;
-
-  height: 200px;
-  width: 100%;
+  padding: 0px;
+}
+.comment {
+  font-weight: 400;
+  font-size: 14px;
+  height: 18px;
+  margin-bottom: 4px;
 }
 .input-area {
   display: flex;
@@ -66,9 +87,9 @@
   }
 }
 .emoji {
-  width: 30px;
-  height: 30px;
-  background-image: url('../../icons/emoji.svg');
+  width: 13px;
+  height: 13px;
+  background-image: url('../../icons/smiley.svg');
   background-size: cover;
 }
 
@@ -79,14 +100,51 @@
 
 .avatar-section {
   display: flex;
-  flex:1;
+  flex: 1;
   align-items: center;
   width: 200px;
-
 }
 
 .threeDots {
   padding-right: 4px;
+}
 
+.input-field {
+  flex: 1;
+}
 
+.story-img {
+  max-height: 580;
+  object-fit: cover;
+}
+
+.slick-slider {
+  width: 468px;
+  .slick-prev {
+    z-index: 10;
+    left: 10px;
+    opacity: 0.4;
+  }
+
+  .slick-next {
+    z-index: 10;
+    right: 10px;
+    opacity: 0.4;
+  }
+
+  .slick-dots {
+    bottom: 10px;
+  }
+
+  .slick-dots li button:before {
+    color: white;
+  }
+
+  .slick-list {
+    margin-bottom: -5px;
+  }
+
+  .slick-dots li {
+    margin: 0;
+  }
 }

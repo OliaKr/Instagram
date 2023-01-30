@@ -1,36 +1,28 @@
+export const uploadService = async (ev) => {
+  const CLOUD_NAME = 'dsinv9pik';
+  const UPLOAD_PRESET = 'Oliakra';
+  const UPLOAD_URL = `https://api.cloudinary.com/v1_1/${CLOUD_NAME}/image/upload`;
 
-export const uploadService = async(ev) => {
-  const CLOUD_NAME = "dsinv9pik"
-  const UPLOAD_PRESET = "Oliakra"
-  const UPLOAD_URL = `https://api.cloudinary.com/v1_1/${CLOUD_NAME}/image/upload`
-  const FORM_DATA = new FormData();
+  const files = ev.target.files;
+  const formData = new FormData();
 
-  const formData = new FormData()
-  // formData.append('upload_preset', UPLOAD_PRESET)
-  // formData.append('file', ev.target.files[0])
-  FORM_DATA.append('file', ev.target.files[0])
-  FORM_DATA.append('upload_preset', UPLOAD_PRESET);
+  console.log(files);
 
-  // return fetch(UPLOAD_URL, {
-  //   method: 'POST',
-  //   body: formData
-  // })
-  //   .then(res => res.json())
-  //   .then(res => {
-  //     return res
-  //   })
-  //   .catch(err => console.error(err))
-
-  try {
-    const res = await fetch(UPLOAD_URL, {
+  for (let i = 0; i < files.length; i++) {
+    let file = files[i];
+    formData.append('file', file);
+    formData.append('upload_preset', UPLOAD_PRESET);
+    try {
+      const res = await fetch(UPLOAD_URL, {
         method: 'POST',
-        body: FORM_DATA
-    })
-    const elImg = document.createElement('img');
-    const { url } = await res.json()
-  
-   return url
-} catch (err) {
-    console.error(err)
-}
-}
+        body: formData,
+      });
+      const elImg = document.createElement('img');
+      const { url } = await res.json();
+
+      return url;
+    } catch (err) {
+      console.error(err);
+    }
+  }
+};
