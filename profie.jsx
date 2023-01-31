@@ -1,15 +1,19 @@
 import React, { useState, useEffect } from 'react';
+import { DisabledByDefault } from '@mui/icons-material';
+// import SettingsIcon from '@mui/icons-material/Settings'
 import Avatar from '@mui/material/Avatar';
 import { withStyles } from '@mui/styles';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
+import AppsIcon from '@mui/icons-material/Apps';
+import AccountBoxIcon from '@mui/icons-material/AccountBox';
 import { useSelector } from 'react-redux';
+import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
+
 import cubeBlack from '../assets/icons/cube black.svg';
 import settings from '../assets/icons/settings.svg';
 import userGray from '../assets/icons/user gray.svg';
 import flagGray from '../assets/icons/flag gray.svg';
-import { openStoryForwardModal } from '../store/story.actions';
-import { StoryForwardModal } from '../cmps/story-forward-modal.jsx';
 
 const tabStyle = {
   display: 'flex',
@@ -65,8 +69,6 @@ export function Profile() {
 
   return (
     <div className='profile-container'>
-      <StoryForwardModal />
-
       <div className='top-section'>
         <div className='avatar-container'>
           <Avatar
@@ -87,9 +89,18 @@ export function Profile() {
             </button>
           </div>
           <div className='second'>
-            <span>{numOfStories} posts</span>
-            <span>{user.followers.length} followers</span>
-            <span>{user.following.length} following</span>
+            <span>
+              {numOfStories}
+              <span className='data'> posts</span>
+            </span>
+            <span>
+              {user.followers.length}
+              <span className='data'> followers</span>
+            </span>
+            <span>
+              {user.following.length}
+              <span className='data'> following</span>
+            </span>
           </div>
           <div className='third'>
             <div style={{ fontWeight: 700 }}>{user.fullname}</div>
@@ -147,7 +158,6 @@ export function Profile() {
                 user._id === story.by._id && (
                   <img
                     key={story._id}
-                    onClick={openStoryForwardModal}
                     className='singleImg'
                     alt='img'
                     src={story.postImg[0]}

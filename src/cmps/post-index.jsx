@@ -33,7 +33,7 @@ export function PostIndex() {
   return (
     <div className='post-index-container'>
       <DeletePostModal />
-      <StoryForwardModal />
+      <StoryForwardModal clickedFromStoryPreview />
       <PostList stories={stories} />
     </div>
   );

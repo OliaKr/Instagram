@@ -44,6 +44,7 @@
 }
 
 .third {
+  font-size: 14px;
 }
 
 .grid-images {
@@ -65,7 +66,6 @@
   display: flex;
   min-height: 52px;
   height: 52px;
-  margin-top: 174px;
   width: 100%;
   flex-basis: 935px;
   max-width: 935px;
@@ -107,4 +107,8 @@
 .iconImg {
   margin-top: 4px;
   margin-right: 6px;
+}
+
+.data {
+  font-weight: 400;
 }

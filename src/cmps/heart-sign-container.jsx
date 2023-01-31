@@ -5,17 +5,18 @@ import {
   updateCurrentStory,
 } from '../store/story.actions.js';
 import { updateUser } from '../store/user.action.js';
-import { utilService } from '../assets/services.js/util.service.js';
 import message from '../assets/icons/message black.svg';
 import flag from '../assets/icons/flag black.svg';
 import heartBlack from '../assets/icons/heart black.svg';
 import heartRed from '../assets/icons/heart red.svg';
 import plane from '../assets/icons/plane.svg';
+import flagBlack from '../assets/icons/flagBlack.svg';
 import { openStoryForwardModal } from '../store/story.actions.js';
 
 export function HeartSignContainer({ story }) {
   const user = useSelector((storeState) => storeState.userModule.user);
   const [isLiked, setIsLiked] = useState(false);
+  const [isSaved, setIsSaved] = useState(false);
 
   useEffect(() => {
     isUserLikedStory();
@@ -52,10 +53,21 @@ export function HeartSignContainer({ story }) {
   }
 
   function OnFavoriteStories() {
-    let addToUserFavorite = {
-      ...user,
-      savedStoryIds: [...user.savedStoryIds, story._id],
-    };
+    let addToUserFavorite;
+    if (isSaved) {
+      let savedStoriesExceptThis = user.savedStoryIds.filter(
+        (savedStory) => savedStory._id === story._id
+      );
+      addToUserFavorite = { ...user, savedStoryIds: savedStoriesExceptThis };
+      setIsSaved(false);
+    } else {
+      addToUserFavorite = {
+        ...user,
+        savedStoryIds: [...user.savedStoryIds, story._id],
+      };
+      setIsSaved(true);
+    }
+
     updateUser(addToUserFavorite);
   }
 
@@ -94,15 +106,21 @@ export function HeartSignContainer({ story }) {
           />
         </button>
       </div>
-
       <button
         className='flagIcon'
         onClick={OnFavoriteStories}
       >
-        <img
-          src={flag}
-          alt='flagIcon'
-        />
+        {user.savedStoryIds.includes(story._id) ? (
+          <img
+            src={flagBlack}
+            alt='flagIcon'
+          />
+        ) : (
+          <img
+            src={flag}
+            alt='flagIcon'
+          />
+        )}
       </button>
     </div>
   );

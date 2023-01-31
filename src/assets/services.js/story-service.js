@@ -40,46 +40,8 @@ const gStories = [
       userImg: 'https://img.mako.co.il/2014/02/24/467424241_g.jpg',
     },
 
-    comments: [
-      {
-        id: 'c1001',
-        by: {
-          _id: 'u105',
-          fullname: 'Bob',
-          imgUrl: 'http://some-img',
-        },
-        txt: 'good one!',
-        likedBy: [
-          // Optional
-          {
-            _id: 'u105',
-            fullname: 'Bob',
-            imgUrl: 'http://some-img',
-          },
-        ],
-      },
-      {
-        id: 'c1002',
-        by: {
-          _id: 'u106',
-          fullname: 'Dob',
-          imgUrl: 'http://some-img',
-        },
-        txt: 'not good!',
-      },
-    ],
-    likedBy: [
-      {
-        _id: 'u105',
-        fullname: 'Bob',
-        imgUrl: 'http://some-img',
-      },
-      {
-        _id: 'u106',
-        fullname: 'Dob',
-        imgUrl: 'http://some-img',
-      },
-    ],
+    comments: [],
+    likedBy: [],
     tags: ['fun', 'kids'],
   },
   {
@@ -91,46 +53,8 @@ const gStories = [
       fullname: 'Lea Di',
       userImg: 'https://tinyurl.com/bddwcp58',
     },
-    comments: [
-      {
-        id: 'c1001',
-        by: {
-          _id: 'u105',
-          fullname: 'Bob',
-          imgUrl: 'http://some-img',
-        },
-        txt: 'good one!',
-        likedBy: [
-          // Optional
-          {
-            _id: 'u105',
-            fullname: 'Bob',
-            imgUrl: 'http://some-img',
-          },
-        ],
-      },
-      {
-        id: 'c1002',
-        by: {
-          _id: 'u106',
-          fullname: 'Dob',
-          imgUrl: 'http://some-img',
-        },
-        txt: 'not good!',
-      },
-    ],
-    likedBy: [
-      {
-        _id: 'u105',
-        fullname: 'Bob',
-        imgUrl: 'http://some-img',
-      },
-      {
-        _id: 'u106',
-        fullname: 'Dob',
-        imgUrl: 'http://some-img',
-      },
-    ],
+    comments: [],
+    likedBy: [],
     tags: ['fun', 'kids'],
   },
   {
@@ -143,46 +67,8 @@ const gStories = [
       userImg: 'https://randomuser.me/api/portraits/men/71.jpg',
     },
 
-    comments: [
-      {
-        id: 'c1001',
-        by: {
-          _id: 'u105',
-          fullname: 'Bob',
-          imgUrl: ['https://shorturl.ac/79odv'],
-        },
-        txt: 'good one!',
-        likedBy: [
-          // Optional
-          {
-            _id: 'u105',
-            fullname: 'Bob',
-            imgUrl: 'http://some-img',
-          },
-        ],
-      },
-      {
-        id: 'c1002',
-        by: {
-          _id: 'u106',
-          fullname: 'Dob',
-          imgUrl: 'http://some-img',
-        },
-        txt: 'not good!',
-      },
-    ],
-    likedBy: [
-      {
-        _id: 'u105',
-        fullname: 'Bob',
-        imgUrl: 'http://some-img',
-      },
-      {
-        _id: 'u106',
-        fullname: 'Dob',
-        imgUrl: 'http://some-img',
-      },
-    ],
+    comments: [],
+    likedBy: [],
     tags: ['fun', 'kids'],
   },
 ];

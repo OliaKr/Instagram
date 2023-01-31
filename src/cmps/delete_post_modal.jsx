@@ -1,7 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
-import Divider from '@mui/material/Divider';
 import TextField from '@mui/material/TextField';
 import {
   closeRemoveModal,
@@ -19,11 +18,11 @@ const style = {
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
-  width: 690,
+  width: '65%',
   height: 728,
   bgcolor: 'background.paper',
   boxShadow: 24,
-  p: 4,
+  p: 0,
   borderRadius: '1%',
 };
 
@@ -39,13 +38,14 @@ export function DeletePostModal() {
   );
   const [text, setText] = useState(currentStory.txt);
 
+  useEffect(() => {}, [updateImgUrl]);
+
   function handleChange(e) {
     setText(e.target.value);
-    console.log(text);
+    console.log(updatedImgUrl);
   }
-
   function onUpdateStory() {
-    let updatedStory = { ...currentStory, txt: text, postImg: updatedImgUrl };
+    let updatedStory = { ...currentStory, txt: text, postImg: [updatedImgUrl] };
     updateStory(updatedStory);
     closeRemoveModal();
     updateImgUrl(null);
@@ -59,44 +59,48 @@ export function DeletePostModal() {
       aria-describedby='modal-modal-description'
     >
       <Box sx={style}>
-        <div
-          onClick={() => onRemoveStory(currentStory._id)}
-          className='modal-header'
-          // remove-modal-header
-        >
-          <span>Delete </span>
+        <div className='deleteStoryModal'>
+          {currentStory.postImg[0] && (
+            <div className='blackBG'>
+              <img
+                src={updatedImgUrl ? updatedImgUrl : currentStory.postImg[0]}
+                alt='postImg'
+                className='editedImg'
+              />
+            </div>
+          )}
+          <div className='right-section'>
+            <button
+              onClick={() => onRemoveStory(currentStory._id)}
+              className='edit-delete-option'
+            >
+              Remove
+            </button>
+            <button
+              onClick={onUpdateStory}
+              className='edit-delete-option'
+              disabled={!updatedImgUrl?.length}
+            >
+              Edit
+            </button>
+            <button
+              onClick={closeRemoveModal}
+              className='edit-delete-option'
+            >
+              Cancel
+            </button>
+            <ImgUploader changeImage />
+            <div className='text-field-container'>
+              <TextField
+                fullWidth
+                label='Edit Text'
+                id='fullWidth'
+                onChange={(e) => handleChange(e)}
+                value={text}
+              />
+            </div>
+          </div>
         </div>
-        <Divider />
-        <button
-          onClick={onUpdateStory}
-          className='modal-header'
-          disabled={!updatedImgUrl?.length}
-        >
-          <span>Edit </span>
-        </button>
-        <Divider />
-        <div
-          onClick={closeRemoveModal}
-          className='modal-header'
-        >
-          <span>Cancel </span>
-        </div>
-        <Divider />
-        {!updatedImgUrl?.length && (
-          <img
-            src={currentStory.postImg[0]}
-            alt='postImg'
-            className='editedImg'
-          />
-        )}
-        <ImgUploader />
-        <TextField
-          fullWidth
-          label='Edit Text'
-          id='fullWidth'
-          onChange={(e) => handleChange(e)}
-          value={text}
-        />
       </Box>
     </Modal>
   );
