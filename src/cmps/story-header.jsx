@@ -1,34 +1,41 @@
-import Avatar from '@mui/material/Avatar';
-import Stack from '@mui/material/Stack';
-import { useState } from 'react';
-import { openRemoveModal, updateCurrentStory } from '../store/story.actions.js';
+import Avatar from "@mui/material/Avatar";
+import Stack from "@mui/material/Stack";
+import { useState } from "react";
+import { useSelector } from "react-redux";
+import { utilService } from "../assets/services.js/util.service.js";
+import { openRemoveModal, updateCurrentStory } from "../store/story.actions.js";
 
 export function Storyheader({ story }) {
   const [name, setName] = useState(story.by.fullname);
+  const currentStory = useSelector(
+    (storeState) => storeState.storyModule.currentStory
+  );
 
   function editPost() {
     updateCurrentStory(story);
-
-    openRemoveModal();
+    if (currentStory?.postImg[0]) {
+      console.log(currentStory?.postImg);
+      openRemoveModal();
+    }
   }
 
   return (
-    <div className='story-header'>
-      <div className='avatar-section'>
-        <Stack
-          direction='row'
-          spacing={2}
-        >
-          <Avatar src={story.by.userImg} />
+    <div className="story-header">
+      <div className="avatar-section">
+        <Stack direction="row" spacing={2}>
+          <Avatar src={story.by.userImg} sx={{ alignSelf: "center" }} />
         </Stack>
-        <span className='userName'>{name.toLowerCase()}</span>
+        <span className="userName">{name.toLowerCase()}</span>
+        <span className="creationDate">
+          {" "}
+          • {utilService.msToTime(story?.timestamp)}
+        </span>
       </div>
-      <span className='threeDots'>
+      <span className="threeDots">
         <i
           onClick={editPost}
-          className='fa fa-ellipsis-h'
-          aria-hidden='true'
-        ></i>
+          className="fa fa-ellipsis-h"
+          aria-hidden="true"></i>
       </span>
     </div>
   );

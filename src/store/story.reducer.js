@@ -18,7 +18,7 @@ const initialState = {
   isRemoveModalOpen: false,
   isStoryForwardModalOpen: false,
   currentStory: newStory,
-  updatedImgUrl: [],
+  updatedImgUrl: null,
 };
 
 export function storyReducer(state = initialState, action) {
@@ -50,7 +50,7 @@ export function storyReducer(state = initialState, action) {
       newState = { ...state, isCreateModalOpen: action.isOpen };
       break;
     case CLOSE_CREATE_MODAL:
-      newState = { ...state, isCreateModalOpen: action.isOpen };
+      newState = { ...state, isCreateModalOpen: action.isOpen, updatedImgUrl: null };
       break;
     case OPEN_REMOVE_MODAL:
       newState = { ...state, isRemoveModalOpen: action.isOpen };
@@ -67,7 +67,7 @@ export function storyReducer(state = initialState, action) {
       newState = { ...state, isStoryForwardModalOpen: action.isOpen };
       break;
     case CLOSE_STORY_FORWARD_MODAL:
-      newState = { ...state, isStoryForwardModalOpen: action.isOpen };
+      newState = { ...state, isStoryForwardModalOpen: action.isOpen, updatedImgUrl: null, };
       break;
     case UPDATE_CURRENT_STORY:
       newState = { ...state, currentStory: action.story };

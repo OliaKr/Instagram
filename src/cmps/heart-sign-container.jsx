@@ -1,50 +1,66 @@
-import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import {
   addLikeOrComment,
   updateCurrentStory,
-} from '../store/story.actions.js';
-import { updateUser } from '../store/user.action.js';
-import message from '../assets/icons/message black.svg';
-import flag from '../assets/icons/flag black.svg';
-import heartBlack from '../assets/icons/heart black.svg';
-import heartRed from '../assets/icons/heart red.svg';
-import plane from '../assets/icons/plane.svg';
-import flagBlack from '../assets/icons/flagBlack.svg';
-import { openStoryForwardModal } from '../store/story.actions.js';
+} from "../store/story.actions.js";
+import { updateOtherUser, updateUser } from "../store/user.action.js";
+import message from "../assets/icons/message black.svg";
+import flag from "../assets/icons/flag black.svg";
+import heartBlack from "../assets/icons/heart black.svg";
+import heartRed from "../assets/icons/heart red.svg";
+import plane from "../assets/icons/plane.svg";
+import flagBlack from "../assets/icons/flagBlack.svg";
+import { openStoryForwardModal } from "../store/story.actions.js";
+import { utilService } from "../assets/services.js/util.service.js";
 
 export function HeartSignContainer({ story }) {
   const user = useSelector((storeState) => storeState.userModule.user);
+  const users = useSelector((storeState) => storeState.userModule.users);
   const [isLiked, setIsLiked] = useState(false);
   const [isSaved, setIsSaved] = useState(false);
 
-  useEffect(() => {
-    isUserLikedStory();
-  }, [story, isLiked]);
-
-  function onAddLike() {
+  async function onAddLike() {
     let updatedStory;
-    if (isLiked) {
-      let likesAfterRemove = story.likedBy.filter(
-        (likedStory) => likedStory._id !== user._id
-      );
-      updatedStory = { ...story, likedBy: likesAfterRemove };
-    } else {
-      updatedStory = {
-        ...story,
-        likedBy: [
-          ...story.likedBy,
-          { _id: user._id, fullname: user.fullname, imgUrl: user.imgUrl },
-        ],
-      };
-    }
-    addLikeOrComment(updatedStory);
+    updatedStory = {
+      ...story,
+      likedBy: [
+        ...story.likedBy,
+        { _id: user._id, fullname: user.fullname, imgUrl: user.imgUrl },
+      ],
+    };
+    setIsLiked(true);
+    await addLikeOrComment(updatedStory);
+    updateCurrentStory(updatedStory);
+    // add like notification
+    //add notification to other user
+    let newNotification = {
+      _id: utilService.makeId(),
+      type: `${user.fullname} liked your story!`,
+      by: {
+        _id: user._id,
+        fullname: user.fullname,
+        imgUrl: user.imgUrl,
+      },
+    };
+    let otherUser = users.find((u) => u._id === story.by._id);
+    let addNotificationToUser = {
+      ...otherUser,
+      notifications: [...otherUser.notifications, newNotification],
+      isNewNotifications: true,
+    };
+    await updateOtherUser(addNotificationToUser);
   }
 
-  function isUserLikedStory() {
-    story.likedBy.map((likedStory) =>
-      user._id === likedStory._id ? setIsLiked(true) : setIsLiked(false)
+  function onRemoveLike() {
+    let updatedStory;
+    let likesAfterRemove = story.likedBy.filter(
+      (likedStory) => likedStory._id !== user._id
     );
+    updatedStory = { ...story, likedBy: likesAfterRemove };
+    setIsLiked(false);
+    addLikeOrComment(updatedStory);
+    updateCurrentStory(updatedStory);
   }
 
   function onOpenStoryForwardModal() {
@@ -67,59 +83,34 @@ export function HeartSignContainer({ story }) {
       };
       setIsSaved(true);
     }
-
     updateUser(addToUserFavorite);
   }
 
   return (
-    <div className='heart-sign-container'>
-      <div className='iconsOnLeft'>
-        <button
-          className='heart-icon'
-          onClick={onAddLike}
-        >
-          {isLiked ? (
-            <img
-              src={heartRed}
-              alt='heartRedIcon'
-            />
-          ) : (
-            <img
-              src={heartBlack}
-              alt='heartBlackIcon'
-            />
-          )}
+    <div className="heart-sign-container">
+      <div className="iconsOnLeft">
+        {story.likedBy.length &&
+        story?.likedBy?.map((like) => like?._id === user?._id) ? (
+          <button className="heart-icon" onClick={onRemoveLike}>
+            <img src={heartRed} alt="heartRedIcon" />
+          </button>
+        ) : (
+          <button className="heart-icon" onClick={onAddLike}>
+            <img src={heartBlack} alt="heartBlackIcon" />
+          </button>
+        )}
+        <button className="commentIcon" onClick={onOpenStoryForwardModal}>
+          <img src={message} alt="messageIcon" />
         </button>
-        <button
-          className='commentIcon'
-          onClick={onOpenStoryForwardModal}
-        >
-          <img
-            src={message}
-            alt='messageIcon'
-          />
-        </button>
-        <button className='planeIcon'>
-          <img
-            src={plane}
-            alt='planeIcon'
-          />
+        <button className="planeIcon">
+          <img src={plane} alt="planeIcon" />
         </button>
       </div>
-      <button
-        className='flagIcon'
-        onClick={OnFavoriteStories}
-      >
+      <button className="flagIcon" onClick={OnFavoriteStories}>
         {user.savedStoryIds.includes(story._id) ? (
-          <img
-            src={flagBlack}
-            alt='flagIcon'
-          />
+          <img src={flagBlack} alt="flagIcon" />
         ) : (
-          <img
-            src={flag}
-            alt='flagIcon'
-          />
+          <img src={flag} alt="flagIcon" />
         )}
       </button>
     </div>

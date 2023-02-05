@@ -1,9 +1,45 @@
 .story-forward-modal {
   display: flex;
+  flex-wrap: wrap;
   height: 100%;
+
+  .slick-slider {
+    max-width: 100%;
+    min-width: 100%;
+    max-height: 90%;
+    min-height: 90%;
+    .slick-prev {
+      z-index: 10;
+      left: 10px;
+      opacity: 0.4;
+    }
+
+    .slick-next {
+      z-index: 10;
+      right: 10px;
+      opacity: 0.4;
+    }
+
+    .slick-dots {
+      bottom: 10px;
+    }
+
+    .slick-dots li button:before {
+      color: white;
+    }
+
+    .slick-list {
+      margin-bottom: -5px;
+    }
+
+    .slick-dots li {
+      margin: 0;
+    }
+  }
 
   .blackBG {
     display: flex;
+    flex-wrap: wrap;
     height: 100%;
     width: 60%;
     background-color: black;
@@ -15,11 +51,10 @@
     width: 100%;
   }
   .image-slider {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    max-height: 100%;
-    min-height: 100%;
+    width: 557px;
+    min-width: 557px;
+    max-height: 650px;
+    min-height: 650px;
   }
 
   .right-section {
@@ -50,30 +85,38 @@
           margin-left: 10px;
         }
       }
-      .story-comments {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        padding: 14px 0px 14px 16px;
-        width: 90%;
+    }
+    .story-comments {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 14px 0px 14px 16px;
+      width: 90%;
 
-        .comment-row {
+      .comment-bottom {
+        display: flex;
+        column-gap: 10px;
+        color: #8e8e8e;
+      }
+
+      .comment-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 10px 0px;
+        .left-comment-section {
           display: flex;
-          align-items: center;
-          justify-content: space-between;
-          .left-comment-section {
-            display: flex;
+        }
+        .heart-container {
+          cursor: pointer;
+          justify-self: end;
+          img {
+            width: 12px;
+            height: 12px;
           }
-          .heart-container {
-            cursor: pointer;
-            img {
-              width: 12px;
-              height: 12px;
-            }
-          }
-          .comment-text {
-            margin-left: 4px;
-          }
+        }
+        .comment-text {
+          margin-left: 4px;
         }
       }
     }
@@ -110,22 +153,21 @@
   }
   .comments-scroll {
     overflow-y: visible;
-
     overflow-x: hidden;
+    overflow-y: visible;
+    max-height: 450px;
   }
+}
 
-  .slick-slider
-    .slick-initialized
-    .slick-slide
-    .slick-active
-    .slick-current
-    .slick-list
-    .slick-track {
-    max-height: 300px;
-    max-width: 300px;
+.story-timestamp {
+  padding: 0px 16px 16px 16px;
+}
+
+@media (max-width: 500px) {
+  .story-forward-modal {
+    width: 320px;
   }
-
-  // .slick-dots{
-
-  // }
+  .slick-slider {
+    width: 100%;
+  }
 }

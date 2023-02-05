@@ -5,10 +5,8 @@ const STORAGE_KEY = 'userDB';
 
 export const userService = {
   query,
-  //   getById,
-  //   remove,
-  //   create,
   update,
+  updateUsers,
 };
 
 async function query() {
@@ -18,7 +16,17 @@ async function query() {
       users = gUsers;
       utilService.saveToStorage(STORAGE_KEY, users);
     }
+    return users;
+  } catch (err) {
+    console.log('Had Error', err);
+  }
+}
 
+async function updateUsers(updatedUsers) {
+  try {
+    let users = await storageService.query(STORAGE_KEY);
+    users = updatedUsers;
+    utilService.saveToStorage(STORAGE_KEY, users);
     return users;
   } catch (err) {
     console.log('Had Error', err);
@@ -26,6 +34,7 @@ async function query() {
 }
 
 async function update(user) {
+  console.log('from user-ervice', user)
   let updatedsUser = await storageService.put(STORAGE_KEY, user);
 
   return updatedsUser;
@@ -48,6 +57,11 @@ export const gUsers = [
         fullname: 'ulashi ulashi',
         imgUrl: 'https://img.mako.co.il/2014/02/24/467424241_g.jpg',
       },
+      {
+        _id: 'u103',
+        fullname: 'Eli Mor',
+        imgUrl: 'https://shorturl.at/adGH1',
+      },
     ],
     followers: [
       {
@@ -63,6 +77,29 @@ export const gUsers = [
       },
     ],
     savedStoryIds: [],
+    isNewNotifications: true,
+    notifications: [
+      {
+        _id: utilService.makeId(),
+        type: "Dob Moran like your story",
+        by: {
+          _id: 'B700',
+          fullname: 'Dob',
+          imgUrl:
+            'https://media.allure.com/photos/5c734d9adbe270553d92abf1/1:1/w_1503,h_1503,c_limit/Rami-Malek-Oscars-2019-Look-Dyp.jpg',
+        },
+      },
+      {
+        _id: utilService.makeId(),
+        type: "maria pali started follow you",
+        written: false,
+        by: {
+          _id: 'C600',
+          fullname: 'maria pali',
+          imgUrl: 'https://randomuser.me/api/portraits/women/31.jpg',
+        },
+      }
+    ]
   },
   {
     _id: 'A550',
@@ -104,6 +141,19 @@ export const gUsers = [
       },
     ],
     savedStoryIds: [],
+    isNewNotifications: false,
+    notifications: [
+      {
+        _id: utilService.makeId(),
+        type: "like your story",
+        written: false,
+        by: {
+          _id: 'C600',
+          fullname: 'maria pali',
+          imgUrl: 'https://randomuser.me/api/portraits/women/31.jpg',
+        },
+      }
+    ]
   },
   {
     _id: 'B700',
@@ -133,6 +183,18 @@ export const gUsers = [
       },
     ],
     savedStoryIds: [],
+    isNewNotifications: false,
+    notifications: [
+      {
+        _id: utilService.makeId(),
+        type: "like your story",
+        by: {
+          _id: 'C600',
+          fullname: 'maria pali',
+          imgUrl: 'https://randomuser.me/api/portraits/women/31.jpg',
+        },
+      }
+    ]
   },
   {
     _id: 'C600',
@@ -158,6 +220,9 @@ export const gUsers = [
       },
     ],
     savedStoryIds: [],
+    isNewNotifications: false,
+    notifications: [
+    ]
   },
   {
     _id: 'Z580',
@@ -186,13 +251,10 @@ export const gUsers = [
         imgUrl:
           'https://media.allure.com/photos/5c734d9adbe270553d92abf1/1:1/w_1503,h_1503,c_limit/Rami-Malek-Oscars-2019-Look-Dyp.jpg',
       },
-      {
-        _id: 'C600',
-        fullname: 'Marko',
-        imgUrl: 'https://randomuser.me/api/portraits/men/75.jpg',
-      },
     ],
     savedStoryIds: [],
+    isNewNotifications: false,
+    notifications: []
   },
   {
     _id: 'u102',
@@ -202,6 +264,12 @@ export const gUsers = [
     bio: 'Imagination is more important than knowledge',
     imgUrl: 'https://tinyurl.com/bddwcp58',
     following: [
+      {
+        _id: 'u103',
+        fullname: 'eli mor',
+        imgUrl:
+          'https://randomuser.me/api/portraits/men/71.jpg',
+      },
       {
         _id: 'B700',
         fullname: 'Dob',
@@ -221,13 +289,10 @@ export const gUsers = [
         imgUrl:
           'https://media.allure.com/photos/5c734d9adbe270553d92abf1/1:1/w_1503,h_1503,c_limit/Rami-Malek-Oscars-2019-Look-Dyp.jpg',
       },
-      {
-        _id: 'C600',
-        fullname: 'Marko',
-        imgUrl: 'https://randomuser.me/api/portraits/men/75.jpg',
-      },
     ],
     savedStoryIds: [],
+    isNewNotifications: false,
+    notifications: [],
   },
   {
     _id: 'u103',
@@ -256,49 +321,105 @@ export const gUsers = [
         imgUrl:
           'https://media.allure.com/photos/5c734d9adbe270553d92abf1/1:1/w_1503,h_1503,c_limit/Rami-Malek-Oscars-2019-Look-Dyp.jpg',
       },
-      {
-        _id: 'C600',
-        fullname: 'Marko',
-        imgUrl: 'https://randomuser.me/api/portraits/men/75.jpg',
-      },
     ],
     savedStoryIds: [],
+    isNewNotifications: false,
+    notifications: [
+      {
+        _id: utilService.makeId(),
+        type: "like your story",
+        by: {
+          _id: 'B700',
+          fullname: 'Dob',
+          imgUrl:
+            'https://media.allure.com/photos/5c734d9adbe270553d92abf1/1:1/w_1503,h_1503,c_limit/Rami-Malek-Oscars-2019-Look-Dyp.jpg',
+        },
+      }
+    ]
   },
-];
-
-export const SuggestedUsers = [
   {
     _id: utilService.makeId(),
     username: 'Daniel22',
-    userUrl:
+    password: '123456',
+    fullname: 'Daniel Levy',
+    bio: 'Be strong and man!',
+    imgUrl:
       'https://images.pexels.com/photos/1680172/pexels-photo-1680172.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+    following: [
+    ],
+    followers: [
+    ],
+    savedStoryIds: [],
+    isNewNotifications: false,
+    notifications: [
+    ]
   },
-
   {
     _id: utilService.makeId(),
     username: 'Leon30',
-    userUrl:
+    password: '123456',
+    fullname: 'Leon Dimitrov',
+    bio: 'Stalin is my king!',
+    imgUrl:
       'https://images.pexels.com/photos/1043473/pexels-photo-1043473.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+    following: [
+    ],
+    followers: [
+    ],
+    savedStoryIds: [],
+    isNewNotifications: false,
+    notifications: [
+    ]
   },
-
   {
     _id: utilService.makeId(),
     username: 'AdamBit',
-    userUrl:
+    password: '123456',
+    fullname: 'Adam Biton',
+    bio: 'I support Israel!',
+    imgUrl:
       'https://images.pexels.com/photos/1680175/pexels-photo-1680175.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+    following: [
+    ],
+    followers: [
+    ],
+    savedStoryIds: [],
+    isNewNotifications: false,
+    notifications: [
+    ]
   },
-
   {
     _id: utilService.makeId(),
     username: 'LinaLove',
-    userUrl:
+    password: '123456',
+    fullname: 'Lina Sorokina',
+    bio: 'Go after your dreams!',
+    imgUrl:
       'https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&w=600',
+    following: [
+    ],
+    followers: [
+    ],
+    savedStoryIds: [],
+    isNewNotifications: false,
+    notifications: [
+    ]
   },
-
   {
     _id: utilService.makeId(),
     username: 'Dikla1990',
-    userUrl:
+    password: '123456',
+    fullname: 'Dikla Din',
+    bio: 'When you will see me you will understand that a woman can be very strong',
+    imgUrl:
       'https://images.pexels.com/photos/1065084/pexels-photo-1065084.jpeg?auto=compress&cs=tinysrgb&w=600',
+    following: [
+    ],
+    followers: [
+    ],
+    savedStoryIds: [],
+    isNewNotifications: false,
+    notifications: [
+    ]
   },
 ];

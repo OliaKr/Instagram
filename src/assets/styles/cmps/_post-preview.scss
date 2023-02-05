@@ -19,13 +19,14 @@
       width: 100%;
       min-height: 587.5px;
       max-height: 587.5px;
-      object-fit: cover;
+      // object-fit: cover;
     }
   }
 
   .preview-details {
     font-size: 14px;
     color: #262626;
+    padding-bottom: 32px;
   }
 
   .input-container {
@@ -88,7 +89,7 @@
   .emoji {
     width: 13px;
     height: 13px;
-    background-image: url('../../icons/smiley.svg');
+    background-image: url("../../icons/smiley.svg");
     background-size: cover;
   }
 
@@ -107,6 +108,9 @@
   .threeDots {
     padding-right: 4px;
   }
+  .creationDate {
+    margin-left: 8px;
+  }
 
   .input-field {
     flex: 1;
@@ -114,7 +118,6 @@
 
   .story-img {
     max-height: 580;
-    object-fit: cover;
   }
 }
 .slick-slider {
@@ -145,5 +148,15 @@
 
   .slick-dots li {
     margin: 0;
+  }
+}
+
+@media (max-width: 500px) {
+  .story-container {
+    margin: 50px auto;
+    width: 320px;
+  }
+  .slick-slider {
+    width: 100%;
   }
 }

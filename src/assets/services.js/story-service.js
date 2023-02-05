@@ -13,6 +13,7 @@ export const storyService = {
 
 export const newStory = {
   _id: null,
+  timestamp: null,
   txt: '',
   postImg: [], //Can be an array if decide to support multiple imgs
   by: {
@@ -28,6 +29,7 @@ export const newStory = {
 const gStories = [
   {
     _id: 's101',
+    timestamp: new Date().getTime(),
     txt: 'Best trip ever',
     postImg: [
       'https://i.pinimg.com/474x/fe/bb/63/febb6397ebc186d9d0910d05d8fc28af.jpg',
@@ -46,6 +48,7 @@ const gStories = [
   },
   {
     _id: 's102',
+    timestamp: new Date().getTime(),
     txt: 'Nice!',
     postImg: ['https://i.insider.com/58936e390849ec1a008b4619?width=700'], //Can be an array if decide to support multiple imgs
     by: {
@@ -59,6 +62,7 @@ const gStories = [
   },
   {
     _id: 's103',
+    timestamp: new Date().getTime(),
     txt: 'Great pic!',
     postImg: ['https://shorturl.ac/79odv'], //Can be an array if decide to support multiple imgs
     by: {

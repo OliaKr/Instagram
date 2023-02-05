@@ -1,16 +1,18 @@
-import { ScienceTwoTone } from '@mui/icons-material';
-import { userService } from '../assets/services.js/user-service.js';
 import { gUsers } from '../assets/services.js/user-service.js';
 export const SWITCH_USER = 'SWITCH_USER';
 export const SET_USERS = 'SET_USERS';
 export const CLOSE_SWITCH_USERS_MODAL = 'CLOSE_SWITCH_USERS_MODAL';
 export const OPEN_SWITCH_USERS_MODAL = 'OPEN_SWITCH_USERS_MODAL';
 export const SAVE_STORY_TO_USER = 'SAVE_STORY_TO_USER';
+export const TOGGLE_NOTIFICATIONS_DRAWER = "TOGGLE_NOTIFICATIONS_DRAWER";
+export const TOGGLE_SEARCH_DRAWER = "TOGGLE_SEARCH_DRAWER";
 
 const initialState = {
   user: gUsers[0],
   users: [],
   isSwitchModalOpen: false,
+  isSearchOpen: false,
+  isNotificationsOpen: false,
 };
 
 export function userReducer(state = initialState, action) {
@@ -32,6 +34,13 @@ export function userReducer(state = initialState, action) {
       break;
     case SAVE_STORY_TO_USER:
       newState = { ...state, user: action.user };
+      break;
+    case TOGGLE_SEARCH_DRAWER:
+      newState = { ...state, isSearchOpen: action.isSearchOpen };
+      break;
+    case TOGGLE_NOTIFICATIONS_DRAWER:
+      newState = { ...state, isNotificationsOpen: action.isNotificationsOpen };
+      break;
     default:
   }
   return newState;

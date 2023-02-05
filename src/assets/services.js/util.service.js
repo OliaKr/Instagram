@@ -5,7 +5,25 @@ export const utilService = {
     debounce,
     randomPastTime,
     saveToStorage,
-    loadFromStorage
+    loadFromStorage,
+    msToTime
+}
+
+function msToTime(ms) {
+    const currentDate = new Date().getTime();
+    const sum = currentDate - ms;
+    if (sum < 60000) {
+        const seconds = Math.floor(sum / 1000);
+        return `${seconds} seconds`
+    }
+    if (sum < 3600000) {
+        const minutes = Math.floor(sum / 60000);
+        return `${minutes} minutes`
+    }
+    if (sum > 3600000) {
+        const hours = Math.floor(sum / 3600000);
+        return `${hours} hours`
+    }
 }
 
 function makeId(length = 6) {
@@ -45,11 +63,11 @@ function randomPastTime() {
     return Date.now() - pastTime
 }
 
-function debounce(func, timeout = 300){
+function debounce(func, timeout = 300) {
     let timer
     return (...args) => {
-      clearTimeout(timer)
-      timer = setTimeout(() => { func.apply(this, args) }, timeout)
+        clearTimeout(timer)
+        timer = setTimeout(() => { func.apply(this, args) }, timeout)
     }
 }
 

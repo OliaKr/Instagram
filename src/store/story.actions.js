@@ -182,7 +182,6 @@ export function updateImgUrl(story) {
 
 export async function addLikeOrComment(updatedStory) {
   console.log(
-    'I should see on the LikedBy section of this story 3 objects including Lior',
     updatedStory
   );
   await storyService.update(updatedStory);
