@@ -1,50 +1,50 @@
-import React, { useState, useEffect } from "react";
-import Avatar from "@mui/material/Avatar";
-import { withStyles } from "@mui/styles";
-import Tabs from "@mui/material/Tabs";
-import Tab from "@mui/material/Tab";
+import React, { useState, useEffect } from 'react';
+import Avatar from '@mui/material/Avatar';
+import { withStyles } from '@mui/styles';
+import Tabs from '@mui/material/Tabs';
+import Tab from '@mui/material/Tab';
 import {
   updateCurrentStory,
   openStoryForwardModal,
-} from "../store/story.actions.js";
-import { StoryForwardModal } from "../cmps/story-details-modal";
-import { useSelector } from "react-redux";
+} from '../store/story.actions.js';
+import { StoryForwardModal } from '../cmps/story-details-modal';
+import { useSelector } from 'react-redux';
 
-import heartWhite from "../assets/icons/heartWhite.svg";
-import messageWhite from "../assets/icons/messageWhite.svg";
-import cubeBlack from "../assets/icons/cube black.svg";
-import settings from "../assets/icons/settings.svg";
-import userGray from "../assets/icons/user gray.svg";
-import flagGray from "../assets/icons/flag gray.svg";
-import { useLocation } from "react-router-dom";
-import { updateOtherUser, updateUser } from "../store/user.action.js";
-import { utilService } from "../assets/services.js/util.service.js";
+import heartWhite from '../assets/icons/heartWhite.svg';
+import messageWhite from '../assets/icons/messageWhite.svg';
+import cubeBlack from '../assets/icons/cube black.svg';
+import settings from '../assets/icons/settings.svg';
+import userGray from '../assets/icons/user gray.svg';
+import flagGray from '../assets/icons/flag gray.svg';
+import { useLocation } from 'react-router-dom';
+import { updateOtherUser, updateUser } from '../store/user.action.js';
+import { utilService } from '../assets/services.js/util.service.js';
 
 const tabStyle = {
-  display: "flex",
-  flexDirection: "row",
-  width: "58px",
-  marginRight: "60px !important",
-  color: "black !important",
-  alignItems: "center",
-  "@media (max-width: 500px)": {
-    marginRight: "8px !important",
+  display: 'flex',
+  flexDirection: 'row',
+  width: '58px',
+  marginRight: '60px !important',
+  color: 'black !important',
+  alignItems: 'center',
+  '@media (max-width: 500px)': {
+    marginRight: '8px !important',
   },
 };
 
 const StyledTabs = withStyles({
   indicator: {
     top: 0,
-    backgroundColor: "gray !important",
-    height: "1px",
+    backgroundColor: 'gray !important',
+    height: '1px',
     fontFamily:
-      "-apple-system, BlinkMacSystemFont,Segoe UI, Tahoma, Geneva, Verdana, sans-serif",
-    fontSize: "14px",
+      '-apple-system, BlinkMacSystemFont,Segoe UI, Tahoma, Geneva, Verdana, sans-serif',
+    fontSize: '14px',
   },
 })((props) => (
   <Tabs
     {...props}
-    inkbarstyle={{ background: "black" }}
+    inkbarstyle={{ background: 'black' }}
     TabIndicatorProps={{ children: <span /> }}
   />
 ));
@@ -55,11 +55,11 @@ export function Profile() {
   const user = useSelector((storeState) => storeState.userModule.user);
   const stories = useSelector((storeState) => storeState.storyModule.stories);
   const otherUser = useLocation()?.state?.otherUser;
-  const [mode, setMode] = useState("STORIES");
+  const [mode, setMode] = useState('STORIES');
   const [userProfile, setProfile] = useState(otherUser ? otherUser : user);
   const [numOfStories, setNumOfStories] = useState(0);
 
-  let defaultImg = "https://randomuser.me/api/portraits/men/75.jpg";
+  let defaultImg = 'https://randomuser.me/api/portraits/men/75.jpg';
 
   useEffect(() => {
     let num = 0;
@@ -161,17 +161,23 @@ export function Profile() {
 
   function renderRelevantBtn() {
     if (!otherUser) {
-      return <button className="edit-btn">Edit profile</button>;
+      return <button className='edit-btn'>Edit profile</button>;
     } else {
       if (user.following.some((u) => u._id === userProfile._id)) {
         return (
-          <button className="edit-btn" onClick={unFollow}>
+          <button
+            className='edit-btn'
+            onClick={unFollow}
+          >
             Following
           </button>
         );
       } else {
         return (
-          <button className="follow-user-btn" onClick={addFollow}>
+          <button
+            className='follow-user-btn'
+            onClick={addFollow}
+          >
             Follow
           </button>
         );
@@ -180,83 +186,112 @@ export function Profile() {
   }
 
   return (
-    <div className="profile-container">
+    <div className='profile-container'>
       <StoryForwardModal />
 
-      <div className="top-section">
-        <div className="avatar-container">
+      <div className='top-section'>
+        <div className='avatar-container'>
           <Avatar
-            alt="Remy Sharp"
-            sx={{ width: "150px", height: "150px", alignSelf: "center" }}
+            alt='Remy Sharp'
+            sx={{ width: '150px', height: '150px', alignSelf: 'center' }}
             src={userProfile ? userProfile.imgUrl : defaultImg}
           />
         </div>
-        <div className="three-columns-details">
-          <div className="first">
+        <div className='three-columns-details'>
+          <div className='first'>
             <span>{userProfile?.username}</span>
             {renderRelevantBtn()}
-            <button className="settings-btn">
-              <img src={settings} alt="settingsIcon" />
+            <button className='settings-btn'>
+              <img
+                src={settings}
+                alt='settingsIcon'
+              />
             </button>
           </div>
-          <div className="second">
+          <div className='second'>
             <span>{numOfStories} posts</span>
             <span>{userProfile?.followers?.length} followers</span>
             <span>{userProfile?.following?.length} following</span>
           </div>
-          <div className="third">
+          <div className='third'>
             <div style={{ fontWeight: 700 }}>{userProfile?.fullname}</div>
             <div>{userProfile?.bio}</div>
           </div>
         </div>
       </div>
-      <div className="profile-display-options">
+      <div className='profile-display-options'>
         <StyledTabs
           value={value}
           onChange={handleChange}
-          aria-label="styled tabs example">
+          aria-label='styled tabs example'
+        >
           <Tab
-            onClick={() => setMode("STORIES")}
+            onClick={() => setMode('STORIES')}
             sx={tabStyle}
-            icon={<img src={cubeBlack} alt="cubeIcon" className="iconImg" />}
-            label={<span className="selectedTabLabel">POSTS</span>}
+            icon={
+              <img
+                src={cubeBlack}
+                alt='cubeIcon'
+                className='iconImg'
+              />
+            }
+            label={<span className='selectedTabLabel'>POSTS</span>}
           />
           <Tab
-            onClick={() => setMode("SAVED")}
+            onClick={() => setMode('SAVED')}
             sx={tabStyle}
-            icon={<img src={flagGray} alt="flagIcon" className="iconImg" />}
-            label={<span className="unselectedTabLabel">SAVED</span>}
+            icon={
+              <img
+                src={flagGray}
+                alt='flagIcon'
+                className='iconImg'
+              />
+            }
+            label={<span className='unselectedTabLabel'>SAVED</span>}
           />
           <Tab
             sx={tabStyle}
-            icon={<img src={userGray} alt="flagIcon" className="iconImg" />}
-            label={<span className="unselectedTabLabel">TAGGED</span>}
+            icon={
+              <img
+                src={userGray}
+                alt='flagIcon'
+                className='iconImg'
+              />
+            }
+            label={<span className='unselectedTabLabel'>TAGGED</span>}
           />
         </StyledTabs>
       </div>
-      <div className="grid-images">
-        {mode === "STORIES"
+      <div className='grid-images'>
+        {mode === 'STORIES'
           ? stories.map(
               (story) =>
                 userProfile?._id === story.by._id && (
                   <div
-                    key={story.by._id}
-                    className="hover-div"
-                    onClick={() => openMyStory(story)}>
-                    <div className="backdrop">
-                      <div className="row">
-                        <img src={heartWhite} alt="" />
-                        <h2 className="count-txt">{story.likedBy.length}</h2>
+                    key={story._id}
+                    className='hover-div'
+                    onClick={() => openMyStory(story)}
+                  >
+                    <div className='backdrop'>
+                      <div className='row'>
+                        <img
+                          src={heartWhite}
+                          alt=''
+                        />
+                        <h2 className='count-txt'>{story.likedBy.length}</h2>
                       </div>
-                      <div className="row">
-                        <img src={messageWhite} alt="" />
-                        <h2 className="count-txt">{story.comments.length}</h2>
+                      <div className='row'>
+                        <img
+                          src={messageWhite}
+                          alt=''
+                        />
+                        <h2 className='count-txt'>{story.comments.length}</h2>
                       </div>
                     </div>
                     <img
                       key={story._id}
-                      className="singleImg"
-                      alt="img"
+                      className='singleImg'
+                      alt='img'
                       src={story.postImg[0]}
                     />
                   </div>
@@ -268,8 +303,8 @@ export function Profile() {
                   savedStory === story._id && (
                     <img
                       key={story._id}
-                      className="singleImg"
-                      alt="img"
+                      className='singleImg'
+                      alt='img'
                       src={story.postImg[0]}
                     />
                   )
