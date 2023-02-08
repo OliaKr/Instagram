@@ -1,24 +1,24 @@
-import React, { useState, useEffect } from 'react';
-import Avatar from '@mui/material/Avatar';
-import { withStyles } from '@mui/styles';
-import Tabs from '@mui/material/Tabs';
-import Tab from '@mui/material/Tab';
+import React, { useState, useEffect } from 'react'
+import Avatar from '@mui/material/Avatar'
+import { withStyles } from '@mui/styles'
+import Tabs from '@mui/material/Tabs'
+import Tab from '@mui/material/Tab'
 import {
   updateCurrentStory,
   openStoryForwardModal,
-} from '../store/story.actions.js';
-import { StoryForwardModal } from '../cmps/story-details-modal';
-import { useSelector } from 'react-redux';
+} from '../store/story.actions.js'
+import { StoryForwardModal } from '../cmps/story-details-modal'
+import { useSelector } from 'react-redux'
 
-import heartWhite from '../assets/icons/heartWhite.svg';
-import messageWhite from '../assets/icons/messageWhite.svg';
-import cubeBlack from '../assets/icons/cube black.svg';
-import settings from '../assets/icons/settings.svg';
-import userGray from '../assets/icons/user gray.svg';
-import flagGray from '../assets/icons/flag gray.svg';
-import { useLocation } from 'react-router-dom';
-import { updateOtherUser, updateUser } from '../store/user.action.js';
-import { utilService } from '../assets/services.js/util.service.js';
+import heartWhite from '../assets/icons/heartWhite.svg'
+import messageWhite from '../assets/icons/messageWhite.svg'
+import cubeBlack from '../assets/icons/cube black.svg'
+import settings from '../assets/icons/settings.svg'
+import userGray from '../assets/icons/user gray.svg'
+import flagGray from '../assets/icons/flag gray.svg'
+import { useLocation } from 'react-router-dom'
+import { updateOtherUser, updateUser } from '../store/user.action.js'
+import { utilService } from '../assets/services.js/util.service.js'
 
 const tabStyle = {
   display: 'flex',
@@ -30,7 +30,7 @@ const tabStyle = {
   '@media (max-width: 500px)': {
     marginRight: '8px !important',
   },
-};
+}
 
 const StyledTabs = withStyles({
   indicator: {
@@ -47,41 +47,41 @@ const StyledTabs = withStyles({
     inkbarstyle={{ background: 'black' }}
     TabIndicatorProps={{ children: <span /> }}
   />
-));
+))
 
 export function Profile() {
-  const [value, setValue] = useState(0);
+  const [value, setValue] = useState(0)
 
-  const user = useSelector((storeState) => storeState.userModule.user);
-  const stories = useSelector((storeState) => storeState.storyModule.stories);
-  const otherUser = useLocation()?.state?.otherUser;
-  const [mode, setMode] = useState('STORIES');
-  const [userProfile, setProfile] = useState(otherUser ? otherUser : user);
-  const [numOfStories, setNumOfStories] = useState(0);
+  const user = useSelector((storeState) => storeState.userModule.user)
+  const stories = useSelector((storeState) => storeState.storyModule.stories)
+  const otherUser = useLocation()?.state?.otherUser
+  const [mode, setMode] = useState('STORIES')
+  const [userProfile, setProfile] = useState(otherUser ? otherUser : user)
+  const [numOfStories, setNumOfStories] = useState(0)
 
-  let defaultImg = 'https://randomuser.me/api/portraits/men/75.jpg';
+  let defaultImg = 'https://randomuser.me/api/portraits/men/75.jpg'
 
   useEffect(() => {
-    let num = 0;
+    let num = 0
     stories.map((story) => {
       if (story.by._id === userProfile._id) {
-        num++;
+        num++
       }
-    });
-    setNumOfStories(num);
-  }, []);
+    })
+    setNumOfStories(num)
+  }, [])
 
   useEffect(() => {
-    setProfile(userProfile);
-  }, [userProfile]);
+    setProfile(userProfile)
+  }, [userProfile])
 
   function openMyStory(story) {
-    updateCurrentStory(story);
-    openStoryForwardModal();
+    updateCurrentStory(story)
+    openStoryForwardModal()
   }
 
   function handleChange(event, newValue) {
-    setValue(newValue);
+    setValue(newValue)
   }
 
   async function addFollow() {
@@ -95,8 +95,8 @@ export function Profile() {
           imgUrl: userProfile.imgUrl,
         },
       ],
-    };
-    await updateUser(updatedUser);
+    }
+    await updateUser(updatedUser)
 
     let addFollowerToOtherUser = {
       ...userProfile,
@@ -108,8 +108,8 @@ export function Profile() {
           imgUrl: user.imgUrl,
         },
       ],
-    };
-    await updateOtherUser(addFollowerToOtherUser);
+    }
+    await updateOtherUser(addFollowerToOtherUser)
     //add notification to other user -
     let newNotification = {
       _id: utilService.makeId(),
@@ -119,28 +119,28 @@ export function Profile() {
         fullname: user.fullname,
         imgUrl: user.imgUrl,
       },
-    };
+    }
     let addNotificationToUser = {
       ...otherUser,
       notifications: [...otherUser.notifications, newNotification],
       isNewNotifications: true,
-    };
-    await updateOtherUser(addNotificationToUser);
+    }
+    await updateOtherUser(addNotificationToUser)
   }
 
   async function unFollow() {
-    let updatedUser;
+    let updatedUser
     let updatedFollowing = user.following.filter(
       (u) => u._id !== userProfile._id
-    );
-    updatedUser = { ...user, following: updatedFollowing };
-    await updateUser(updatedUser);
+    )
+    updatedUser = { ...user, following: updatedFollowing }
+    await updateUser(updatedUser)
     // remove from other user a follower
     let removeFollowerFromUser = userProfile.followers.filter(
       (u) => u._id !== user._id
-    );
-    updatedUser = { ...userProfile, followers: removeFollowerFromUser };
-    await updateOtherUser(updatedUser);
+    )
+    updatedUser = { ...userProfile, followers: removeFollowerFromUser }
+    await updateOtherUser(updatedUser)
     //remove follower to other user notification
     let newNotification = {
       _id: utilService.makeId(),
@@ -150,18 +150,18 @@ export function Profile() {
         fullname: user.fullname,
         imgUrl: user.imgUrl,
       },
-    };
+    }
     let addNotificationToUser = {
       ...otherUser,
       notifications: [...otherUser.notifications, newNotification],
       isNewNotifications: true,
-    };
-    await updateOtherUser(addNotificationToUser);
+    }
+    await updateOtherUser(addNotificationToUser)
   }
 
   function renderRelevantBtn() {
     if (!otherUser) {
-      return <button className='edit-btn'>Edit profile</button>;
+      return <button className='edit-btn'>Edit profile</button>
     } else {
       if (user.following.some((u) => u._id === userProfile._id)) {
         return (
@@ -171,7 +171,7 @@ export function Profile() {
           >
             Following
           </button>
-        );
+        )
       } else {
         return (
           <button
@@ -180,7 +180,7 @@ export function Profile() {
           >
             Follow
           </button>
-        );
+        )
       }
     }
   }
@@ -312,5 +312,5 @@ export function Profile() {
             )}
       </div>
     </div>
-  );
+  )
 }

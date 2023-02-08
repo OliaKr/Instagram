@@ -11,76 +11,76 @@ import {
   CLOSE_STORY_FORWARD_MODAL,
   UPDATE_CURRENT_STORY,
   UPDATE_IMG_URL,
-} from './story.reducer';
-import { store } from '../store/store.js';
-import { storyService } from '../assets/services.js/story-service';
+} from './story.reducer'
+import { store } from '../store/store.js'
+import { storyService } from '../assets/services.js/story-service'
 
 // Action Creators:
 export function getActionRemovestory(storyId) {
   return {
     type: REMOVE_STORY,
     storyId,
-  };
+  }
 }
 
 export function getActionAddstory(story) {
   return {
     type: ADD_STORY,
     story,
-  };
+  }
 }
 
 export function getActionUpdatestory(story) {
   return {
     type: UPDATE_STORY,
     story,
-  };
+  }
 }
 
 export async function loadStories() {
   try {
-    const stories = await storyService.query();
+    const stories = await storyService.query()
     store.dispatch({
       type: SET_STORIES,
       stories,
-    });
+    })
   } catch (err) {
-    console.log('Cannot load srories', err);
-    throw err;
+    console.log('Cannot load srories', err)
+    throw err
   }
 }
 
 export async function removeStory(storyId) {
   try {
-    await storyService.remove(storyId);
-    store.dispatch(getActionRemovestory(storyId));
+    await storyService.remove(storyId)
+    store.dispatch(getActionRemovestory(storyId))
   } catch (err) {
-    console.log('Cannot remove story', err);
-    throw err;
+    console.log('Cannot remove story', err)
+    throw err
   }
 }
 
 export async function addStory(story) {
   try {
-    const savedstory = await storyService.create(story);
-    console.log('Added story', savedstory);
-    store.dispatch(getActionAddstory(savedstory));
-    return savedstory;
+    const savedstory = await storyService.create(story)
+    console.log('Added story', savedstory)
+    store.dispatch(getActionAddstory(savedstory))
+    return savedstory
   } catch (err) {
-    console.log('Cannot add story', err);
-    throw err;
+    console.log('Cannot add story', err)
+    throw err
   }
 }
 
 export async function updateStory(story) {
   try {
     // if (story._id) {
-    let savedstory = await storyService.update(story);
-    store.dispatch(getActionUpdatestory(savedstory));
-    return savedstory;
+    let savedstory = await storyService.update(story)
+    store.dispatch(getActionUpdatestory(savedstory))
+    return savedstory
   } catch (err) {
-    console.log('Cannot save story', err);
-    throw err;
+    console.log('Cannot save story', err)
+    throw err
   }
 }
 
@@ -89,10 +89,10 @@ export function openCreateModal(story) {
     store.dispatch({
       type: OPEN_CREATE_MODAL,
       isOpen: true,
-    });
+    })
   } catch (err) {
-    console.log('Cannot open create modal', err);
-    throw err;
+    console.log('Cannot open create modal', err)
+    throw err
   }
 }
 
@@ -101,10 +101,10 @@ export function closeCreateModal(story) {
     store.dispatch({
       type: CLOSE_CREATE_MODAL,
       isOpen: false,
-    });
+    })
   } catch (err) {
-    console.log('Cannot close create modal', err);
-    throw err;
+    console.log('Cannot close create modal', err)
+    throw err
   }
 }
 
@@ -113,10 +113,10 @@ export function openRemoveModal() {
     store.dispatch({
       type: OPEN_REMOVE_MODAL,
       isOpen: true,
-    });
+    })
   } catch (err) {
-    console.log('Cannot open delete modal', err);
-    throw err;
+    console.log('Cannot open delete modal', err)
+    throw err
   }
 }
 
@@ -125,10 +125,10 @@ export function closeRemoveModal() {
     store.dispatch({
       type: CLOSE_REMOVE_MODAL,
       isOpen: false,
-    });
+    })
   } catch (err) {
-    console.log('Cannot close delete modal', err);
-    throw err;
+    console.log('Cannot close delete modal', err)
+    throw err
   }
 }
 
@@ -137,10 +137,10 @@ export function openStoryForwardModal() {
     store.dispatch({
       type: OPEN_STORY_FORWARD_MODAL,
       isOpen: true,
-    });
+    })
   } catch (err) {
-    console.log('Cannot open delete modal', err);
-    throw err;
+    console.log('Cannot open delete modal', err)
+    throw err
   }
 }
 
@@ -149,10 +149,10 @@ export function closeStoryForwardModal() {
     store.dispatch({
       type: CLOSE_STORY_FORWARD_MODAL,
       isOpen: false,
-    });
+    })
   } catch (err) {
-    console.log('Cannot close delete modal', err);
-    throw err;
+    console.log('Cannot close delete modal', err)
+    throw err
   }
 }
 
@@ -161,10 +161,10 @@ export function updateCurrentStory(story) {
     store.dispatch({
       type: UPDATE_CURRENT_STORY,
       story,
-    });
+    })
   } catch (err) {
-    console.log('Cannot update the current story', err);
-    throw err;
+    console.log('Cannot update the current story', err)
+    throw err
   }
 }
 
@@ -173,17 +173,14 @@ export function updateImgUrl(story) {
     store.dispatch({
       type: UPDATE_IMG_URL,
       story,
-    });
+    })
   } catch (err) {
-    console.log('Cannot update the current story', err);
-    throw err;
+    console.log('Cannot update the current story', err)
+    throw err
   }
 }
 
 export async function addLikeOrComment(updatedStory) {
-  console.log(
-    updatedStory
-  );
-  await storyService.update(updatedStory);
-  loadStories();
+  await storyService.update(updatedStory)
+  loadStories()
 }

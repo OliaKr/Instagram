@@ -1,46 +1,44 @@
-import { storageService } from '../services.js/async-storage.service.js';
-import { utilService } from '../services.js/util.service.js';
+import { storageService } from '../services.js/async-storage.service.js'
+import { utilService } from '../services.js/util.service.js'
 
-const STORAGE_KEY = 'userDB';
+const STORAGE_KEY = 'userDB'
 
 export const userService = {
   query,
   update,
   updateUsers,
-};
+}
 
 async function query() {
   try {
-    let users = await storageService.query(STORAGE_KEY);
+    let users = await storageService.query(STORAGE_KEY)
     if (!users || !users.length) {
-      users = gUsers;
-      utilService.saveToStorage(STORAGE_KEY, users);
+      users = gUsers
+      utilService.saveToStorage(STORAGE_KEY, users)
     }
-    return users;
+    return users
   } catch (err) {
-    console.log('Had Error', err);
+    console.log('Had Error', err)
   }
 }
 
 async function updateUsers(updatedUsers) {
   try {
-    let users = await storageService.query(STORAGE_KEY);
-    users = updatedUsers;
-    utilService.saveToStorage(STORAGE_KEY, users);
-    return users;
+    let users = await storageService.query(STORAGE_KEY)
+    users = updatedUsers
+    utilService.saveToStorage(STORAGE_KEY, users)
+    return users
   } catch (err) {
-    console.log('Had Error', err);
+    console.log('Had Error', err)
   }
 }
 
 async function update(user) {
   console.log('from user-ervice', user)
-  let updatedsUser = await storageService.put(STORAGE_KEY, user);
+  let updatedsUser = await storageService.put(STORAGE_KEY, user)
 
-  return updatedsUser;
+  return updatedsUser
 }
-
-//  כאשר יוזר רוצה להתחבר, הוא ממלא את השם משתמש והססמא, אותה נשלח לפונקציה שתביא לנו את כל היוזרים מתוך הלוקאל סטוראג'. אם המערך יוזרים ריק, נשמור במקום מערך יוזרים בצורת הארד קודד. לאחר מכן נחפש יוזר ששם המשתמש שלו וגם הססמא זהים ליוזר מתוך המערך של כל היוזרים. אם מצאנו אחד כזה, לשמור אותו בסשן סטוראג' ונחזיר חזרה לפרונט את היוזר המחובר. אם לא מצאנו אחד כזה, נשלח שגיאה לפרונט ונטפל בה
 
 export const gUsers = [
   {
@@ -81,7 +79,7 @@ export const gUsers = [
     notifications: [
       {
         _id: utilService.makeId(),
-        type: "Dob Moran like your story",
+        type: 'Dob Moran like your story',
         by: {
           _id: 'B700',
           fullname: 'Dob',
@@ -91,15 +89,15 @@ export const gUsers = [
       },
       {
         _id: utilService.makeId(),
-        type: "maria pali started follow you",
+        type: 'maria pali started follow you',
         written: false,
         by: {
           _id: 'C600',
           fullname: 'maria pali',
           imgUrl: 'https://randomuser.me/api/portraits/women/31.jpg',
         },
-      }
-    ]
+      },
+    ],
   },
   {
     _id: 'A550',
@@ -145,15 +143,15 @@ export const gUsers = [
     notifications: [
       {
         _id: utilService.makeId(),
-        type: "like your story",
+        type: 'like your story',
         written: false,
         by: {
           _id: 'C600',
           fullname: 'maria pali',
           imgUrl: 'https://randomuser.me/api/portraits/women/31.jpg',
         },
-      }
-    ]
+      },
+    ],
   },
   {
     _id: 'B700',
@@ -187,14 +185,14 @@ export const gUsers = [
     notifications: [
       {
         _id: utilService.makeId(),
-        type: "like your story",
+        type: 'like your story',
         by: {
           _id: 'C600',
           fullname: 'maria pali',
           imgUrl: 'https://randomuser.me/api/portraits/women/31.jpg',
         },
-      }
-    ]
+      },
+    ],
   },
   {
     _id: 'C600',
@@ -221,8 +219,7 @@ export const gUsers = [
     ],
     savedStoryIds: [],
     isNewNotifications: false,
-    notifications: [
-    ]
+    notifications: [],
   },
   {
     _id: 'Z580',
@@ -254,7 +251,7 @@ export const gUsers = [
     ],
     savedStoryIds: [],
     isNewNotifications: false,
-    notifications: []
+    notifications: [],
   },
   {
     _id: 'u102',
@@ -267,8 +264,7 @@ export const gUsers = [
       {
         _id: 'u103',
         fullname: 'eli mor',
-        imgUrl:
-          'https://randomuser.me/api/portraits/men/71.jpg',
+        imgUrl: 'https://randomuser.me/api/portraits/men/71.jpg',
       },
       {
         _id: 'B700',
@@ -327,99 +323,84 @@ export const gUsers = [
     notifications: [
       {
         _id: utilService.makeId(),
-        type: "like your story",
+        type: 'like your story',
         by: {
           _id: 'B700',
           fullname: 'Dob',
           imgUrl:
             'https://media.allure.com/photos/5c734d9adbe270553d92abf1/1:1/w_1503,h_1503,c_limit/Rami-Malek-Oscars-2019-Look-Dyp.jpg',
         },
-      }
-    ]
+      },
+    ],
   },
   {
-    _id: utilService.makeId(),
+    _id: 'o12344',
     username: 'Daniel22',
     password: '123456',
     fullname: 'Daniel Levy',
     bio: 'Be strong and man!',
     imgUrl:
       'https://images.pexels.com/photos/1680172/pexels-photo-1680172.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
-    following: [
-    ],
-    followers: [
-    ],
+    following: [],
+    followers: [],
     savedStoryIds: [],
     isNewNotifications: false,
-    notifications: [
-    ]
+    notifications: [],
   },
   {
-    _id: utilService.makeId(),
+    _id: 'b343434',
     username: 'Leon30',
     password: '123456',
     fullname: 'Leon Dimitrov',
     bio: 'Stalin is my king!',
     imgUrl:
       'https://images.pexels.com/photos/1043473/pexels-photo-1043473.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
-    following: [
-    ],
-    followers: [
-    ],
+    following: [],
+    followers: [],
     savedStoryIds: [],
     isNewNotifications: false,
-    notifications: [
-    ]
+    notifications: [],
   },
   {
-    _id: utilService.makeId(),
+    _id: 'c898989',
     username: 'AdamBit',
     password: '123456',
     fullname: 'Adam Biton',
     bio: 'I support Israel!',
     imgUrl:
       'https://images.pexels.com/photos/1680175/pexels-photo-1680175.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
-    following: [
-    ],
-    followers: [
-    ],
+    following: [],
+    followers: [],
     savedStoryIds: [],
     isNewNotifications: false,
-    notifications: [
-    ]
+    notifications: [],
   },
   {
-    _id: utilService.makeId(),
+    _id: 'd34236',
     username: 'LinaLove',
     password: '123456',
     fullname: 'Lina Sorokina',
     bio: 'Go after your dreams!',
     imgUrl:
       'https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&w=600',
-    following: [
-    ],
-    followers: [
-    ],
+    following: [],
+    followers: [],
     savedStoryIds: [],
     isNewNotifications: false,
-    notifications: [
-    ]
+    notifications: [],
   },
   {
-    _id: utilService.makeId(),
+    _id: 'f909090',
     username: 'Dikla1990',
     password: '123456',
     fullname: 'Dikla Din',
     bio: 'When you will see me you will understand that a woman can be very strong',
     imgUrl:
       'https://images.pexels.com/photos/1065084/pexels-photo-1065084.jpeg?auto=compress&cs=tinysrgb&w=600',
-    following: [
-    ],
-    followers: [
-    ],
+    following: [],
+    followers: [],
     savedStoryIds: [],
     isNewNotifications: false,
-    notifications: [
-    ]
+    notifications: [],
   },
-];
+]

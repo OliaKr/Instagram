@@ -1,7 +1,7 @@
-import { storageService } from '../services.js/async-storage.service.js';
-import { utilService } from '../services.js/util.service.js';
+import { storageService } from '../services.js/async-storage.service.js'
+import { utilService } from '../services.js/util.service.js'
 
-const STORAGE_KEY = 'storyDB';
+const STORAGE_KEY = 'storyDB'
 
 export const storyService = {
   query,
@@ -9,7 +9,7 @@ export const storyService = {
   remove,
   create,
   update,
-};
+}
 
 export const newStory = {
   _id: null,
@@ -24,7 +24,7 @@ export const newStory = {
   comments: [],
   likedBy: [],
   tags: [],
-};
+}
 
 const gStories = [
   {
@@ -75,7 +75,7 @@ const gStories = [
     likedBy: [],
     tags: ['fun', 'kids'],
   },
-];
+]
 
 function _createStory(txt, imgUrl, by, comments) {
   return {
@@ -84,37 +84,37 @@ function _createStory(txt, imgUrl, by, comments) {
     imgUrl,
     by,
     comments,
-  };
+  }
 }
 
 async function query() {
   try {
-    let stories = await storageService.query(STORAGE_KEY);
+    let stories = await storageService.query(STORAGE_KEY)
     if (!stories || !stories.length) {
-      stories = gStories;
-      utilService.saveToStorage(STORAGE_KEY, stories);
+      stories = gStories
+      utilService.saveToStorage(STORAGE_KEY, stories)
     }
 
-    return stories;
+    return stories
   } catch (err) {
-    console.log('Had Error', err);
+    console.log('Had Error', err)
   }
 }
 
 function getById(storyId) {
-  return storageService.get(STORAGE_KEY, storyId);
+  return storageService.get(STORAGE_KEY, storyId)
 }
 
 async function remove(storyId) {
-  await storageService.remove(STORAGE_KEY, storyId);
+  await storageService.remove(STORAGE_KEY, storyId)
 }
 
 async function create(story) {
-  let savedStory = await storageService.post(STORAGE_KEY, story);
-  return savedStory;
+  let savedStory = await storageService.post(STORAGE_KEY, story)
+  return savedStory
 }
 
 async function update(story) {
-  let savedStory = await storageService.put(STORAGE_KEY, story);
-  return savedStory;
+  let savedStory = await storageService.put(STORAGE_KEY, story)
+  return savedStory
 }

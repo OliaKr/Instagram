@@ -1,73 +1,83 @@
-import React from "react";
-import { useSelector } from "react-redux";
-import Box from "@mui/material/Box";
-import Modal from "@mui/material/Modal";
-import vi from "../assets/icons/vi.svg";
-import Avatar from "@mui/material/Avatar";
-import { gUsers } from "../assets/services.js/user-service.js";
-import { switchUser, closeSwitchUsersModal } from "../store/user.action.js";
-import close from "../assets/icons/close.svg";
+import React from 'react'
+import { useSelector } from 'react-redux'
+import Box from '@mui/material/Box'
+import Modal from '@mui/material/Modal'
+import vi from '../assets/icons/vi.svg'
+import Avatar from '@mui/material/Avatar'
+import { gUsers } from '../assets/services.js/user-service.js'
+import { switchUser, closeSwitchUsersModal } from '../store/user.action.js'
+import close from '../assets/icons/close.svg'
 
 const style = {
-  display: "flex",
-  flexDirection: "column",
-  position: "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
+  display: 'flex',
+  flexDirection: 'column',
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
   width: 370,
   // height: 370,
-  bgcolor: "background.paper",
+  bgcolor: 'background.paper',
   boxShadow: 24,
-  borderRadius: "2%",
-  overflowY: "visible",
-};
+  borderRadius: '2%',
+  overflowY: 'visible',
+}
 
 export function SwitchAcoountsModal() {
   const isSwitchModalOpen = useSelector(
     (storeState) => storeState.userModule.isSwitchModalOpen
-  );
-  const user = useSelector((storeState) => storeState.userModule.user);
+  )
+  const user = useSelector((storeState) => storeState.userModule.user)
 
   function onLogin(userLine) {
-    console.log(`The user ${userLine.fullname} is logged in`);
-    switchUser(userLine);
-    closeSwitchUsersModal();
+    switchUser(userLine)
+    closeSwitchUsersModal()
   }
 
   return (
     <Modal
       open={isSwitchModalOpen}
       onClose={closeSwitchUsersModal}
-      aria-labelledby="modal-modal-title"
-      aria-describedby="modal-modal-description">
+      aria-labelledby='modal-modal-title'
+      aria-describedby='modal-modal-description'
+    >
       <Box sx={style}>
-        <div className="switch-accounts-modal">
-          <div className="modal-header">
-            <span className="modal-title">Switch accounts </span>
-            <img src={close} alt="close" onClick={closeSwitchUsersModal} />
+        <div className='switch-accounts-modal'>
+          <div className='modal-header'>
+            <span className='modal-title'>Switch accounts </span>
+            <img
+              src={close}
+              alt='close'
+              onClick={closeSwitchUsersModal}
+            />
           </div>
 
           {gUsers.map((userLine) => (
             <div
-              className="registered-user"
+              className='registered-user'
               key={userLine._id}
-              onClick={() => onLogin(userLine)}>
-              <div className="left-section">
+              onClick={() => onLogin(userLine)}
+            >
+              <div className='left-section'>
                 <Avatar
                   alt={userLine.fullname}
-                  sx={{ width: 24, height: 24, alignSelf: "center" }}
+                  sx={{ width: 24, height: 24, alignSelf: 'center' }}
                   src={userLine.imgUrl}
                 />
-                <span className="username">{userLine.fullname}</span>
+                <span className='username'>{userLine.fullname}</span>
               </div>
               {user && user._id === userLine._id ? (
-                <img src={vi} width="30" height="30" alt="newPostImg"></img>
+                <img
+                  src={vi}
+                  width='30'
+                  height='30'
+                  alt='newPostImg'
+                ></img>
               ) : null}
             </div>
           ))}
         </div>
       </Box>
     </Modal>
-  );
+  )
 }

@@ -1,5 +1,5 @@
-import React from 'react';
-import Slider from 'react-slick';
+import React from 'react'
+import Slider from 'react-slick'
 
 export function Slick() {
   const settings = {
@@ -11,7 +11,7 @@ export function Slick() {
     width: '578.5px',
     minHeight: '587.5px',
     maxHeight: '587.5px',
-  };
+  }
   return (
     <div>
       <h2> Single Item</h2>
@@ -36,5 +36,5 @@ export function Slick() {
         </div>
       </Slider>
     </div>
-  );
+  )
 }
