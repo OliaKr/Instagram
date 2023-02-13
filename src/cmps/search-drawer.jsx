@@ -58,8 +58,6 @@ export default function SearchDrawer() {
     <Box
       sx={style}
       role='presentation'
-      // onClick={toggleDrawer("left", false)}
-      // onKeyDown={toggleDrawer("left", false)}
     >
       <div className='search-drawer'>
         <h2 className='title'>Search</h2>

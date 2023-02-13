@@ -19,6 +19,7 @@ import flagGray from '../assets/icons/flag gray.svg'
 import { useLocation } from 'react-router-dom'
 import { updateOtherUser, updateUser } from '../store/user.action.js'
 import { utilService } from '../assets/services.js/util.service.js'
+import { DeletePostModal } from './delete_post_modal.jsx'
 
 const tabStyle = {
   display: 'flex',
@@ -126,6 +127,7 @@ export function Profile() {
       isNewNotifications: true,
     }
     await updateOtherUser(addNotificationToUser)
+    window.location.reload(false)
   }
 
   async function unFollow() {
@@ -187,7 +189,8 @@ export function Profile() {
 
   return (
     <div className='profile-container'>
-      <StoryForwardModal />
+      <StoryForwardModal isProfileDispayed />
+      <DeletePostModal />
 
       <div className='top-section'>
         <div className='avatar-container'>

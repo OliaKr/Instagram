@@ -7,8 +7,13 @@ import {
   updateStory,
   updateImgUrl,
   updateCurrentStory,
+  removeStory,
 } from '../store/story.actions.js'
-import { onRemoveStory } from './post-index.jsx'
+import {
+  showSuccessMsg,
+  showErrorMsg,
+} from '../assets/services.js/event-bus.service.js'
+
 import { useSelector } from 'react-redux'
 import { ImgUploader } from '../cmps/img-uploader.jsx'
 
@@ -20,7 +25,7 @@ const style = {
   left: '50%',
   transform: 'translate(-50%, -50%)',
   width: '50%',
-  height: 728,
+  height: 500,
   bgcolor: 'background.paper',
   boxShadow: 24,
   p: 0,
@@ -51,6 +56,15 @@ export function DeletePostModal() {
     closeRemoveModal()
     updateCurrentStory(updatedStory)
     updateImgUrl(null)
+  }
+
+  async function onRemoveStory() {
+    try {
+      await removeStory(currentStory._id)
+      showSuccessMsg('Story removed')
+    } catch (err) {
+      showErrorMsg('Cannot remove story')
+    }
   }
 
   return (

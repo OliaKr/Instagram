@@ -1,5 +1,6 @@
 import { updateImgUrl } from '../store/story.actions.js'
 import { uploadService } from '../assets/services.js/upload.service.js'
+
 export function ImgUploader({ onUploaded = null, changeImage }) {
   async function uploadImg(ev) {
     console.log(ev)

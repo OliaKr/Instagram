@@ -62,7 +62,7 @@ export default function NotificationsDrawer() {
         <h2 className='title'>Notifications</h2>
         <Divider />
         <div className='notifications-list'>
-          {user.notifications.map((n) => (
+          {user?.notifications?.map((n) => (
             <div key={n._id}>
               <div
                 className='notification-row'

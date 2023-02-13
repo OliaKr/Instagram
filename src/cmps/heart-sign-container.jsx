@@ -128,7 +128,7 @@ export function HeartSignContainer({ story }) {
         className='flagIcon'
         onClick={OnFavoriteStories}
       >
-        {user.savedStoryIds.includes(story._id) ? (
+        {user?.savedStoryIds?.includes(story._id) ? (
           <img
             src={flagBlack}
             alt='flagIcon'

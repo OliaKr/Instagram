@@ -11,14 +11,6 @@ export function Storyheader({ story }) {
     (storeState) => storeState.storyModule.currentStory
   )
 
-  function editPost() {
-    updateCurrentStory(story)
-    if (currentStory?.postImg[0]) {
-      console.log(currentStory?.postImg)
-      openRemoveModal()
-    }
-  }
-
   return (
     <div className='story-header'>
       <div className='avatar-section'>
@@ -39,7 +31,6 @@ export function Storyheader({ story }) {
       </div>
       <span className='threeDots'>
         <i
-          onClick={editPost}
           className='fa fa-ellipsis-h'
           aria-hidden='true'
         ></i>

@@ -14,10 +14,9 @@ import { updateUser, updateOtherUser } from '../store/user.action'
 export function PostPreview({ story }) {
   const [text, setText] = useState('')
   const [chosenEmoji, setChosenEmoji] = useState(null)
+  const [showEmojiPicker, setShowEmojiPicker] = useState(false)
   const user = useSelector((storeState) => storeState.userModule.user)
   const users = useSelector((storeState) => storeState.userModule.users)
-
-  const [showEmojiPicker, setShowEmojiPicker] = useState(false)
 
   function handleChange(e) {
     setText(e.target.value)

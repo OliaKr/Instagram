@@ -7,6 +7,7 @@ import {
   addLikeOrComment,
   closeStoryForwardModal,
   updateCurrentStory,
+  openRemoveModal,
 } from '../store/story.actions.js'
 import Avatar from '@mui/material/Avatar'
 import Slider from 'react-slick'
@@ -34,7 +35,7 @@ const style = {
   borderRadius: '1%',
 }
 
-export function StoryForwardModal() {
+export function StoryForwardModal({ isProfileDispayed }) {
   const isStoryForwardModalOpen = useSelector(
     (storeState) => storeState.storyModule.isStoryForwardModalOpen
   )
@@ -140,6 +141,13 @@ export function StoryForwardModal() {
     updateCurrentStory(updatedStory)
   }
 
+  function editPost() {
+    updateCurrentStory(currentStory)
+    if (isProfileDispayed) {
+      openRemoveModal()
+    }
+  }
+
   return (
     <Modal
       open={isStoryForwardModalOpen}
@@ -190,6 +198,7 @@ export function StoryForwardModal() {
                 </div>
                 <span className='threeDots'>
                   <i
+                    onClick={editPost}
                     className='fa fa-ellipsis-h'
                     aria-hidden='true'
                   ></i>

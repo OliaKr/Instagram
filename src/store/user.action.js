@@ -9,16 +9,32 @@ import {
   SAVE_STORY_TO_USER,
   TOGGLE_SEARCH_DRAWER,
   TOGGLE_NOTIFICATIONS_DRAWER,
+  SET_USER,
 } from '../store/user.reducer.js'
 
 export async function switchUser(userLine) {
   try {
+    await userService.loggedInUser(userLine)
     store.dispatch({
       type: SWITCH_USER,
       userLine,
     })
   } catch (err) {
     console.log(`Cannot logging the user ${userLine.fullname} `, err)
+    throw err
+  }
+}
+
+export async function loadLoggedUser() {
+  try {
+    const user = await userService.fetchUser()
+
+    store.dispatch({
+      type: SET_USER,
+      user,
+    })
+  } catch (err) {
+    console.log('Cannot load user', err)
     throw err
   }
 }

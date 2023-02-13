@@ -2,21 +2,36 @@ import { storageService } from '../services.js/async-storage.service.js'
 import { utilService } from '../services.js/util.service.js'
 
 const STORAGE_KEY = 'userDB'
+const AUTH_KEY = 'authDB'
 
 export const userService = {
   query,
   update,
   updateUsers,
+  loggedInUser,
+  fetchUser,
 }
 
 async function query() {
   try {
     let users = await storageService.query(STORAGE_KEY)
+
     if (!users || !users.length) {
       users = gUsers
       utilService.saveToStorage(STORAGE_KEY, users)
     }
     return users
+  } catch (err) {
+    console.log('Had Error', err)
+  }
+}
+
+async function fetchUser() {
+  try {
+    let user = await storageService.query(AUTH_KEY)
+    utilService.saveToStorage(AUTH_KEY, user)
+
+    return user
   } catch (err) {
     console.log('Had Error', err)
   }
@@ -36,6 +51,13 @@ async function updateUsers(updatedUsers) {
 async function update(user) {
   console.log('from user-ervice', user)
   let updatedsUser = await storageService.put(STORAGE_KEY, user)
+
+  return updatedsUser
+}
+
+async function loggedInUser(user) {
+  console.log('from user-ervice', user)
+  let updatedsUser = await storageService._save(AUTH_KEY, user)
 
   return updatedsUser
 }

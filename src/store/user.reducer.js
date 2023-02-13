@@ -1,6 +1,7 @@
 import { gUsers } from '../assets/services.js/user-service.js'
 export const SWITCH_USER = 'SWITCH_USER'
 export const SET_USERS = 'SET_USERS'
+export const SET_USER = 'SET_USER'
 export const CLOSE_SWITCH_USERS_MODAL = 'CLOSE_SWITCH_USERS_MODAL'
 export const OPEN_SWITCH_USERS_MODAL = 'OPEN_SWITCH_USERS_MODAL'
 export const SAVE_STORY_TO_USER = 'SAVE_STORY_TO_USER'
@@ -22,6 +23,10 @@ export function userReducer(state = initialState, action) {
     case SET_USERS:
       newState = { ...state, users: action.users }
       break
+    case SET_USER:
+      newState = { ...state, user: action.user }
+      break
+
     case SWITCH_USER:
       newState = { ...state, user: action.userLine }
       break
