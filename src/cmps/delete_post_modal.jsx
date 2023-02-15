@@ -47,6 +47,10 @@ export function DeletePostModal() {
   )
   const [text, setText] = useState(currentStory.txt)
 
+  useEffect(() => {
+    setText(currentStory.txt)
+  }, [currentStory])
+
   function handleChange(e) {
     setText(e.target.value)
   }
