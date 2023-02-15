@@ -46,6 +46,7 @@ export function userReducer(state = initialState, action) {
       newState = { ...state, isNotificationsOpen: action.isNotificationsOpen }
       break
     default:
+      return newState
   }
   return newState
 }
