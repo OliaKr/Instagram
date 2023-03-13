@@ -117,7 +117,7 @@ export function PostPreview({ story }) {
             {lastTwoComments.map((comment) => (
               <span
                 className='comment'
-                key={comment.id}
+                key={comment._id}
               >
                 <strong>{comment.by.fullname}</strong> {comment.txt}
               </span>

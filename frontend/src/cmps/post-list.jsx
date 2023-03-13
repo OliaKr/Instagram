@@ -8,12 +8,16 @@ export function PostList({ stories }) {
   const [currentUser, setCurrentUser] = useState(user)
 
   useEffect(() => {
-    setCurrentUser(users?.find((u) => u._id === user._id))
+    setCurrentUser(users?.find((u) => u._id === user?._id))
   }, [users, user])
+
+  stories.sort(function (x, y) {
+    return x.timestamp - y.timestamp
+  })
 
   return (
     <div>
-      {stories.map((story) =>
+      {stories?.map((story) =>
         currentUser?.following?.map((followedUser) =>
           followedUser?._id === story?.by?._id ? (
             <PostPreview

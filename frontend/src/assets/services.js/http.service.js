@@ -1,34 +1,37 @@
 import Axios from 'axios'
 
-const BASE_URL = 'http://localhost:4000/api/'
+const BASE_URL = 'http://localhost:4000/'
 
 export const httpService = {
-  get(endpoint, data) {
+  async get(endpoint, data) {
+    try {
+      let result = await Axios.get(`${BASE_URL}${endpoint}`, data)
+      return result
+    } catch (error) {
+      console.log(error)
+    }
+  },
+  async post(endpoint, data) {
     try {
       console.log(`${BASE_URL}${endpoint}`)
-      return Axios.get(`${BASE_URL}${endpoint}`, data)
+      let result = await Axios.post(`${BASE_URL}${endpoint}`, data)
+      return result
     } catch (error) {
       console.log(error)
     }
   },
-  post(endpoint, data) {
+  async put(endpoint, data) {
     try {
-      let users = Axios.post(`${BASE_URL}${endpoint}`, data)
-      return users
+      let result = await Axios.put(`${BASE_URL}${endpoint}`, data)
+      return result
     } catch (error) {
       console.log(error)
     }
   },
-  put(endpoint, data) {
+  async delete(endpoint, data) {
     try {
-      return Axios.put(`${BASE_URL}${endpoint}`, data)
-    } catch (error) {
-      console.log(error)
-    }
-  },
-  delete(endpoint, data) {
-    try {
-      return Axios.delete(`${BASE_URL}${endpoint}`, data)
+      let result = await Axios.delete(`${BASE_URL}${endpoint}`, data)
+      return result
     } catch (error) {
       console.log(error)
     }

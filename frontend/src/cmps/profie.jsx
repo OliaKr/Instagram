@@ -64,8 +64,8 @@ export function Profile() {
 
   useEffect(() => {
     let num = 0
-    stories.map((story) => {
-      if (story.by._id === userProfile._id) {
+    stories?.map((story) => {
+      if (story?.by._id === userProfile?._id) {
         num++
       }
     })
@@ -91,7 +91,7 @@ export function Profile() {
       following: [
         ...user.following,
         {
-          _id: userProfile._id,
+          _id: userProfile?._id,
           fullname: userProfile.fullname,
           imgUrl: userProfile.imgUrl,
         },
@@ -104,7 +104,7 @@ export function Profile() {
       followers: [
         ...userProfile.followers,
         {
-          _id: user._id,
+          _id: user?._id,
           fullname: user.fullname,
           imgUrl: user.imgUrl,
         },
@@ -116,7 +116,7 @@ export function Profile() {
       _id: utilService.makeId(),
       type: `${user.fullname} started follow you!`,
       by: {
-        _id: user._id,
+        _id: user?._id,
         fullname: user.fullname,
         imgUrl: user.imgUrl,
       },
@@ -133,13 +133,13 @@ export function Profile() {
   async function unFollow() {
     let updatedUser
     let updatedFollowing = user.following.filter(
-      (u) => u._id !== userProfile._id
+      (u) => u?._id !== userProfile?._id
     )
     updatedUser = { ...user, following: updatedFollowing }
     await updateUser(updatedUser)
     // remove from other user a follower
     let removeFollowerFromUser = userProfile.followers.filter(
-      (u) => u._id !== user._id
+      (u) => u?._id !== user?._id
     )
     updatedUser = { ...userProfile, followers: removeFollowerFromUser }
     await updateOtherUser(updatedUser)
@@ -148,7 +148,7 @@ export function Profile() {
       _id: utilService.makeId(),
       type: `${user.fullname} stop follow you!`,
       by: {
-        _id: user._id,
+        _id: user?._id,
         fullname: user.fullname,
         imgUrl: user.imgUrl,
       },
@@ -165,7 +165,7 @@ export function Profile() {
     if (!otherUser) {
       return <button className='edit-btn'>Edit profile</button>
     } else {
-      if (user.following.some((u) => u._id === userProfile._id)) {
+      if (user.following.some((u) => u?._id === userProfile?._id)) {
         return (
           <button
             className='edit-btn'
@@ -186,7 +186,7 @@ export function Profile() {
       }
     }
   }
-
+  console.log('stories', stories)
   return (
     <div className='profile-container'>
       <StoryForwardModal isProfileDispayed />
@@ -267,9 +267,9 @@ export function Profile() {
       </div>
       <div className='grid-images'>
         {mode === 'STORIES'
-          ? stories.map(
+          ? stories?.map(
               (story) =>
-                userProfile?._id === story.by._id && (
+                userProfile?._id === story?.by._id && (
                   <div
                     key={story._id}
                     className='hover-div'

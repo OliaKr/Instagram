@@ -1,4 +1,5 @@
 import { gUsers } from '../assets/services.js/user-service.js'
+import { loadLoggedUser } from './user.action.js'
 export const SWITCH_USER = 'SWITCH_USER'
 export const SET_USERS = 'SET_USERS'
 export const SET_USER = 'SET_USER'
@@ -22,6 +23,7 @@ export function userReducer(state = initialState, action) {
   switch (action.type) {
     case SET_USERS:
       newState = { ...state, users: action.users }
+
       break
     case SET_USER:
       newState = { ...state, user: action.user }

@@ -15,15 +15,16 @@ export const userService = {
 
 async function query() {
   try {
-    // let users = await storageService.query(STORAGE_KEY)
-    // let users = await httpService.get('users')
-
     let users
-    if (!users || !users.length) {
+    users = await httpService.get('users')
+
+    if (!users.data.length) {
       users = gUsers
+
       httpService.post('users', users)
     }
-    return users
+
+    return users.data
   } catch (err) {
     console.log('Had Error', err)
   }
@@ -52,10 +53,9 @@ async function updateUsers(updatedUsers) {
 }
 
 async function update(user) {
-  console.log('from user-ervice', user)
-  let updatedsUser = await storageService.put(STORAGE_KEY, user)
+  let updatedsUser = await httpService.put('user', user)
 
-  return updatedsUser
+  return updatedsUser.data
 }
 
 async function loggedInUser(user) {

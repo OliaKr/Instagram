@@ -68,7 +68,7 @@ export function HeartSignContainer({ story }) {
   function OnFavoriteStories() {
     let addToUserFavorite
     if (isSaved) {
-      let savedStoriesExceptThis = user.savedStoryIds.filter(
+      let savedStoriesExceptThis = user?.savedStoryIds.filter(
         (savedStory) => savedStory._id === story._id
       )
       addToUserFavorite = { ...user, savedStoryIds: savedStoriesExceptThis }

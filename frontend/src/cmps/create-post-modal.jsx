@@ -16,6 +16,7 @@ import mapIcon from '../assets/icons/map icon.svg'
 import arrowDown from '../assets/icons/arrow down.svg'
 import createPostIcon from '../assets/icons/createPostIcon.svg'
 import EmojiPicker from 'emoji-picker-react'
+import { utilService } from '../assets/services.js/util.service.js'
 
 export function CreatePostModal() {
   const isCreateModalOpen = useSelector(
@@ -52,6 +53,7 @@ export function CreatePostModal() {
     if (updatedImgUrl) {
       let story = {
         ...newStory,
+        _id: utilService.makeId(),
         timestamp: new Date().getTime(),
         postImg: [updatedImgUrl],
         txt: text,

@@ -1,5 +1,6 @@
 import { storageService } from '../services.js/async-storage.service.js'
 import { utilService } from '../services.js/util.service.js'
+import { httpService } from './http.service.js'
 
 const STORAGE_KEY = 'storyDB'
 
@@ -12,7 +13,7 @@ export const storyService = {
 }
 
 export const newStory = {
-  _id: null,
+  _id: '',
   timestamp: null,
   txt: '',
   postImg: [], //Can be an array if decide to support multiple imgs
@@ -88,14 +89,17 @@ function _createStory(txt, imgUrl, by, comments) {
 }
 
 async function query() {
+  let stories
   try {
-    let stories = await storageService.query(STORAGE_KEY)
-    if (!stories || !stories.length) {
+    stories = await httpService.get('stories')
+
+    if (!stories.data.length) {
       stories = gStories
-      utilService.saveToStorage(STORAGE_KEY, stories)
+
+      httpService.post('stories', stories)
     }
 
-    return stories
+    return stories.data
   } catch (err) {
     console.log('Had Error', err)
   }
@@ -106,15 +110,23 @@ function getById(storyId) {
 }
 
 async function remove(storyId) {
-  await storageService.remove(STORAGE_KEY, storyId)
+  try {
+    await httpService.delete('story', storyId)
+  } catch (error) {
+    console.log('Had Error', error)
+  }
 }
 
 async function create(story) {
-  let savedStory = await storageService.post(STORAGE_KEY, story)
+  let savedStory = await httpService.post('story', story)
   return savedStory
 }
 
 async function update(story) {
-  let savedStory = await storageService.put(STORAGE_KEY, story)
-  return savedStory
+  try {
+    let savedStory = await httpService.put('story', story)
+    return savedStory
+  } catch (err) {
+    console.log('Had Error', err)
+  }
 }
