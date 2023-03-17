@@ -1,8 +1,6 @@
 const express = require('express')
 const app = express()
 const api = require('./Routes/api')
-const Users = require('./model/userSchema')
-const Stories = require('./model/storySchema')
 const bodyParser = require('body-parser')
 const cors = require('cors')
 const mongoose = require('mongoose')
@@ -20,14 +18,12 @@ app.use(function (req, res, next) {
 
   next()
 })
-const corsOptions = {
-  origin: ['http://192.168.14.10:3000', 'http://localhost:3000'],
-  //   credentials: true,
-}
-app.use('/', api)
-app.use(cors(corsOptions))
-app.use(express.json())
 
+app.use(cors())
+app.use(express.json())
+app.use('/', api)
+
+// connect to mongoose
 mongoose
   .connect(process.env.MONGO_URI, {
     useNewUrlParser: true,
@@ -35,7 +31,7 @@ mongoose
     useUnifiedTopology: true,
   })
   .then(() => {
-    console.log('Connected to DB')
+    console.log('Connected to DB', process.env.MONGO_URI)
 
     app.listen(process.env.PORT, function () {
       console.log(`express server is running on port ${process.env.PORT}`)
@@ -44,4 +40,3 @@ mongoose
   .catch((err) => {
     console.log(err)
   })
-// require route
