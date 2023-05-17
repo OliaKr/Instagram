@@ -13,6 +13,7 @@ const userSchema = new Schema({
   savedStoryIds: Array,
   isNewNotifications: Boolean,
   notifications: Array,
+  messages: Array,
 })
 
 const User = mongoose.model('user', userSchema)

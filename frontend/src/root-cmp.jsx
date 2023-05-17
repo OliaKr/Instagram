@@ -10,6 +10,7 @@ import SearchDrawer from './cmps/search-drawer.jsx'
 import NotificationsDrawer from './cmps/notifications-drawer.jsx'
 import { loadStories } from './store/story.actions.js'
 import io from 'socket.io-client'
+import Messages from './pages/messages-page.jsx'
 
 const socket = io.connect('http://localhost:4000')
 
@@ -43,10 +44,15 @@ export function App() {
           path='/instagram/search'
           element={<HomePage />}
         />
+
         <Route
           exact
           path='/instagram/notifications'
           element={<HomePage />}
+        />
+        <Route
+          path='/instagram/messages'
+          element={<Messages />}
         />
         <Route
           path='/instagram/:username'
