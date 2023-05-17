@@ -14,7 +14,7 @@ function query(entityType, delay = 500) {
 
 function get(entityType, entityId) {
   return query(entityType).then((entities) => {
-    const entity = entities.find((entity) => entity._id === entityId)
+    const entity = entities.find((entity) => entity.id === entityId)
     if (!entity)
       throw new Error(
         `Get failed, cannot find entity with id: ${entityId} in: ${entityType}`
@@ -25,7 +25,7 @@ function get(entityType, entityId) {
 
 function post(entityType, newEntity) {
   newEntity = JSON.parse(JSON.stringify(newEntity))
-  newEntity._id = _makeId()
+  newEntity.id = _makeId()
   return query(entityType).then((entities) => {
     entities.push(newEntity)
     _save(entityType, entities)
@@ -36,10 +36,10 @@ function post(entityType, newEntity) {
 function put(entityType, updatedEntity) {
   updatedEntity = JSON.parse(JSON.stringify(updatedEntity))
   return query(entityType).then((entities) => {
-    const idx = entities.findIndex((entity) => entity._id === updatedEntity._id)
+    const idx = entities.findIndex((entity) => entity.id === updatedEntity.id)
     if (idx < 0)
       throw new Error(
-        `Update failed, cannot find entity with id: ${updatedEntity._id} in: ${entityType}`
+        `Update failed, cannot find entity with id: ${updatedEntity.id} in: ${entityType}`
       )
     entities.splice(idx, 1, updatedEntity)
     _save(entityType, entities)
@@ -49,8 +49,8 @@ function put(entityType, updatedEntity) {
 
 function remove(entityType, entityId) {
   return query(entityType).then((entities) => {
-    console.log('test', entities[0]._id, entityId)
-    let updatedEntities = entities.filter((story) => story._id !== entityId)
+    console.log('test', entities[0].id, entityId)
+    let updatedEntities = entities.filter((story) => story.id !== entityId)
     _save(entityType, updatedEntities)
   })
 }

@@ -74,7 +74,6 @@ export async function addStory(story) {
 
 export async function updateStory(story) {
   try {
-    // if (story._id) {
     let savedstory = await storyService.update(story)
     store.dispatch(getActionUpdatestory(savedstory))
     return savedstory

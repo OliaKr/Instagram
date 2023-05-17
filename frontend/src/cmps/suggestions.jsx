@@ -1,20 +1,22 @@
-import React, { useState } from 'react'
-import Avatar from '@mui/material/Avatar'
-import Stack from '@mui/material/Stack'
-import { gUsers } from '../assets/services.js/user-service.js'
-import { SwitchAcoountsModal } from '../cmps/switch-accounts-modal.jsx'
-import { openSwitchUsersModal, updateUser } from '../store/user.action.js'
-import { useSelector } from 'react-redux'
+import React, { useState } from "react";
+import Avatar from "@mui/material/Avatar";
+import Stack from "@mui/material/Stack";
+import { gUsers } from "../assets/services.js/user-service.js";
+import { SwitchAcoountsModal } from "../cmps/switch-accounts-modal.jsx";
+import { openSwitchUsersModal, updateUser } from "../store/user.action.js";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 export function Suggestions() {
-  const user = useSelector((storeState) => storeState.userModule.user)
-  let allUsersExceptMe = gUsers?.filter((u) => u._id !== user._id)
+  const user = useSelector((storeState) => storeState.userModule.user);
+  let allUsersExceptMe = gUsers?.filter((u) => u?.id !== user?.id);
   const [lastFourUsers, setLastFourUsers] = useState(
     allUsersExceptMe?.slice(Math.max(allUsersExceptMe.length - 4, 0))
-  )
+  );
+  const navigate = useNavigate();
 
   let defaultImg =
-    'https://i.pinimg.com/originals/0c/3b/3a/0c3b3adb1a7530892e55ef36d3be6cb8.png'
+    "https://i.pinimg.com/originals/0c/3b/3a/0c3b3adb1a7530892e55ef36d3be6cb8.png";
 
   function addFollow(u) {
     let updatedUser = {
@@ -22,70 +24,58 @@ export function Suggestions() {
       following: [
         ...user.following,
         {
-          _id: u._id,
+          id: u.id,
           fullname: u.fullname,
           imgUrl: u.imgUrl,
         },
       ],
-    }
-    updateUser(updatedUser)
-    let removeElement = lastFourUsers.indexOf(u)
-    setLastFourUsers(lastFourUsers.slice(removeElement))
+    };
+    updateUser(updatedUser);
+    let removeElement = lastFourUsers.indexOf(u);
+    setLastFourUsers(lastFourUsers.slice(removeElement));
   }
 
   return (
-    <div className='suggestion-container'>
+    <div className="suggestion-container">
       <SwitchAcoountsModal />
-      <div className='main-avatar'>
-        <Stack>
+      <div className="main-avatar">
+        <Stack onClick={() => navigate(`/instagram/${user?.username}`)}>
           <Avatar
-            alt='user'
+            alt="user"
             src={user ? user.imgUrl : defaultImg}
             sx={{
               width: 56,
               height: 56,
-              marginRight: '12px',
+              marginRight: "12px",
             }}
           />
         </Stack>
-        <div className='user-details-top'>
-          <span className='user-fullname'>{user ? user.fullname : ''}</span>
-          <span className='user-bio'>{user ? user.bio : ''}</span>
+        <div className="user-details-top">
+          <span className="user-fullname">{user ? user.fullname : ""}</span>
+          <span className="user-bio">{user ? user.bio : ""}</span>
         </div>
-        <button
-          className='switch-btn'
-          onClick={openSwitchUsersModal}
-        >
-          Swtich
+        <button className="switch-btn" onClick={openSwitchUsersModal}>
+          Switch
         </button>
       </div>
-      <div className='suggestions-for-you'>
-        <span className='title'>Suggestions for you</span>
-        <span className='see-all-btn'>See All</span>
+      <div className="suggestions-for-you">
+        <span className="title">Suggestions for you</span>
+        <span className="see-all-btn">See All</span>
       </div>
-      <div className='suggestions-users'>
+      <div className="suggestions-users">
         <ul>
           {lastFourUsers?.map((u) => (
-            <li
-              className='user-suggestion'
-              key={u._id}
-            >
+            <li className="user-suggestion" key={u?.id}>
               <Stack>
-                <Avatar
-                  alt={u.username}
-                  src={u.imgUrl}
-                />
+                <Avatar alt={u.username} src={u.imgUrl} />
               </Stack>
-              <div className='user-details'>
-                <div className='user-fullname'>{u.username}</div>
+              <div className="user-details">
+                <div className="user-fullname">{u.username}</div>
                 {u?.followers[0] && (
                   <div>Followed by {u?.followers[0]?.fullname}</div>
                 )}
               </div>
-              <button
-                className='follow-btn'
-                onClick={() => addFollow(u)}
-              >
+              <button className="follow-btn" onClick={() => addFollow(u)}>
                 Follow
               </button>
             </li>
@@ -93,5 +83,5 @@ export function Suggestions() {
         </ul>
       </div>
     </div>
-  )
+  );
 }

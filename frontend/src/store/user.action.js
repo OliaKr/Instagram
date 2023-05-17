@@ -14,7 +14,7 @@ import {
 
 export async function switchUser(userLine) {
   try {
-    await userService.loggedInUser(userLine)
+    await userService.fetchCurrentUser(userLine)
     store.dispatch({
       type: SWITCH_USER,
       userLine,
@@ -25,10 +25,9 @@ export async function switchUser(userLine) {
   }
 }
 
-export async function loadLoggedUser() {
+export async function fetchCurrentUser() {
   try {
-    const user = await userService.fetchUser()
-
+    const user = await userService.fetchCurrentUser()
     store.dispatch({
       type: SET_USER,
       user,
@@ -42,7 +41,6 @@ export async function loadLoggedUser() {
 export async function loadUsers() {
   try {
     const users = await userService.query()
-
     store.dispatch({
       type: SET_USERS,
       users,
@@ -77,7 +75,8 @@ export async function openSwitchUsersModal() {
   }
 }
 
-export async function toggleSearchDrawer(isSearchOpen) {
+export async function toggleSearchDrawer(isSearchOpen, updatedUser) {
+
   try {
     store.dispatch({
       type: TOGGLE_SEARCH_DRAWER,
@@ -114,9 +113,10 @@ export async function updateUser(user) {
   }
 }
 
-export async function updateOtherUser(user) {
+export async function updateOtherUser(otherUser) {
   try {
-    let savedUser = await userService.update(user)
+    await userService.update(otherUser)
+    loadUsers()
   } catch (err) {
     console.log('Cannot save story', err)
     throw err

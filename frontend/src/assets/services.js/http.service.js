@@ -13,7 +13,6 @@ export const httpService = {
   },
   async post(endpoint, data) {
     try {
-      console.log(`${BASE_URL}${endpoint}`)
       let result = await Axios.post(`${BASE_URL}${endpoint}`, data)
       return result
     } catch (error) {

@@ -31,9 +31,9 @@ export function storyReducer(state = initialState, action) {
       break
     case REMOVE_STORY:
       const RemovedStory = state.stories.find(
-        (story) => story._id === action.storyId
+        (story) => story.id === action.storyId
       )
-      stories = state.stories.filter((story) => story._id !== action.storyId)
+      stories = state.stories.filter((story) => story.id !== action.storyId)
       newState = { ...state, stories, RemovedStory }
       break
     case ADD_STORY:
@@ -41,7 +41,7 @@ export function storyReducer(state = initialState, action) {
       break
     case UPDATE_STORY:
       stories = state.stories.map((story) =>
-        story._id === action.story._id ? action.story : story
+        story.id === action.story.id ? action.story : story
       )
       newState = { ...state, stories }
       break

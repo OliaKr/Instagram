@@ -13,12 +13,12 @@ export const storyService = {
 }
 
 export const newStory = {
-  _id: '',
+  id: null,
   timestamp: null,
   txt: '',
   postImg: [], //Can be an array if decide to support multiple imgs
   by: {
-    _id: '',
+    id: '',
     fullname: '',
     userImg: '',
   },
@@ -29,7 +29,7 @@ export const newStory = {
 
 const gStories = [
   {
-    _id: 's101',
+    id: 's101',
     timestamp: new Date().getTime(),
     txt: 'Best trip ever',
     postImg: [
@@ -38,7 +38,7 @@ const gStories = [
       'https://res.cloudinary.com/dsinv9pik/image/upload/v1674988394/325913754_1048696716095856_6968959291050052233_n_xjxeb9.jpg',
     ], //Can be an array if decide to support multiple imgs
     by: {
-      _id: 'Z580',
+      id: 'Z580',
       fullname: 'Ulash Ulashi',
       userImg: 'https://img.mako.co.il/2014/02/24/467424241_g.jpg',
     },
@@ -48,12 +48,12 @@ const gStories = [
     tags: ['fun', 'kids'],
   },
   {
-    _id: 's102',
+    id: 's102',
     timestamp: new Date().getTime(),
     txt: 'Nice!',
     postImg: ['https://i.insider.com/58936e390849ec1a008b4619?width=700'], //Can be an array if decide to support multiple imgs
     by: {
-      _id: 'u102',
+      id: 'u102',
       fullname: 'Lea Di',
       userImg: 'https://tinyurl.com/bddwcp58',
     },
@@ -62,12 +62,12 @@ const gStories = [
     tags: ['fun', 'kids'],
   },
   {
-    _id: 's103',
+    id: 's103',
     timestamp: new Date().getTime(),
     txt: 'Great pic!',
     postImg: ['https://shorturl.ac/79odv'], //Can be an array if decide to support multiple imgs
     by: {
-      _id: 'u103',
+      id: 'u103',
       fullname: 'Eli Mor',
       userImg: 'https://randomuser.me/api/portraits/men/71.jpg',
     },
@@ -78,27 +78,14 @@ const gStories = [
   },
 ]
 
-function _createStory(txt, imgUrl, by, comments) {
-  return {
-    _id: utilService.makeId(),
-    txt,
-    imgUrl,
-    by,
-    comments,
-  }
-}
-
 async function query() {
   let stories
   try {
     stories = await httpService.get('stories')
-
-    if (!stories.data.length) {
+    if (!stories?.data.length) {
       stories = gStories
-
       httpService.post('stories', stories)
     }
-
     return stories.data
   } catch (err) {
     console.log('Had Error', err)

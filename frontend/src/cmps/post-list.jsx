@@ -1,32 +1,29 @@
-import React, { useEffect, useState } from 'react'
-import { useSelector } from 'react-redux'
-import { PostPreview } from './post-preview.jsx'
+import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { PostPreview } from "./post-preview.jsx";
 
 export function PostList({ stories }) {
-  const users = useSelector((storeState) => storeState.userModule.users)
-  const user = useSelector((storeState) => storeState.userModule.user)
-  const [currentUser, setCurrentUser] = useState(user)
+  const users = useSelector((storeState) => storeState.userModule.users);
+  const user = useSelector((storeState) => storeState.userModule.user);
+  const [currentUser, setCurrentUser] = useState(user);
 
   useEffect(() => {
-    setCurrentUser(users?.find((u) => u._id === user?._id))
-  }, [users, user])
+    setCurrentUser(users?.find((u) => u.id === user?.id));
+  }, [users, user]);
 
-  stories.sort(function (x, y) {
-    return x.timestamp - y.timestamp
-  })
+  const sortedStories = stories?.sort(function (x, y) {
+    return new Date(y.timestamp) - new Date(x.timestamp);
+  });
 
   return (
     <div>
-      {stories?.map((story) =>
+      {sortedStories?.map((story) =>
         currentUser?.following?.map((followedUser) =>
-          followedUser?._id === story?.by?._id ? (
-            <PostPreview
-              story={story}
-              key={story._id}
-            />
+          followedUser?.id === story?.by?.id ? (
+            <PostPreview story={story} key={story?.id} />
           ) : null
         )
       )}
     </div>
-  )
+  );
 }

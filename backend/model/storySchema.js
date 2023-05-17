@@ -2,17 +2,28 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
 const storySchema = new Schema({
-  _id: String,
+  id: String,
   timestamp: Date,
   txt: String,
   postImg: Array,
   by: {
-    _id: String,
+    id: String,
     fullname: String,
     userImg: String,
   },
-
-  comments: Array,
+  comments: [
+    {
+      timestamp: { type: Date, required: true },
+      id: String,
+      by: {
+        id: String,
+        fullname: String,
+        imgUrl: String,
+      },
+      txt: String,
+      likedBy: [],
+    }
+  ],
   likedBy: Array,
   tags: Array,
 })

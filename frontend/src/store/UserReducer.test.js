@@ -2,7 +2,7 @@ import { userReducer } from './user.reducer'
 import { gUsers } from '../assets/services.js/user-service.js'
 
 describe('UserReducer', () => {
-  const mockUser = { username: 'eli1', fullname: 'eli mor', _id: 'u103' }
+  const mockUser = { username: 'eli1', fullname: 'eli mor', id: 'u103' }
   const initialState = {
     user: gUsers[0],
     users: [],

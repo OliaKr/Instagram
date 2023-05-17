@@ -1,10 +1,19 @@
 const express = require('express')
+const bodyParser = require('body-parser')
 const app = express()
 const api = require('./Routes/api')
-const bodyParser = require('body-parser')
+const http = require('http')
 const cors = require('cors')
+const { Server } = require('socket.io')
 const mongoose = require('mongoose')
 require('dotenv').config()
+
+app.use(bodyParser.json({ type: 'application/*+json' }))
+// parse some custom thing into a Buffer
+app.use(bodyParser.raw({ type: 'application/vnd.custom-type' }))
+
+// parse an HTML body into a string
+app.use(bodyParser.text({ type: 'text/html' }))
 
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
@@ -23,7 +32,22 @@ app.use(cors())
 app.use(express.json())
 app.use('/', api)
 
-// connect to mongoose
+const server = http.createServer(app)
+
+const io = new Server(server, {
+  cors: {
+    origin: 'http://localhost:3000',
+    methods: ['GET', 'POST'],
+  },
+})
+
+io.on('connection', (socket) => {
+  console.log(socket.id)
+  socket.on('disconnect', () => {
+    console.log('User Disconnected', socket.id)
+  })
+})
+
 mongoose
   .connect(process.env.MONGO_URI, {
     useNewUrlParser: true,
@@ -33,7 +57,7 @@ mongoose
   .then(() => {
     console.log('Connected to DB', process.env.MONGO_URI)
 
-    app.listen(process.env.PORT, function () {
+    server.listen(process.env.PORT, function () {
       console.log(`express server is running on port ${process.env.PORT}`)
     })
   })
