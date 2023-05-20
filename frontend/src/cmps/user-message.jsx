@@ -1,13 +1,11 @@
 import React from 'react'
 import Avatar from '@mui/material/Avatar'
 
-export function UserMessage({ u }) {
-  const onOpenMessage = () => {}
-  console.log('u', u)
+export function UserMessage({ u, setUserToMsg }) {
   return (
     <div
       className='user-message'
-      onClick={() => onOpenMessage()}
+      onClick={() => setUserToMsg(u)}
     >
       <Avatar
         sx={{
