@@ -17,7 +17,7 @@ function Messages() {
   const user = useSelector((storeState) => storeState.userModule.user)
   const [userToMsg, setUserToMsg] = useState(null)
 
-  const [room, setRoom] = useState('')
+  const [room, setRoom] = useState('123')
 
   const u = {
     fullname: 'Dov Roz',
