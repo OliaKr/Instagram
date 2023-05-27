@@ -6,7 +6,7 @@ const Story = require('../model/storySchema')
 router.post('/currentUser', async function (req, res) {
   const user = req.body
   console.log(req.body)
-  let document = await User.findOne({ username: user.username });
+  let document = await User.findOne({ username: user.username })
   res.send(document)
 })
 
@@ -57,9 +57,7 @@ router.post('/stories', async function (req, res) {
 router.post('/story', async function (req, res) {
   const story = new Story(req.body)
   try {
-    story.save().then((data) => {
-      // console.log('save data', data)
-    })
+    story.save().then((data) => {})
     res.end()
   } catch (error) {
     console.log('Got an error', error)
