@@ -24,7 +24,7 @@ export const gUsers = [
     following: [
       {
         id: "Z580",
-        fullname: "ulashi ulashi",
+        fullname: "Ulashi Ulashi",
         imgUrl: "https://img.mako.co.il/2014/02/24/467424241_g.jpg",
       },
       {
@@ -36,7 +36,7 @@ export const gUsers = [
     followers: [
       {
         id: "B700",
-        fullname: "Dob",
+        fullname: "Dob Moran",
         imgUrl:
           "https://media.allure.com/photos/5c734d9adbe270553d92abf1/1:1/w_1503,h_1503,c_limit/Rami-Malek-Oscars-2019-Look-Dyp.jpg",
       },
@@ -54,7 +54,7 @@ export const gUsers = [
         type: "Dob Moran like your story",
         by: {
           id: "B700",
-          fullname: "Dob",
+          fullname: "Dob Moran",
           imgUrl:
             "https://media.allure.com/photos/5c734d9adbe270553d92abf1/1:1/w_1503,h_1503,c_limit/Rami-Malek-Oscars-2019-Look-Dyp.jpg",
         },
@@ -70,6 +70,44 @@ export const gUsers = [
         },
       },
     ],
+    messages: [
+      {
+        room: "123",
+        otherUserId: "B700",
+        list: [
+          {
+            timestamp: "8:45",
+            fullname: "Lior Maor",
+            avatar: "https://res.cloudinary.com/dsinv9pik/image/upload/v1674477174/%D7%AA%D7%9E%D7%95%D7%A0%D7%94_vsrinc.jpg",
+            message: "Hayush",
+          },
+          {
+            timestamp: "8:47",
+            fullname: "Dob Moran",
+            avatar: "https://media.allure.com/photos/5c734d9adbe270553d92abf1/1:1/w_1503,h_1503,c_limit/Rami-Malek-Oscars-2019-Look-Dyp.jpg",
+            message: "מה המצב",
+          },
+        ],
+      },
+      {
+        room: "425",
+        otherUserId: "Z580",
+        list: [
+          {
+            timestamp: "1:45",
+            fullname: "Lior Maor",
+            avatar: "https://res.cloudinary.com/dsinv9pik/image/upload/v1674477174/%D7%AA%D7%9E%D7%95%D7%A0%D7%94_vsrinc.jpg",
+            message: "אז אתה מתחיל איתי?",
+          },
+          {
+            timestamp: "3:33",
+            fullname: "Ulashi Ulashi",
+            avatar: "https://img.mako.co.il/2014/02/24/467424241_g.jpg",
+            message: "איפפפ את עפה על עצמך! תעשה פרסה מותק!",
+          },
+        ],
+      }
+    ],
   },
   {
     id: "A550",
@@ -82,7 +120,7 @@ export const gUsers = [
     following: [
       {
         id: "B700",
-        fullname: "Dob",
+        fullname: "Dob Moran",
         imgUrl:
           "https://media.allure.com/photos/5c734d9adbe270553d92abf1/1:1/w_1503,h_1503,c_limit/Rami-Malek-Oscars-2019-Look-Dyp.jpg",
       },
@@ -100,7 +138,7 @@ export const gUsers = [
     followers: [
       {
         id: "B700",
-        fullname: "Dob",
+        fullname: "Dob Moran",
         imgUrl:
           "https://media.allure.com/photos/5c734d9adbe270553d92abf1/1:1/w_1503,h_1503,c_limit/Rami-Malek-Oscars-2019-Look-Dyp.jpg",
       },
@@ -124,19 +162,20 @@ export const gUsers = [
         },
       },
     ],
+    messages: [],
   },
   {
     id: "B700",
-    username: "Dob",
+    username: "Dob Moran",
     password: "123456",
-    fullname: "Dob moran",
+    fullname: "Dob Moran",
     bio: "Change will not come if we wait for some other person or some other time",
     imgUrl:
       "https://media.allure.com/photos/5c734d9adbe270553d92abf1/1:1/w_1503,h_1503,c_limit/Rami-Malek-Oscars-2019-Look-Dyp.jpg",
     following: [
       {
         id: "C600",
-        fullname: "Dob",
+        fullname: "Dob Moran",
         imgUrl: "https://randomuser.me/api/portraits/men/75.jpg",
       },
       {
@@ -148,7 +187,7 @@ export const gUsers = [
     followers: [
       {
         id: "C600",
-        fullname: "Dob",
+        fullname: "Dob Moran",
         imgUrl: "https://randomuser.me/api/portraits/men/75.jpg",
       },
     ],
@@ -165,6 +204,26 @@ export const gUsers = [
         },
       },
     ],
+    messages: [
+      {
+        room: "123",
+        otherUserId: "Z550",
+        list: [
+          {
+            timestamp: "8:45",
+            fullname: "Lior Maor",
+            avatar: "https://res.cloudinary.com/dsinv9pik/image/upload/v1674477174/%D7%AA%D7%9E%D7%95%D7%A0%D7%94_vsrinc.jpg",
+            message: "Hayush",
+          },
+          {
+            timestamp: "8:47",
+            fullname: "Dob Moran",
+            avatar: "https://media.allure.com/photos/5c734d9adbe270553d92abf1/1:1/w_1503,h_1503,c_limit/Rami-Malek-Oscars-2019-Look-Dyp.jpg",
+            message: "מה המצב",
+          },
+        ],
+      }
+    ],
   },
   {
     id: "C600",
@@ -176,7 +235,7 @@ export const gUsers = [
     following: [
       {
         id: "B700",
-        fullname: "Dob",
+        fullname: "Dob Moran",
         imgUrl:
           "https://media.allure.com/photos/5c734d9adbe270553d92abf1/1:1/w_1503,h_1503,c_limit/Rami-Malek-Oscars-2019-Look-Dyp.jpg",
       },
@@ -184,7 +243,7 @@ export const gUsers = [
     followers: [
       {
         id: "B700",
-        fullname: "Dob",
+        fullname: "Dob Moran",
         imgUrl:
           "https://media.allure.com/photos/5c734d9adbe270553d92abf1/1:1/w_1503,h_1503,c_limit/Rami-Malek-Oscars-2019-Look-Dyp.jpg",
       },
@@ -192,18 +251,19 @@ export const gUsers = [
     savedStoryIds: [],
     isNewNotifications: false,
     notifications: [],
+    messages: [],
   },
   {
     id: "Z580",
-    username: "ulashi",
+    username: "Ulashi",
     password: "123456",
-    fullname: "ulashi ulashi",
+    fullname: "Ulashi Ulashi",
     bio: "If you don’t like the road you’re walking, start paving another one",
     imgUrl: "https://img.mako.co.il/2014/02/24/467424241_g.jpg",
     following: [
       {
         id: "B700",
-        fullname: "Dob",
+        fullname: "Dob Moran ",
         imgUrl:
           "https://media.allure.com/photos/5c734d9adbe270553d92abf1/1:1/w_1503,h_1503,c_limit/Rami-Malek-Oscars-2019-Look-Dyp.jpg",
       },
@@ -216,7 +276,7 @@ export const gUsers = [
     followers: [
       {
         id: "B700",
-        fullname: "Dob",
+        fullname: "Dob Moran",
         imgUrl:
           "https://media.allure.com/photos/5c734d9adbe270553d92abf1/1:1/w_1503,h_1503,c_limit/Rami-Malek-Oscars-2019-Look-Dyp.jpg",
       },
@@ -224,6 +284,26 @@ export const gUsers = [
     savedStoryIds: [],
     isNewNotifications: false,
     notifications: [],
+    messages: [
+      {
+        room: "425",
+        otherUserId: "Z550",
+        list: [
+          {
+            timestamp: "1:45",
+            fullname: "Lior Maor",
+            avatar: "https://res.cloudinary.com/dsinv9pik/image/upload/v1674477174/%D7%AA%D7%9E%D7%95%D7%A0%D7%94_vsrinc.jpg",
+            message: "אז אתה מתחיל איתי?",
+          },
+          {
+            timestamp: "3:33",
+            fullname: "Ulashi Ulashi",
+            avatar: "https://img.mako.co.il/2014/02/24/467424241_g.jpg",
+            message: "איפפפ את עפה על עצמך! תעשה פרסה מותק!",
+          },
+        ],
+      }
+    ],
   },
   {
     id: "u102",
@@ -240,7 +320,7 @@ export const gUsers = [
       },
       {
         id: "B700",
-        fullname: "Dob",
+        fullname: "Dob Moran",
         imgUrl:
           "https://media.allure.com/photos/5c734d9adbe270553d92abf1/1:1/w_1503,h_1503,c_limit/Rami-Malek-Oscars-2019-Look-Dyp.jpg",
       },
@@ -253,7 +333,7 @@ export const gUsers = [
     followers: [
       {
         id: "B700",
-        fullname: "Dob",
+        fullname: "Dob Moran",
         imgUrl:
           "https://media.allure.com/photos/5c734d9adbe270553d92abf1/1:1/w_1503,h_1503,c_limit/Rami-Malek-Oscars-2019-Look-Dyp.jpg",
       },
@@ -261,6 +341,7 @@ export const gUsers = [
     savedStoryIds: [],
     isNewNotifications: false,
     notifications: [],
+    messages: [],
   },
   {
     id: "u103",
@@ -272,7 +353,7 @@ export const gUsers = [
     following: [
       {
         id: "B700",
-        fullname: "Dob",
+        fullname: "Dob Moran",
         imgUrl:
           "https://media.allure.com/photos/5c734d9adbe270553d92abf1/1:1/w_1503,h_1503,c_limit/Rami-Malek-Oscars-2019-Look-Dyp.jpg",
       },
@@ -285,7 +366,7 @@ export const gUsers = [
     followers: [
       {
         id: "B700",
-        fullname: "Dob",
+        fullname: "Dob Moran",
         imgUrl:
           "https://media.allure.com/photos/5c734d9adbe270553d92abf1/1:1/w_1503,h_1503,c_limit/Rami-Malek-Oscars-2019-Look-Dyp.jpg",
       },
@@ -298,12 +379,13 @@ export const gUsers = [
         type: "like your story",
         by: {
           id: "B700",
-          fullname: "Dob",
+          fullname: "Dob Moran",
           imgUrl:
             "https://media.allure.com/photos/5c734d9adbe270553d92abf1/1:1/w_1503,h_1503,c_limit/Rami-Malek-Oscars-2019-Look-Dyp.jpg",
         },
       },
     ],
+    messages: [],
   },
   {
     id: "o12344",
@@ -318,6 +400,7 @@ export const gUsers = [
     savedStoryIds: [],
     isNewNotifications: false,
     notifications: [],
+    messages: [],
   },
   {
     id: "b343434",
@@ -332,6 +415,7 @@ export const gUsers = [
     savedStoryIds: [],
     isNewNotifications: false,
     notifications: [],
+    messages: [],
   },
   {
     id: "c898989",
@@ -346,6 +430,7 @@ export const gUsers = [
     savedStoryIds: [],
     isNewNotifications: false,
     notifications: [],
+    messages: [],
   },
   {
     id: "d34236",
@@ -360,6 +445,7 @@ export const gUsers = [
     savedStoryIds: [],
     isNewNotifications: false,
     notifications: [],
+    messages: [],
   },
   {
     id: "f909090",
@@ -374,6 +460,7 @@ export const gUsers = [
     savedStoryIds: [],
     isNewNotifications: false,
     notifications: [],
+    messages: [],
   },
 ]
 

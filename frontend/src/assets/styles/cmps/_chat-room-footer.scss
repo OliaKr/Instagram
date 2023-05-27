@@ -1,15 +1,15 @@
 .footer-input {
   display: flex;
-  position: sticky;
+  position: fixed;
   height: 44px;
   padding: 20px;
-  bottom: 0px;
+  bottom: 20px;
 }
 
 .footer-emoji {
   width: 24px;
   height: 24px;
-  background-image: url('../../icons/smiley.svg');
+  background-image: url("../../icons/smiley.svg");
   background-size: cover;
 }
 .footer-input-area {

@@ -1,74 +1,43 @@
-import React, { useEffect, useState } from 'react'
-import { useSelector } from 'react-redux'
-import ScrollToBottom from 'react-scroll-to-bottom'
+import React from "react";
+import { useSelector } from "react-redux";
+import { v4 as uuidv4 } from "uuid";
+import ChatBoxReciever, { ChatBoxSender } from "./chat-box";
 
-export function Chat({ socket, room }) {
-  const user = useSelector((storeState) => storeState.userModule.user)
-  const [currentMessage, setCurrentMessage] = useState('')
-  const [messageList, setMessageList] = useState([])
-
-  const sendMessage = async () => {
-    if (currentMessage !== '') {
-      const messageData = {
-        room: room,
-        author: user.fullname,
-        message: currentMessage,
-        time:
-          new Date(Date.now()).getHours() +
-          ':' +
-          new Date(Date.now()).getMinutes(),
-      }
-
-      await socket.emit('send_message', messageData)
-      setMessageList((list) => [...list, messageData])
-      setCurrentMessage('')
-    }
-  }
-
-  useEffect(() => {
-    socket.on('receive_message', (data) => {
-      setMessageList((list) => [...list, data])
-    })
-  }, [socket])
+export function Chat({ messageList, room }) {
+  const user = useSelector((storeState) => storeState.userModule.user);
 
   return (
-    <div className='chat-window'>
-      <div className='chat-body'>
-        <ScrollToBottom className='message-container'>
-          {messageList.map((messageContent) => {
-            return (
-              <div
-                className='message'
-                id={user.fullname === messageContent.author ? 'you' : 'other'}
-              >
-                <div>
-                  <div className='message-content'>
-                    <p>{messageContent.message}</p>
-                  </div>
-                  <div className='message-meta'>
-                    <p id='time'>{messageContent.time}</p>
-                    <p id='author'>{messageContent.author}</p>
-                  </div>
-                </div>
-              </div>
-            )
-          })}
-        </ScrollToBottom>
-      </div>
-      <div className='chat-footer'>
-        <input
-          type='text'
-          value={currentMessage}
-          placeholder='Hey...'
-          onChange={(event) => {
-            setCurrentMessage(event.target.value)
-          }}
-          onKeyPress={(event) => {
-            event.key === 'Enter' && sendMessage()
-          }}
-        />
-        <button onClick={sendMessage}>&#9658;</button>
-      </div>
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        height: "80%",
+        maxHeight: "80%",
+        overflowY: "scroll",
+      }}>
+      {messageList?.map((chat) => (
+        <div key={uuidv4()}>
+          {chat?.fullname === user?.fullname ? (
+            <ChatBoxSender
+              room={room}
+              timestamp={chat.timestamp}
+              userId={chat.userId}
+              fullname={chat.fullname}
+              avatar={chat.avatar}
+              message={chat.message}
+            />
+          ) : (
+            <ChatBoxReciever
+              room={room}
+              timestamp={chat.timestamp}
+              userId={chat.userId}
+              fullname={chat.fullname}
+              avatar={chat.avatar}
+              message={chat.message}
+            />
+          )}
+        </div>
+      ))}
     </div>
-  )
+  );
 }

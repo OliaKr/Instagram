@@ -23,6 +23,7 @@ export default function AutocompleteInput() {
         '.MuiOutlinedInput-notchedOutline': { border: 'none' },
       }}
       options={gUsers}
+      //   autoHighlight
       getOptionLabel={(option) => option.fullname}
       renderOption={(props, option) => (
         <Box

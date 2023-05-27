@@ -57,7 +57,6 @@ const StyledTabs = withStyles({
 
 export function Profile() {
   const [value, setValue] = useState(0);
-
   const user = useSelector((storeState) => storeState.userModule.user);
   const stories = useSelector((storeState) => storeState.storyModule.stories);
   const otherUser = useLocation()?.state?.otherUser;
@@ -100,11 +99,11 @@ export function Profile() {
     let updatedUser = {
       ...user,
       following: [
-        ...user.following,
+        ...user?.following,
         {
           id: userProfile?.id,
-          fullname: userProfile.fullname,
-          imgUrl: userProfile.imgUrl,
+          fullname: userProfile?.fullname,
+          imgUrl: userProfile?.imgUrl,
         },
       ],
     };
@@ -113,11 +112,11 @@ export function Profile() {
     let addFollowerToOtherUser = {
       ...userProfile,
       followers: [
-        ...userProfile.followers,
+        ...userProfile?.followers,
         {
           id: user?.id,
-          fullname: user.fullname,
-          imgUrl: user.imgUrl,
+          fullname: user?.fullname,
+          imgUrl: user?.imgUrl,
         },
       ],
     };
@@ -125,11 +124,11 @@ export function Profile() {
     //add notification to other user -
     let newNotification = {
       id: utilService.makeId(),
-      type: `${user.fullname} started follow you!`,
+      type: `${user?.fullname} started follow you!`,
       by: {
         id: user?.id,
-        fullname: user.fullname,
-        imgUrl: user.imgUrl,
+        fullname: user?.fullname,
+        imgUrl: user?.imgUrl,
       },
     };
     let addNotificationToUser = {
@@ -143,13 +142,13 @@ export function Profile() {
 
   async function unFollow() {
     let updatedUser;
-    let updatedFollowing = user.following.filter(
+    let updatedFollowing = user?.following?.filter(
       (u) => u?.id !== userProfile?.id
     );
     updatedUser = { ...user, following: updatedFollowing };
     await updateUser(updatedUser);
     // remove from other user a follower
-    let removeFollowerFromUser = userProfile.followers.filter(
+    let removeFollowerFromUser = userProfile?.followers.filter(
       (u) => u?.id !== user?.id
     );
     updatedUser = { ...userProfile, followers: removeFollowerFromUser };
@@ -160,8 +159,8 @@ export function Profile() {
       type: `${user.fullname} stop follow you!`,
       by: {
         id: user?.id,
-        fullname: user.fullname,
-        imgUrl: user.imgUrl,
+        fullname: user?.fullname,
+        imgUrl: user?.imgUrl,
       },
     };
     let addNotificationToUser = {
@@ -177,7 +176,7 @@ export function Profile() {
     if (!otherUser) {
       return <button className="edit-btn">Edit profile</button>;
     } else {
-      if (user?.following.some((u) => u?.id === userProfile?.id)) {
+      if (user?.following?.some((u) => u?.id === userProfile?.id)) {
         return (
           <button className="edit-btn" onClick={unFollow}>
             Following
@@ -202,7 +201,7 @@ export function Profile() {
           <Avatar
             alt="Remy Sharp"
             sx={{ width: "150px", height: "150px", alignSelf: "center" }}
-            src={userProfile ? userProfile.imgUrl : defaultImg}
+            src={userProfile ? userProfile?.imgUrl : defaultImg}
           />
         </div>
         <div className="three-columns-details">
@@ -276,7 +275,7 @@ export function Profile() {
                   </div>
                 )
             )
-          : userProfile?.savedStoryIds.map((savedStory) =>
+          : userProfile?.savedStoryIds?.map((savedStory) =>
               stories?.map(
                 (story) =>
                   savedStory === story?.id && (

@@ -7,13 +7,15 @@
   overflow-x: hidden;
   background-color: #fafafa;
   color: #262626;
-  height: '100vh';
+  height: "100vh";
+  max-height: "100vh";
 }
 .messages-content {
   display: flex;
   background-color: white;
   max-width: 935px;
   width: 100%;
+  max-height: 100%;
 }
 .messages-list {
   width: 350px;
@@ -25,9 +27,10 @@
 }
 .messages-header {
   display: flex;
+  flex-wrap: wrap;
   padding: 0px 20px;
   height: 59px;
-
+  min-height: 59px;
   border-bottom: 1px solid rgb(219, 219, 219);
 }
 .messages-header-left {
@@ -106,6 +109,7 @@
   justify-content: space-between;
   padding: 0px 20px;
   height: 100%;
+  min-height: 59px;
 }
 .chat-open-header-l {
   display: flex;
@@ -120,9 +124,10 @@
 }
 .chat-body {
   flex: 1;
+  max-height: 100%;
 }
 
-@media (max-width: '930px') {
+@media (max-width: "930px") {
   .messages-container {
     padding: 0px;
   }
