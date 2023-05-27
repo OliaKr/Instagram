@@ -36,13 +36,13 @@ const server = http.createServer(app)
 
 const io = new Server(server, {
   cors: {
-    origin: "http://localhost:3000",
-    methods: ["GET", "POST"],
+    origin: '*',
+    methods: ['GET', 'POST'],
     credentials: true,
     transports: ['websocket', 'polling'],
   },
-  allowEIO3: true
-});
+  allowEIO3: true,
+})
 
 mongoose
   .connect(process.env.MONGO_URI, {
@@ -61,34 +61,36 @@ mongoose
     console.log(err)
   })
 
-io.on("connection", async (socket) => {
-  console.log(`User Connected: ${socket.id}`);
-  socket.on("join_room", (room) => {
-    const currentRoom = io.sockets.adapter.rooms.get(room);
+io.on('connection', async (socket) => {
+  console.log(`User Connected: ${socket.id}`)
+  socket.on('join_room', (room) => {
+    const currentRoom = io.sockets.adapter.rooms.get(room)
     if (currentRoom) {
       // Check if socket ID exists in the room
       if (currentRoom.has(socket.id)) {
         // Socket ID already exists in the room, don't join
-        socket.emit('alreadyJoined', 'You have already joined this room.');
-      }
-      else {
+        socket.emit('alreadyJoined', 'You have already joined this room.')
+      } else {
         // Join the room
-        socket.join(room);
-        socket.emit('join_room', 'You have successfully joined the room.');
+        socket.join(room)
+        socket.emit('join_room', 'You have successfully joined the room.')
       }
     } else {
       // Join the room
-      socket.join(room);
-      socket.emit('join_room', `User with ID: ${socket.id} joined room: ${room}`)
-      console.log(`User with ID: ${socket.id} joined room: ${room}`);
+      socket.join(room)
+      socket.emit(
+        'join_room',
+        `User with ID: ${socket.id} joined room: ${room}`
+      )
+      console.log(`User with ID: ${socket.id} joined room: ${room}`)
     }
-  });
+  })
 
-  socket.on("send_message", (data) => {
-    io.in(data.room).emit('receive_message', data);
-  });
+  socket.on('send_message', (data) => {
+    io.in(data.room).emit('receive_message', data)
+  })
 
-  socket.on("disconnect", () => {
-    console.log("User Disconnected", socket.id);
-  });
-});
+  socket.on('disconnect', () => {
+    console.log('User Disconnected', socket.id)
+  })
+})
