@@ -14,7 +14,7 @@ import io from 'socket.io-client'
 import { Chat } from '../cmps/chat'
 
 function Messages() {
-  const socket = io.connect('https://oliakr.github.io/instagram/messages')
+  const socket = io.connect('https://oliakr.github.io/instagram')
   const user = useSelector((storeState) => storeState.userModule.user)
   const [userToMsg, setUserToMsg] = useState(null)
   const [messageList, setMessageList] = useState([])
