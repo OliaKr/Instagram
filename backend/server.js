@@ -28,7 +28,12 @@ app.use(function (req, res, next) {
   next()
 })
 
-app.use(cors())
+const corsOptions = {
+  origin: 'https://oliakr.github.io/instagram',
+}
+
+// Enable CORS with options
+app.use(cors(corsOptions))
 app.use(express.json())
 app.use('/', api)
 
