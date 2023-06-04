@@ -17,6 +17,7 @@ export function Chat({ messageList, room }) {
         maxHeight: isMobile ? "73%" : "80%",
         zIndex: "0",
         overflowY: "scroll",
+        padding: "12px",
       }}
     >
       {messageList?.map((chat) => (
