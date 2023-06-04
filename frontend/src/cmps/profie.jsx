@@ -203,7 +203,7 @@ export function Profile() {
     <div className="profile-container">
       <StoryForwardModal isProfileDisplayed />
       <DeletePostModal />
-      <SwitchAcoountsModal />
+      <SwitchAcoountsModal isProfile />
       <div className="top-section">
         <div className="avatar-container">
           <Avatar

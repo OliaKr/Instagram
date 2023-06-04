@@ -10,6 +10,7 @@ import { useSelector } from "react-redux";
 import { toggleSearchDrawer } from "../store/user.action";
 import AutocompleteInput from "./input-autocomplete";
 import { useNavigate } from "react-router-dom";
+import { useMediaQuery } from "@mui/material";
 
 export default function SearchDrawer() {
   const isSearchOpen = useSelector(
@@ -17,6 +18,7 @@ export default function SearchDrawer() {
   );
   const user = useSelector((storeState) => storeState.userModule.user);
   const navigate = useNavigate();
+  const isMobile = useMediaQuery("(max-width:480px)");
 
   const otherUsers = gUsers?.filter((u) => u.id !== user?.id);
 
@@ -25,7 +27,7 @@ export default function SearchDrawer() {
     toggleSearchDrawer(false);
   }
   const style = {
-    width: "349px",
+    width: isMobile ? "75%" : "349px",
     padding: "40px 24px 0px 24px",
     zIndex: 1000,
   };
@@ -55,13 +57,20 @@ export default function SearchDrawer() {
     if (reason && reason === "backdropClick") return;
   };
   const list = () => (
-    <Box sx={style} role="presentation">
+    <Box
+      sx={style}
+      role="presentation"
+    >
       <div className="search-drawer">
         <h2 className="title">Search</h2>
         <div className="search-input">
           <AutocompleteInput />
           <div className="closeBtnAvatar">
-            <img src={close} alt="close" className="closeImg" />
+            <img
+              src={close}
+              alt="close"
+              className="closeImg"
+            />
           </div>
         </div>
         <Divider />
@@ -72,13 +81,22 @@ export default function SearchDrawer() {
           </div>
           {otherUsers?.map((u) => (
             <div key={u?.id}>
-              <div className="row" onClick={() => goToOtherProfile(u)}>
-                <Avatar src={u?.imgUrl} alt="user" />
+              <div
+                className="row"
+                onClick={() => goToOtherProfile(u)}
+              >
+                <Avatar
+                  src={u?.imgUrl}
+                  alt="user"
+                />
                 <div className="details-user">
                   <span>{u?.username}</span>
                   <span>{u?.fullname}</span>
                 </div>
-                <img src={closeGray} alt="" />
+                <img
+                  src={closeGray}
+                  alt=""
+                />
               </div>
               <Divider />
             </div>
@@ -91,7 +109,10 @@ export default function SearchDrawer() {
   return (
     <div>
       <React.Fragment>
-        <Drawer anchor={"left"} open={isSearchOpen}>
+        <Drawer
+          anchor={"left"}
+          open={isSearchOpen}
+        >
           {list()}
         </Drawer>
         <Backdrop
@@ -103,7 +124,8 @@ export default function SearchDrawer() {
             zIndex: (theme) => theme.zIndex.drawer + 1,
           }}
           open={isSearchOpen}
-          onClick={handleClose}></Backdrop>
+          onClick={handleClose}
+        ></Backdrop>
       </React.Fragment>
     </div>
   );

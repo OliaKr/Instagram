@@ -5,7 +5,8 @@ Frontend - React.js
 State-management: Redux
 UI Library: Material UI v9
 DB - Mongo DB
-Hosting - Firebase
+Frontend Hosting - Firebase
+Backend Server Hosting - Render.com
 Storage - Cloudinary
 Emoji-picker
 Live ChatApp - Socket.io

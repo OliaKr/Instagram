@@ -10,23 +10,28 @@ import close from "../assets/icons/close.svg";
 import { useMediaQuery } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
-export function SwitchAcoountsModal() {
-  const matches = useMediaQuery("(max-width:480px)");
+export function SwitchAcoountsModal({ isProfile }) {
+  const isMobile = useMediaQuery("(max-width:480px)");
   const isSwitchModalOpen = useSelector(
     (storeState) => storeState.userModule.isSwitchModalOpen
   );
   const user = useSelector((storeState) => storeState.userModule.user);
   const navigate = useNavigate();
 
-  function onLogin(userLine) {
-    // console.log("userLine", userLine);
-    switchUser(userLine);
-    closeSwitchUsersModal();
-    // window.location.reload(false);
-    navigate(`/instagram/${userLine?.username}`, {
-      state: { otherUser: userLine },
-    });
-  }
+  const onLogin = async (userLine) => {
+    if (isProfile) {
+      await switchUser(userLine);
+      closeSwitchUsersModal();
+      await navigate(`/instagram/${userLine?.username}`);
+      window.location.reload();
+    } else {
+      switchUser(userLine);
+      closeSwitchUsersModal();
+      navigate(`/instagram/${userLine?.username}`, {
+        state: { otherUser: userLine },
+      });
+    }
+  };
 
   const style = {
     display: "flex",
@@ -35,7 +40,7 @@ export function SwitchAcoountsModal() {
     top: "50%",
     left: "50%",
     transform: "translate(-50%, -50%)",
-    width: matches ? "80%" : 370,
+    width: isMobile ? "80%" : 370,
     // height: 370,
     bgcolor: "background.paper",
     boxShadow: 24,

@@ -4,6 +4,8 @@
   height: 44px;
   padding: 20px;
   bottom: 20px;
+  background-color: white;
+  z-index: 1000;
 }
 
 .footer-emoji {
@@ -23,4 +25,13 @@
   display: flex;
   align-items: center;
   gap: 8px;
+}
+
+@media (max-width: 480px) {
+  .footer-input-area {
+    width: 320px;
+  }
+  .footer-input {
+    bottom: 50px;
+  }
 }
