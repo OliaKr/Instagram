@@ -95,19 +95,20 @@ const io = new Server(server, {
 // })
 const MAX_USERS_PER_ROOM = 2;
 const roomUsers = {};
+
 io.on("connection", async (socket) => {
   console.log(`User Connected: ${socket.id}`);
+  let room;
 
-  socket.on("join_room", (room) => {
+  socket.on("join_room", (roomName) => {
+    room = roomName;
+
     const currentRoom = io.sockets.adapter.rooms.get(room);
     if (currentRoom) {
       // Check if socket ID exists in the room
       if (currentRoom.has(socket.id)) {
         // Socket ID already exists in the room, don't join
         socket.emit("alreadyJoined", "You have already joined this room.");
-      } else if (currentRoom.size >= MAX_USERS_PER_ROOM) {
-        // Room is already at maximum capacity
-        socket.emit("roomFull", "The room is already full.");
       } else {
         // Join the room
         socket.join(room);
@@ -117,15 +118,15 @@ io.on("connection", async (socket) => {
       socket.join(room);
       socket.emit(
         "join_room",
-        ` User with ID: ${socket.id} joined room: ${room}`
+        `User with ID: ${socket.id} joined room: ${room}`
       );
       console.log(`User with ID: ${socket.id} joined room: ${room}`);
     }
   });
 
   socket.on("send_message", (data) => {
-    if (data && data.room) {
-      // Send the message to the user who sent it
+    if (data && data.room === room) {
+      console.log("working", data);
       socket.emit("receive_message", data);
     }
   });
