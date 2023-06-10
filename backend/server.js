@@ -127,7 +127,7 @@ io.on("connection", async (socket) => {
   socket.on("send_message", (data) => {
     if (data && data.room === room) {
       console.log("working", data);
-      socket.emit("receive_message", data);
+      io.to(socket.id).emit("receive_message", data);
     }
   });
 
