@@ -96,7 +96,7 @@ const io = new Server(server, {
 const MAX_USERS_PER_ROOM = 2;
 const roomUsers = {};
 io.on("connection", (socket) => {
-  socket.on("joinRoom", (room) => {
+  socket.on("join_room", (room) => {
     // Check if the room is already at maximum capacity or the user is already in the room
     if (
       (roomUsers[room] && roomUsers[room].length >= MAX_USERS_PER_ROOM) ||
@@ -118,9 +118,9 @@ io.on("connection", (socket) => {
     }
 
     // Listen for chat messages
-    socket.on("chatMessage", (message) => {
+    socket.on("send_message", (message) => {
       // Send the message to the user in the room
-      socket.emit("chatMessage", message);
+      socket.emit("send_message", message);
     });
 
     // Handle user disconnection
