@@ -1,7 +1,7 @@
 import Axios from "axios";
 
-const BASE_URL = "http://localhost:4000/";
-// const BASE_URL = "https://olia-insta-server.onrender.com/";
+// const BASE_URL = "http://localhost:4000/";
+const BASE_URL = "https://olia-insta-server.onrender.com/";
 
 export const httpService = {
   async get(endpoint, data) {
