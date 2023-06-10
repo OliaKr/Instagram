@@ -95,42 +95,42 @@ const io = new Server(server, {
 // })
 const MAX_USERS_PER_ROOM = 2;
 const roomUsers = {};
-io.on("connection", (socket) => {
+io.on("connection", async (socket) => {
+  console.log(`User Connected: ${socket.id}`);
+
   socket.on("join_room", (room) => {
-    // Check if the room is already at maximum capacity or the user is already in the room
-    if (
-      (roomUsers[room] && roomUsers[room].length >= MAX_USERS_PER_ROOM) ||
-      roomUsers[room]?.includes(socket.id)
-    ) {
-      socket.emit("roomFull"); // Notify the client that the room is full or user is already in the room
-      return;
-    }
-
-    // Join the room
-    socket.join(room);
-    socket.emit("roomJoined");
-
-    // Add the user to the room
-    if (!roomUsers[room]) {
-      roomUsers[room] = [socket.id];
-    } else {
-      roomUsers[room].push(socket.id);
-    }
-
-    // Listen for chat messages
-    socket.on("send_message", (message) => {
-      // Send the message to the user in the room
-      socket.emit("send_message", message);
-    });
-
-    // Handle user disconnection
-    socket.on("disconnect", () => {
-      // Remove the user from the room
-      if (roomUsers[room]) {
-        roomUsers[room] = roomUsers[room].filter(
-          (userId) => userId !== socket.id
-        );
+    const currentRoom = io.sockets.adapter.rooms.get(room);
+    if (currentRoom) {
+      // Check if socket ID exists in the room
+      if (currentRoom.has(socket.id)) {
+        // Socket ID already exists in the room, don't join
+        socket.emit("alreadyJoined", "You have already joined this room.");
+      } else if (currentRoom.size >= MAX_USERS_PER_ROOM) {
+        // Room is already at maximum capacity
+        socket.emit("roomFull", "The room is already full.");
+      } else {
+        // Join the room
+        socket.join(room);
+        socket.emit("join_room", "You have successfully joined the room.");
       }
-    });
+    } else {
+      socket.join(room);
+      socket.emit(
+        "join_room",
+        ` User with ID: ${socket.id} joined room: ${room}`
+      );
+      console.log(`User with ID: ${socket.id} joined room: ${room}`);
+    }
+  });
+
+  socket.on("send_message", (data) => {
+    if (data && data.room) {
+      // Send the message to the user who sent it
+      socket.emit("receive_message", data);
+    }
+  });
+
+  socket.on("disconnect", () => {
+    console.log("User Disconnected", socket.id);
   });
 });

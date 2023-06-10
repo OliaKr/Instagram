@@ -56,7 +56,7 @@ export function ChatRoomFooter({ socket, room }) {
       };
       userMessages[roomIndex] = updatedCurrentRoom;
       setText("");
-      const otherUserInRoom = users.find(
+      const otherUserInRoom = users?.find(
         (u) => u.id === currentRoom.otherUserId
       );
       await updateUser({

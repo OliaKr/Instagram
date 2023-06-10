@@ -18,9 +18,9 @@ import { useNavigate } from "react-router-dom";
 function Messages() {
   //dev
 
-  // const socket = io.connect("http://localhost:4000/");
+  const socket = io.connect("http://localhost:4000/");
   //prod
-  const socket = io.connect("https://olia-insta-server.onrender.com/");
+  // const socket = io.connect("https://olia-insta-server.onrender.com/");
   const user = useSelector((storeState) => storeState.userModule.user);
   const [userToMsg, setUserToMsg] = useState(null);
   const [messageList, setMessageList] = useState([]);
