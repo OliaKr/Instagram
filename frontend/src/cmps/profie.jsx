@@ -71,7 +71,7 @@ export function Profile() {
   useEffect(() => {
     loadUsers();
     loadStories();
-  });
+  }, []);
 
   useEffect(() => {
     let num = 0;
