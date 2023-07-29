@@ -1,16 +1,16 @@
-import { storageService } from "../services.js/async-storage.service.js"
-import { utilService } from "../services.js/util.service.js"
-import { httpService } from "./http.service.js"
+import { storageService } from "../services.js/async-storage.service.js";
+import { utilService } from "../services.js/util.service.js";
+import { httpService } from "./http.service.js";
 
-const STORAGE_KEY = "userDB"
-const AUTH_KEY = "authDB"
+const STORAGE_KEY = "userDB";
+const AUTH_KEY = "authDB";
 
 export const userService = {
   query,
   update,
   updateUsers,
   fetchCurrentUser,
-}
+};
 
 export const gUsers = [
   {
@@ -78,14 +78,16 @@ export const gUsers = [
           {
             timestamp: "8:45",
             fullname: "Lior Maor",
-            avatar: "https://res.cloudinary.com/dsinv9pik/image/upload/v1674477174/%D7%AA%D7%9E%D7%95%D7%A0%D7%94_vsrinc.jpg",
-            message: "Hayush",
+            avatar:
+              "https://res.cloudinary.com/dsinv9pik/image/upload/v1674477174/%D7%AA%D7%9E%D7%95%D7%A0%D7%94_vsrinc.jpg",
+            message: "שלום!מה נשמע?",
           },
           {
             timestamp: "8:47",
             fullname: "Dob Moran",
-            avatar: "https://media.allure.com/photos/5c734d9adbe270553d92abf1/1:1/w_1503,h_1503,c_limit/Rami-Malek-Oscars-2019-Look-Dyp.jpg",
-            message: "מה המצב",
+            avatar:
+              "https://media.allure.com/photos/5c734d9adbe270553d92abf1/1:1/w_1503,h_1503,c_limit/Rami-Malek-Oscars-2019-Look-Dyp.jpg",
+            message: "הכל מעולה ומה איתך?",
           },
         ],
       },
@@ -96,17 +98,18 @@ export const gUsers = [
           {
             timestamp: "1:45",
             fullname: "Lior Maor",
-            avatar: "https://res.cloudinary.com/dsinv9pik/image/upload/v1674477174/%D7%AA%D7%9E%D7%95%D7%A0%D7%94_vsrinc.jpg",
-            message: "אז אתה מתחיל איתי?",
+            avatar:
+              "https://res.cloudinary.com/dsinv9pik/image/upload/v1674477174/%D7%AA%D7%9E%D7%95%D7%A0%D7%94_vsrinc.jpg",
+            message: "היי,נפגשים היום?",
           },
           {
             timestamp: "3:33",
             fullname: "Ulashi Ulashi",
             avatar: "https://img.mako.co.il/2014/02/24/467424241_g.jpg",
-            message: "איפפפ את עפה על עצמך! תעשה פרסה מותק!",
+            message: "היי ליאור, בוודאי. מתי מתאים לך?",
           },
         ],
-      }
+      },
     ],
   },
   {
@@ -207,22 +210,24 @@ export const gUsers = [
     messages: [
       {
         room: "123",
-        otherUserId: "Z550",
+        otherUserId: "B700",
         list: [
           {
             timestamp: "8:45",
             fullname: "Lior Maor",
-            avatar: "https://res.cloudinary.com/dsinv9pik/image/upload/v1674477174/%D7%AA%D7%9E%D7%95%D7%A0%D7%94_vsrinc.jpg",
-            message: "Hayush",
+            avatar:
+              "https://res.cloudinary.com/dsinv9pik/image/upload/v1674477174/%D7%AA%D7%9E%D7%95%D7%A0%D7%94_vsrinc.jpg",
+            message: "שלום!מה נשמע?",
           },
           {
             timestamp: "8:47",
             fullname: "Dob Moran",
-            avatar: "https://media.allure.com/photos/5c734d9adbe270553d92abf1/1:1/w_1503,h_1503,c_limit/Rami-Malek-Oscars-2019-Look-Dyp.jpg",
-            message: "מה המצב",
+            avatar:
+              "https://media.allure.com/photos/5c734d9adbe270553d92abf1/1:1/w_1503,h_1503,c_limit/Rami-Malek-Oscars-2019-Look-Dyp.jpg",
+            message: "הכל מעולה ומה איתך?",
           },
         ],
-      }
+      },
     ],
   },
   {
@@ -292,17 +297,18 @@ export const gUsers = [
           {
             timestamp: "1:45",
             fullname: "Lior Maor",
-            avatar: "https://res.cloudinary.com/dsinv9pik/image/upload/v1674477174/%D7%AA%D7%9E%D7%95%D7%A0%D7%94_vsrinc.jpg",
-            message: "אז אתה מתחיל איתי?",
+            avatar:
+              "https://res.cloudinary.com/dsinv9pik/image/upload/v1674477174/%D7%AA%D7%9E%D7%95%D7%A0%D7%94_vsrinc.jpg",
+            message: "היי,נפגשים היום?",
           },
           {
             timestamp: "3:33",
             fullname: "Ulashi Ulashi",
             avatar: "https://img.mako.co.il/2014/02/24/467424241_g.jpg",
-            message: "איפפפ את עפה על עצמך! תעשה פרסה מותק!",
+            message: "היי ליאור, בוודאי. מתי מתאים לך?",
           },
         ],
-      }
+      },
     ],
   },
   {
@@ -462,57 +468,56 @@ export const gUsers = [
     notifications: [],
     messages: [],
   },
-]
+];
 
 async function query() {
   try {
-    let users
-    users = await httpService.get("users")
+    let users;
+    users = await httpService.get("users");
     if (!users.data.length) {
-      users = gUsers
-      httpService.post("users", users)
+      users = gUsers;
+      httpService.post("users", users);
     }
-    return users.data
+    return users.data;
   } catch (err) {
-    console.log("Had Error", err)
+    console.log("Had Error", err);
   }
 }
 
 async function fetchCurrentUser(switchUser) {
   try {
-    let user
-    let loggedUser
+    let user;
+    let loggedUser;
     if (switchUser) {
-      user = await httpService.post("currentUser", switchUser)
-      utilService.saveToStorage(AUTH_KEY, switchUser)
+      user = await httpService.post("currentUser", switchUser);
+      utilService.saveToStorage(AUTH_KEY, switchUser);
     } else {
-      loggedUser = await storageService.query(AUTH_KEY)
+      loggedUser = await storageService.query(AUTH_KEY);
       if (!loggedUser) {
-        loggedUser = utilService.saveToStorage(AUTH_KEY, gUsers[0])
+        loggedUser = utilService.saveToStorage(AUTH_KEY, gUsers[0]);
       }
-      console.log(loggedUser)
-      user = await httpService.post("currentUser", loggedUser)
+      console.log(loggedUser);
+      user = await httpService.post("currentUser", loggedUser);
     }
-    return user.data
+    return user.data;
   } catch (err) {
-    console.log("Had Error", err)
+    console.log("Had Error", err);
   }
 }
 
 async function updateUsers(updatedUsers) {
   try {
-    let users = await storageService.query(STORAGE_KEY)
-    users = updatedUsers
-    utilService.saveToStorage(STORAGE_KEY, users)
-    return users
+    let users = await storageService.query(STORAGE_KEY);
+    users = updatedUsers;
+    utilService.saveToStorage(STORAGE_KEY, users);
+    return users;
   } catch (err) {
-    console.log("Had Error", err)
+    console.log("Had Error", err);
   }
 }
 
 async function update(user) {
-  let updatedsUser = await httpService.put("user", user)
+  let updatedsUser = await httpService.put("user", user);
 
-  return updatedsUser.data
+  return updatedsUser.data;
 }
-
