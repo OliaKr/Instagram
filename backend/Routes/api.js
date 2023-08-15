@@ -14,6 +14,7 @@ router.put('/user', async function (req, res) {
   const user = req.body
   try {
     let updatedUser = await User.findOneAndReplace({ id: user.id }, user)
+    console.log("updateeeeeee", updatedUser)
     res.send(updatedUser)
   } catch (error) {
     console.log('Got an error', error)
@@ -68,7 +69,6 @@ router.post('/story', async function (req, res) {
 
 router.put('/story', async function (req, res) {
   const story = req.body
-  console.log('storyyyyyyyyy', req.body.timestamp)
   try {
     let updatedStory = await Story.findOneAndReplace({ id: story.id }, story)
     // console.log('save data', updatedStory)
@@ -79,7 +79,8 @@ router.put('/story', async function (req, res) {
 })
 
 router.delete('/story', async function (req, res) {
-  let id = req.body
+  let id = JSON.parse(req.headers['x-delete-data']);
+  console.log('id', id)
   await Story.findByIdAndDelete(id)
   res.end()
 })
