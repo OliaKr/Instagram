@@ -19,23 +19,10 @@ import smileyBlack from "../assets/icons/smileyBlack.svg";
 import { HeartSignContainer } from "./heart-sign-container";
 import EmojiPicker from "emoji-picker-react";
 import { utilService } from "../assets/services.js/util.service.js";
-
-const style = {
-  display: "flex",
-  flexDirection: "column",
-  flexWrap: "wrap",
-  position: "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  width: "65%",
-  height: 728,
-  bgcolor: "background.paper",
-  boxShadow: 24,
-  borderRadius: "1%",
-};
+import { useMediaQuery } from "@mui/material";
 
 export function StoryForwardModal({ isProfileDisplayed }) {
+  const isMobile = useMediaQuery("(max-width:480px)");
   const isStoryForwardModalOpen = useSelector(
     (storeState) => storeState.storyModule.isStoryForwardModalOpen
   );
@@ -48,6 +35,21 @@ export function StoryForwardModal({ isProfileDisplayed }) {
   const [isSaved, setIsSaved] = useState(false);
   const [chosenEmoji, setChosenEmoji] = useState(null);
   const [showEmojiPicker, setShowEmojiPicker] = useState(false);
+
+  const style = {
+    display: "flex",
+    flexDirection: "column",
+    flexWrap: "wrap",
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    width: isMobile ? "100%" : "65%",
+    height: 728,
+    bgcolor: "background.paper",
+    boxShadow: 24,
+    borderRadius: "1%",
+  };
 
   function handleChange(e) {
     setText(e.target.value);

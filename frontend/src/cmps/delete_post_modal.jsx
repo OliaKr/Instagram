@@ -64,8 +64,10 @@ export function DeletePostModal() {
 
   async function onRemoveStory() {
     try {
-      await removeStory(currentStory?.id);
+      await removeStory(currentStory?._id);
+      closeRemoveModal();
       showSuccessMsg("Story removed");
+      window.location.reload();
     } catch (err) {
       showErrorMsg("Cannot remove story");
     }
@@ -98,7 +100,7 @@ export function DeletePostModal() {
           )}
           <div className="right-section">
             <button
-              onClick={() => onRemoveStory(currentStory.id)}
+              onClick={() => onRemoveStory(currentStory._id)}
               className="edit-delete-option">
               Remove
             </button>

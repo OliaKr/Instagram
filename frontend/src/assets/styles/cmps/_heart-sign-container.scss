@@ -24,3 +24,10 @@
     flex: 0;
   }
 }
+
+@media (max-width: 480px) {
+  .iconsOnLeft {
+    display: flex;
+    align-items: center;
+  }
+}

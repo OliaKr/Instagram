@@ -30,10 +30,12 @@ export const httpService = {
   },
   async delete(endpoint, data) {
     try {
-      let result = await Axios.delete(`${BASE_URL}${endpoint}`, data);
+      let result = await Axios.delete(`${BASE_URL}${endpoint}`, {
+        headers: { 'X-Delete-Data': JSON.stringify(data) }
+      });
       return result;
     } catch (error) {
       console.log(error);
     }
-  },
+  }
 };

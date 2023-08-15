@@ -81,10 +81,7 @@ function Messages() {
                 </span>
               </div>
               <div className="messages-header-right">
-                <img
-                  src={pen}
-                  alt="penIcon"
-                />
+                <img src={pen} alt="penIcon" />
               </div>
             </div>
             <div className="messages-title">
@@ -117,26 +114,14 @@ function Messages() {
                       {userToMsg.fullname}
                     </div>
                     <div className="chat-open-header-r">
-                      <img
-                        src={phone}
-                        alt="phoneIcon"
-                      />
-                      <img
-                        src={video}
-                        alt="videoIcon"
-                      />
-                      <img
-                        src={info}
-                        alt="infoIcon"
-                      />
+                      <img src={phone} alt="phoneIcon" />
+                      <img src={video} alt="videoIcon" />
+                      <img src={info} alt="infoIcon" />
                     </div>
                   </div>
                 </div>
                 <div className="chat-body">
-                  <Chat
-                    messageList={messageList}
-                    room={room}
-                  />
+                  <Chat messageList={messageList} room={room} />
                 </div>
                 <div className="chat-footer">
                   <ChatRoomFooter
@@ -148,10 +133,7 @@ function Messages() {
               </div>
             ) : (
               <div className="chat-closed">
-                <img
-                  src={roomIcon}
-                  alt="messagesIcon"
-                />
+                <img src={roomIcon} alt="messagesIcon" />
 
                 <span>Your Messages</span>
                 <span>
